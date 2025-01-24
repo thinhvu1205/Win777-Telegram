@@ -1,0 +1,65 @@
+{
+"skeleton": {
+	"hash": "iQep7eWDCcfzXn7hCvH0moRRKjY",
+	"spine": "3.8.99",
+	"x": -84.73,
+	"y": -58.82,
+	"width": 131.96,
+	"height": 130,
+	"images": "./image/",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" },
+	{ "name": "bone", "parent": "root", "x": -0.95, "y": -35.71 },
+	{ "name": "bone2", "parent": "bone", "x": 0.88, "y": 35.57 },
+	{ "name": "1l", "parent": "bone2", "x": -21.46, "y": 6.61 }
+],
+"slots": [
+	{ "name": "bank3", "bone": "bone2", "attachment": "news" },
+	{ "name": "1l", "bone": "1l", "attachment": "1l", "blend": "additive" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"1l": {
+				"1l": { "x": 0.29, "y": -0.29, "width": 127, "height": 130 }
+			},
+			"bank3": {
+				"news": { "x": 0.29, "y": 1.91, "width": 94, "height": 92 }
+			}
+		}
+	}
+],
+"animations": {
+	"bank": {
+		"bones": {
+			"bone2": {
+				"rotate": [
+					{ "angle": 1.42, "curve": 0.382, "c2": 0.57, "c3": 0.735 },
+					{ "time": 0.1667, "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.6667, "angle": 5, "curve": 0.243, "c3": 0.649, "c4": 0.6 },
+					{ "time": 1, "angle": 1.42 }
+				],
+				"translate": [
+					{ "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.5, "y": 5.88, "curve": 0.25, "c3": 0.75 },
+					{ "time": 1 }
+				]
+			},
+			"1l": {
+				"rotate": [
+					{},
+					{ "time": 0.3333, "angle": -113.57 },
+					{ "time": 0.6667, "angle": 106.62 },
+					{ "time": 1 }
+				],
+				"translate": [
+					{ "x": 34.58, "y": 18.85 }
+				]
+			}
+		}
+	}
+}
+}

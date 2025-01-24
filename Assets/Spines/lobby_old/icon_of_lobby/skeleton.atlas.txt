@@ -1,0 +1,125 @@
+
+skeleton.png
+size: 307,307
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1l
+  rotate: false
+  xy: 161, 65
+  size: 68, 70
+  orig: 127, 130
+  offset: 28, 29
+  index: -1
+bank2
+  rotate: false
+  xy: 131, 3
+  size: 42, 49
+  orig: 96, 100
+  offset: 27, 23
+  index: -1
+bank3
+  rotate: false
+  xy: 176, 221
+  size: 81, 84
+  orig: 96, 100
+  offset: 7, 8
+  index: -1
+chat
+  rotate: false
+  xy: 231, 61
+  size: 52, 42
+  orig: 96, 100
+  offset: 22, 26
+  index: -1
+chat2
+  rotate: true
+  xy: 2, 35
+  size: 89, 76
+  orig: 96, 100
+  offset: 3, 12
+  index: -1
+freechip
+  rotate: false
+  xy: 259, 258
+  size: 46, 47
+  orig: 96, 100
+  offset: 25, 25
+  index: -1
+freechip2
+  rotate: false
+  xy: 80, 54
+  size: 79, 81
+  orig: 96, 100
+  offset: 8, 9
+  index: -1
+gifftcode
+  rotate: true
+  xy: 175, 2
+  size: 61, 43
+  orig: 96, 100
+  offset: 17, 26
+  index: -1
+gifftcode2
+  rotate: true
+  xy: 2, 126
+  size: 92, 75
+  orig: 96, 100
+  offset: 0, 11
+  index: -1
+mail
+  rotate: true
+  xy: 248, 105
+  size: 49, 54
+  orig: 96, 100
+  offset: 23, 21
+  index: -1
+mail2
+  rotate: false
+  xy: 92, 220
+  size: 82, 85
+  orig: 88, 91
+  offset: 3, 3
+  index: -1
+rank
+  rotate: false
+  xy: 80, 2
+  size: 49, 50
+  orig: 96, 100
+  offset: 24, 30
+  index: -1
+rank-copy
+  rotate: false
+  xy: 79, 137
+  size: 86, 81
+  orig: 96, 100
+  offset: 5, 13
+  index: -1
+setting
+  rotate: false
+  xy: 259, 209
+  size: 46, 47
+  orig: 96, 100
+  offset: 25, 25
+  index: -1
+setting2
+  rotate: false
+  xy: 167, 139
+  size: 79, 79
+  orig: 96, 100
+  offset: 8, 10
+  index: -1
+support
+  rotate: false
+  xy: 248, 156
+  size: 54, 51
+  orig: 96, 100
+  offset: 21, 23
+  index: -1
+support2
+  rotate: false
+  xy: 2, 220
+  size: 88, 85
+  orig: 96, 100
+  offset: 4, 7
+  index: -1

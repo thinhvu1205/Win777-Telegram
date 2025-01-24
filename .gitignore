@@ -1,0 +1,35 @@
+#/////////////////////////////////////////////////////////////////////////////
+# DummyCO Projects
+#/////////////////////////////////////////////////////////////////////////////
+
+/Library/
+/DummyThaiCO_BurstDebugInformation_DoNotShip/
+/paragon_BackUpThisFolder_ButDontShipItWithYourGame/
+/Logs/
+
+*.apk
+DummyCO_BackUpThisFolder_ButDontShipItWithYourGame/
+Temp/
+ProjAndroid/
+.vs/
+Dummy Thai CO_BackUpThisFolder_ButDontShipItWithYourGame/
+.vs/DummyCO/
+*.vsidx
+TestSixiang_BackUpThisFolder_ButDontShipItWithYourGame/
+TestSlotNoel_BackUpThisFolder_ButDontShipItWithYourGame/
+TestSlot_BackUpThisFolder_ButDontShipItWithYourGame/
+ServerData/RubyBundle/
+
+.vscode/extensions.json
+.vscode/launch.json
+.vscode/settings.json
+obj/Debug/Assembly-CSharp-Editor-firstpass.csproj.AssemblyReference.cache
+obj/Debug/Assembly-CSharp-Editor.csproj.AssemblyReference.cache
+obj/Debug/Assembly-CSharp-firstpass.csproj.AssemblyReference.cache
+obj/Debug/Assembly-CSharp.csproj.AssemblyReference.cache
+obj/Debug/RTLTMPro-Editor.csproj.AssemblyReference.cache
+obj/Debug/RTLTMPro-Tests.csproj.AssemblyReference.cache
+obj/Debug/RTLTMPro.csproj.AssemblyReference.cache
+obj/Debug/SocketIOUnityAssembly.csproj.AssemblyReference.cache
+obj/Debug/spine-unity-editor.csproj.AssemblyReference.cache
+obj/Debug/spine-unity.csproj.AssemblyReference.cache

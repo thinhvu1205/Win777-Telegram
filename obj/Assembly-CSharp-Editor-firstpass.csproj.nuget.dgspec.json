@@ -1,0 +1,436 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Unity projects\\Cioalink-Unity\\Assembly-CSharp-Editor-firstpass.csproj": {}
+  },
+  "projects": {
+    "D:\\Unity projects\\Cioalink-Unity\\Assembly-CSharp-Editor-firstpass.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Unity projects\\Cioalink-Unity\\Assembly-CSharp-Editor-firstpass.csproj",
+        "projectName": "Assembly-CSharp-Editor-firstpass",
+        "projectPath": "D:\\Unity projects\\Cioalink-Unity\\Assembly-CSharp-Editor-firstpass.csproj",
+        "packagesPath": "C:\\Users\\Vu Duc Thinh\\.nuget\\packages\\",
+        "outputPath": "D:\\Unity projects\\Cioalink-Unity\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Vu Duc Thinh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "D:\\Unity projects\\Cioalink-Unity\\Assembly-CSharp-firstpass.csproj": {
+                "projectPath": "D:\\Unity projects\\Cioalink-Unity\\Assembly-CSharp-firstpass.csproj"
+              },
+              "D:\\Unity projects\\Cioalink-Unity\\RTLTMPro-Editor.csproj": {
+                "projectPath": "D:\\Unity projects\\Cioalink-Unity\\RTLTMPro-Editor.csproj"
+              },
+              "D:\\Unity projects\\Cioalink-Unity\\RTLTMPro.csproj": {
+                "projectPath": "D:\\Unity projects\\Cioalink-Unity\\RTLTMPro.csproj"
+              },
+              "D:\\Unity projects\\Cioalink-Unity\\SocketIOUnityAssembly.csproj": {
+                "projectPath": "D:\\Unity projects\\Cioalink-Unity\\SocketIOUnityAssembly.csproj"
+              },
+              "D:\\Unity projects\\Cioalink-Unity\\spine-unity-editor.csproj": {
+                "projectPath": "D:\\Unity projects\\Cioalink-Unity\\spine-unity-editor.csproj"
+              },
+              "D:\\Unity projects\\Cioalink-Unity\\spine-unity.csproj": {
+                "projectPath": "D:\\Unity projects\\Cioalink-Unity\\spine-unity.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Unity projects\\Cioalink-Unity\\Assembly-CSharp-firstpass.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Unity projects\\Cioalink-Unity\\Assembly-CSharp-firstpass.csproj",
+        "projectName": "Assembly-CSharp-firstpass",
+        "projectPath": "D:\\Unity projects\\Cioalink-Unity\\Assembly-CSharp-firstpass.csproj",
+        "packagesPath": "C:\\Users\\Vu Duc Thinh\\.nuget\\packages\\",
+        "outputPath": "D:\\Unity projects\\Cioalink-Unity\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Vu Duc Thinh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "D:\\Unity projects\\Cioalink-Unity\\RTLTMPro-Editor.csproj": {
+                "projectPath": "D:\\Unity projects\\Cioalink-Unity\\RTLTMPro-Editor.csproj"
+              },
+              "D:\\Unity projects\\Cioalink-Unity\\RTLTMPro.csproj": {
+                "projectPath": "D:\\Unity projects\\Cioalink-Unity\\RTLTMPro.csproj"
+              },
+              "D:\\Unity projects\\Cioalink-Unity\\SocketIOUnityAssembly.csproj": {
+                "projectPath": "D:\\Unity projects\\Cioalink-Unity\\SocketIOUnityAssembly.csproj"
+              },
+              "D:\\Unity projects\\Cioalink-Unity\\spine-unity-editor.csproj": {
+                "projectPath": "D:\\Unity projects\\Cioalink-Unity\\spine-unity-editor.csproj"
+              },
+              "D:\\Unity projects\\Cioalink-Unity\\spine-unity.csproj": {
+                "projectPath": "D:\\Unity projects\\Cioalink-Unity\\spine-unity.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Unity projects\\Cioalink-Unity\\RTLTMPro-Editor.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Unity projects\\Cioalink-Unity\\RTLTMPro-Editor.csproj",
+        "projectName": "RTLTMPro-Editor",
+        "projectPath": "D:\\Unity projects\\Cioalink-Unity\\RTLTMPro-Editor.csproj",
+        "packagesPath": "C:\\Users\\Vu Duc Thinh\\.nuget\\packages\\",
+        "outputPath": "D:\\Unity projects\\Cioalink-Unity\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Vu Duc Thinh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "D:\\Unity projects\\Cioalink-Unity\\RTLTMPro.csproj": {
+                "projectPath": "D:\\Unity projects\\Cioalink-Unity\\RTLTMPro.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Unity projects\\Cioalink-Unity\\RTLTMPro.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Unity projects\\Cioalink-Unity\\RTLTMPro.csproj",
+        "projectName": "RTLTMPro",
+        "projectPath": "D:\\Unity projects\\Cioalink-Unity\\RTLTMPro.csproj",
+        "packagesPath": "C:\\Users\\Vu Duc Thinh\\.nuget\\packages\\",
+        "outputPath": "D:\\Unity projects\\Cioalink-Unity\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Vu Duc Thinh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Unity projects\\Cioalink-Unity\\SocketIOUnityAssembly.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Unity projects\\Cioalink-Unity\\SocketIOUnityAssembly.csproj",
+        "projectName": "SocketIOUnityAssembly",
+        "projectPath": "D:\\Unity projects\\Cioalink-Unity\\SocketIOUnityAssembly.csproj",
+        "packagesPath": "C:\\Users\\Vu Duc Thinh\\.nuget\\packages\\",
+        "outputPath": "D:\\Unity projects\\Cioalink-Unity\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Vu Duc Thinh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Unity projects\\Cioalink-Unity\\spine-unity-editor.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Unity projects\\Cioalink-Unity\\spine-unity-editor.csproj",
+        "projectName": "spine-unity-editor",
+        "projectPath": "D:\\Unity projects\\Cioalink-Unity\\spine-unity-editor.csproj",
+        "packagesPath": "C:\\Users\\Vu Duc Thinh\\.nuget\\packages\\",
+        "outputPath": "D:\\Unity projects\\Cioalink-Unity\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Vu Duc Thinh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "D:\\Unity projects\\Cioalink-Unity\\spine-unity.csproj": {
+                "projectPath": "D:\\Unity projects\\Cioalink-Unity\\spine-unity.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Unity projects\\Cioalink-Unity\\spine-unity.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Unity projects\\Cioalink-Unity\\spine-unity.csproj",
+        "projectName": "spine-unity",
+        "projectPath": "D:\\Unity projects\\Cioalink-Unity\\spine-unity.csproj",
+        "packagesPath": "C:\\Users\\Vu Duc Thinh\\.nuget\\packages\\",
+        "outputPath": "D:\\Unity projects\\Cioalink-Unity\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Vu Duc Thinh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
