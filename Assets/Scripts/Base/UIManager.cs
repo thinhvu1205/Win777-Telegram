@@ -1165,6 +1165,7 @@ public class UIManager : MonoBehaviour
     }
     public void openTableView()
     {
+        return;
         if (TableView.instance == null)
         {
             //if (curGameId == (int)Globals.GAMEID.KEANG || curGameId == (int)Globals.GAMEID.DUMMY || curGameId == (int)Globals.GAMEID.SICBO)

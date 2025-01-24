@@ -60,12 +60,12 @@ public class LobbyView : BaseView
     }
     public void setQuickPlayGame(int gameID)
     {
+        return;
         lbQuickGame.gameObject.SetActive(true);
         lbQuickGame.text = Globals.Config.getTextConfig(gameID.ToString()).ToUpper();
         animQuickPlay.Initialize(true);
         animQuickPlay.AnimationState.SetAnimation(0, "coTag", true);
     }
-
     List<GAMEID> listSlot = new List<GAMEID>() { GAMEID.DOMINO, GAMEID.SLOT_SIXIANG, GAMEID.SLOTTARZAN, GAMEID.SLOT20FRUIT, GAMEID.SLOT_JUICY_GARDEN, GAMEID.SLOT_INCA, GAMEID.SLOTNOEL, GAMEID.SLOT_SIXIANG };
 
     void OnClickTab(Button btn)
@@ -146,8 +146,8 @@ public class LobbyView : BaseView
         }
         else
         {
-            foreach (ItemGame ig in m_ConfigOffIGs)
-                ig.setInfo(int.Parse(ig.name), null, null, materialDefault, () => onClickGame(ig));
+            // foreach (ItemGame ig in m_ConfigOffIGs)
+            //     ig.setInfo(int.Parse(ig.name), null, null, materialDefault, () => onClickGame(ig));
         }
         if (Config.isChangeTable)
         {

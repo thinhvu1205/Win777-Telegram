@@ -24,6 +24,7 @@ public class ButtonVipFarm : MonoBehaviour
     #endregion
     public void SetData(float farmPercent)
     {
+        return;
         _farmPercent = farmPercent;
         txtPercentVipFarm.text = farmPercent + "%";
 
