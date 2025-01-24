@@ -1595,8 +1595,8 @@ namespace Globals
 
         public static void Vibration()
         {
-            if (isVibration)
-                Handheld.Vibrate();
+            // if (isVibration)
+            //     Handheld.Vibrate();
         }
 
 

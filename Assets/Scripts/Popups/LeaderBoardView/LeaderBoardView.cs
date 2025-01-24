@@ -132,7 +132,8 @@ public class LeaderBoardView : BaseView
         {
             JToken dataItem = dataTop[i];
             Debug.Log(dataItem.ToString());
-            if ((int)dataItem["Id"] == User.userMain.Userid) dataMe = dataItem;
+            if ((int)dataItem["Id"] == User.userMain.Userid && dataMe == null) dataMe = dataItem;
+            if (i == dataTop.Count - 1) continue;
             GameObject itemView;
             if (i < scrollView.content.childCount) itemView = scrollView.content.GetChild(i).gameObject;
             else itemView = Instantiate(itemViewRank, scrollView.content);
