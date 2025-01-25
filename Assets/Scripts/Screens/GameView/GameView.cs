@@ -12,6 +12,10 @@ using TMPro;
 
 public class GameView : BaseView
 {
+    public enum GAME_TYPE
+    { // của SiXiangView, để tối ưu dung lượng build thì xóa Si Xiang nên phải thêm nó ở đây k lỗi
+        NORMAL, SCATTER, DRAGON_PEARL, LUCKY_DRAW, LUCKY_GOLD, RAPID_PAY, BONUS_GAME
+    }
     public List<Player> players = new List<Player>();
     [SerializeField]
     protected List<Vector2> listPosView = new List<Vector2>();

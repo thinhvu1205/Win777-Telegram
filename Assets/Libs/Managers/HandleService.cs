@@ -1006,7 +1006,7 @@ public class HandleService
                 case Globals.ACTION_SLOT_SIXIANG.goldPick:
                 case Globals.ACTION_SLOT_SIXIANG.luckyDraw:
                 case Globals.ACTION_SLOT_SIXIANG.selectBonusGame:
-                    handleGameSiXiang(jsonData);
+                    // handleGameSiXiang(jsonData);
                     break;
                 case "farmInfo":
                     {
@@ -1284,46 +1284,46 @@ public class HandleService
             }
         }
     }
-    public static void handleGameSiXiang(JObject data)
-    {
-        JObject dataGame = JObject.Parse((string)data["data"]);
-        if (SiXiangView.Instance == null)
-        {
-            Debug.Log("clm chua co game sixiang la sao");
-        }
-        switch ((string)data["evt"])
-        {
-            case Globals.ACTION_SLOT_SIXIANG.getInfo:
-                //dataGame = JObject.Parse(SiXiangFakeData.Instance.getInfoDragonPearl);
-                SiXiangView.Instance.handleGetInfo(dataGame);
-                break;
-            case Globals.ACTION_SLOT_SIXIANG.getBonusGames:
-                SiXiangView.Instance.handleBonusInfo(dataGame);
-                break;
-            case Globals.ACTION_SLOT_SIXIANG.normalSpin:
-                SiXiangView.Instance.handleNormalSpin(dataGame);
-                break;
-            case Globals.ACTION_SLOT_SIXIANG.scatterSpin:
-                SiXiangView.Instance.handleScatterSpin(dataGame);
-                break;
-            case Globals.ACTION_SLOT_SIXIANG.buyBonusGame:
-                SiXiangView.Instance.handleBuyBonusGame(dataGame);
-                break;
-            case Globals.ACTION_SLOT_SIXIANG.dragonPearlSpin:
-                SiXiangView.Instance.handleDragonPealsSpin(dataGame);
-                break;
-            case Globals.ACTION_SLOT_SIXIANG.rapidPay:
-                SiXiangView.Instance.handleRapidPay(dataGame);
-                break;
-            case Globals.ACTION_SLOT_SIXIANG.goldPick:
-                SiXiangView.Instance.handleGoldPick(dataGame);
-                break;
-            case Globals.ACTION_SLOT_SIXIANG.luckyDraw:
-                SiXiangView.Instance.handleLuckyDraw(dataGame);
-                break;
-            case Globals.ACTION_SLOT_SIXIANG.selectBonusGame:
-                SiXiangView.Instance.handleSelectBonusGame(dataGame);
-                break;
-        }
-    }
+    // public static void handleGameSiXiang(JObject data)
+    // {
+    //     JObject dataGame = JObject.Parse((string)data["data"]);
+    //     if (SiXiangView.Instance == null)
+    //     {
+    //         Debug.Log("clm chua co game sixiang la sao");
+    //     }
+    //     switch ((string)data["evt"])
+    //     {
+    //         case Globals.ACTION_SLOT_SIXIANG.getInfo:
+    //             //dataGame = JObject.Parse(SiXiangFakeData.Instance.getInfoDragonPearl);
+    //             SiXiangView.Instance.handleGetInfo(dataGame);
+    //             break;
+    //         case Globals.ACTION_SLOT_SIXIANG.getBonusGames:
+    //             SiXiangView.Instance.handleBonusInfo(dataGame);
+    //             break;
+    //         case Globals.ACTION_SLOT_SIXIANG.normalSpin:
+    //             SiXiangView.Instance.handleNormalSpin(dataGame);
+    //             break;
+    //         case Globals.ACTION_SLOT_SIXIANG.scatterSpin:
+    //             SiXiangView.Instance.handleScatterSpin(dataGame);
+    //             break;
+    //         case Globals.ACTION_SLOT_SIXIANG.buyBonusGame:
+    //             SiXiangView.Instance.handleBuyBonusGame(dataGame);
+    //             break;
+    //         case Globals.ACTION_SLOT_SIXIANG.dragonPearlSpin:
+    //             SiXiangView.Instance.handleDragonPealsSpin(dataGame);
+    //             break;
+    //         case Globals.ACTION_SLOT_SIXIANG.rapidPay:
+    //             SiXiangView.Instance.handleRapidPay(dataGame);
+    //             break;
+    //         case Globals.ACTION_SLOT_SIXIANG.goldPick:
+    //             SiXiangView.Instance.handleGoldPick(dataGame);
+    //             break;
+    //         case Globals.ACTION_SLOT_SIXIANG.luckyDraw:
+    //             SiXiangView.Instance.handleLuckyDraw(dataGame);
+    //             break;
+    //         case Globals.ACTION_SLOT_SIXIANG.selectBonusGame:
+    //             SiXiangView.Instance.handleSelectBonusGame(dataGame);
+    //             break;
+    //     }
+    // }
 }

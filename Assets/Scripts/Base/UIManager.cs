@@ -523,7 +523,7 @@ public class UIManager : MonoBehaviour
             case (int)Globals.GAMEID.SLOT_SIXIANG:
                 {
                     Globals.Logging.Log("showGame SLOT_SIXIANG");
-                    gameView = Instantiate(loadPrefabGame("SiXiangView"), parentGame).GetComponent<SiXiangView>();
+                    // gameView = Instantiate(loadPrefabGame("SiXiangView"), parentGame).GetComponent<SiXiangView>();
                     break;
                 }
             case (int)Globals.GAMEID.SLOT20FRUIT:

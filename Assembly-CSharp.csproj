@@ -63,7 +63,6 @@
     <Compile Include="Assets\Scripts\Objects\ToggleItemCtrl.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\BandarQQ\ChipBandar.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\Baccarat\HistoryBaccarat_CockRoad.cs" />
-    <Compile Include="Assets\Scripts\Screens\GameView\Sixiang\SiXiangScatterView.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\Dummy\GaoGea\ShanClubNodeBet.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\Tongits\ShowGroupBanner.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\HiloView\NodePlayerSicbo.cs" />
@@ -71,12 +70,10 @@
     <Compile Include="Assets\Scripts\Screens\GameView\BoxbetView.cs" />
     <Compile Include="Assets\Scripts\Popups\ShopView\ItemShop.cs" />
     <Compile Include="Assets\Scripts\Popups\FriendInfo\FriendInfoView.cs" />
-    <Compile Include="Assets\Scripts\Screens\GameView\Sixiang\SixiangInfoBarController.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\HiloView\RuleSicbo.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\Lucky9\ChipLucky9.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\SlotIncaView\HandleSlotInCa.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\Baccarat\HistoryBaccarat_SmallRoad.cs" />
-    <Compile Include="Assets\Scripts\Screens\GameView\Sixiang\SiXiangFakeData.cs" />
     <Compile Include="Assets\Scripts\Base\BaseView.cs" />
     <Compile Include="Assets\Scripts\Popups\Dialog\DialogView.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\Sabong\NodePlayerSabong.cs" />
@@ -86,7 +83,6 @@
     <Compile Include="Assets\Scripts\Screens\GameView\SlotTarzanView\SlotTarzanCollumController.cs" />
     <Compile Include="Assets\Libs\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
     <Compile Include="Assets\Scripts\Base\SoundManager.cs" />
-    <Compile Include="Assets\Scripts\Screens\GameView\Sixiang\SiXiangView.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\DragonTiger\ChipDragonTiger.cs" />
     <Compile Include="Assets\EmojiResolver\Scripts\EmojiResolver.cs" />
     <Compile Include="Assets\Scripts\Popups\MailView\MailItem.cs" />
@@ -98,7 +94,6 @@
     <Compile Include="Assets\Scripts\Screens\GameView\BaseSlot\BaseSlotGameView.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\SlotNoelView\SlotNoelItemSpin.cs" />
     <Compile Include="Assets\Libs\Managers\WebSocketManager.cs" />
-    <Compile Include="Assets\Scripts\Screens\GameView\Sixiang\LuckyDraw\LuckyDrawItem.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\Lucky89\Lucky89View.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\SicboView\PlayerViewSicbo.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\Lucky9\Lucky9HandControl.cs" />
@@ -115,7 +110,6 @@
     <Compile Include="Assets\Scripts\Screens\GameView\Tongits\BannerInfo.cs" />
     <Compile Include="Assets\Scripts\Screens\Lobby\AlertShort.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\SlotNoelView\SlotNoelView.cs" />
-    <Compile Include="Assets\Scripts\Screens\GameView\Sixiang\HandleSiXiangView.cs" />
     <Compile Include="Assets\EmojiResolver\Scripts\TextMeshPro\TextEmojiResolver.cs" />
     <Compile Include="Assets\Scripts\Base\FullScreen.cs" />
     <Compile Include="Assets\Scripts\UnityPurchasing\generated\AppleTangle.cs" />
@@ -138,7 +132,6 @@
     <Compile Include="Assets\Scripts\Screens\GameView\Tongits\TongitsScene.cs" />
     <Compile Include="Assets\Scripts\Popups\InfoPlayerInGame\InfoPlayerInGame.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\Lucky9\Lucky9ScoreResult.cs" />
-    <Compile Include="Assets\Scripts\Screens\GameView\Sixiang\SiXiangCollumController.cs" />
     <Compile Include="Assets\Scripts\Popups\Lucky Number\HistoryWonLuckyNumber.cs" />
     <Compile Include="Assets\Libs\DOTween\Modules\DOTweenModuleUI.cs" />
     <Compile Include="Assets\Scripts\Popups\FreeChipView\FreeChipItem.cs" />
@@ -148,13 +141,11 @@
     <Compile Include="Assets\Scripts\Screens\GameView\Baccarat\HandleBaccarat.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\Binh\BinhJackpotView.cs" />
     <Compile Include="Assets\Scripts\Popups\SettingView\SettingView.cs" />
-    <Compile Include="Assets\Scripts\Screens\GameView\Sixiang\RapidPay\RapidPayRowController.cs" />
     <Compile Include="Assets\Scripts\Screens\LoginView.cs" />
     <Compile Include="Assets\Scripts\Base\UIManager.cs" />
     <Compile Include="Assets\Scripts\Popups\ChatWorld\ChatPrivateView.cs" />
     <Compile Include="Assets\EmojiResolver\Scripts\RTLTextMeshPro\RTLInputFieldEmojiResolver.cs" />
     <Compile Include="Assets\Scripts\Base\InitializeServices.cs" />
-    <Compile Include="Assets\Scripts\Screens\GameView\Sixiang\LuckyGold\LuckyGoldItem.cs" />
     <Compile Include="Assets\Scripts\Objects\ImageManager.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\SlotFruitView\SlotFruitView.cs" />
     <Compile Include="Assets\AutoResize.cs" />
@@ -168,7 +159,6 @@
     <Compile Include="Assets\Scripts\Screens\GameView\SlotTarzanView\SlotTarzanItemBonus.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\Tongits\PlayerInfo.cs" />
     <Compile Include="Assets\Libs\DOTween\Modules\DOTweenModulePhysics.cs" />
-    <Compile Include="Assets\Scripts\Screens\GameView\Sixiang\SixiangChooseGameBonus.cs" />
     <Compile Include="Assets\Scripts\Base\PageViewControl\PageView.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\Tongits\HandleTongits.cs" />
     <Compile Include="Assets\Scripts\Base\ButtonTransparency.cs" />
@@ -177,10 +167,8 @@
     <Compile Include="Assets\Libs\DOTween\Modules\DOTweenModuleUtils.cs" />
     <Compile Include="Assets\Scripts\Popups\ChatIngame\ItemChatInGame.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\Dummy\DummyView.cs" />
-    <Compile Include="Assets\Scripts\Screens\GameView\Sixiang\SiXiangSymbolController.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\Baccarat\HistoryBaccarat_BigEye.cs" />
     <Compile Include="Assets\Scripts\Popups\InputPass\InputPassView.cs" />
-    <Compile Include="Assets\Scripts\Screens\GameView\Sixiang\LuckyDraw\SiXiangLuckyDrawView.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\SlotIncaView\SlotInCaItemSpin.cs" />
     <Compile Include="Assets\Scripts\Screens\TableView\CreateTableView.cs" />
     <Compile Include="Assets\Libs\Packets\LoginRequestPacket.cs" />
@@ -188,7 +176,6 @@
     <Compile Include="Assets\Scenes\LoadImage.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\Baccarat\BaccaratView.cs" />
     <Compile Include="Assets\Scripts\Popups\Lucky Number\Result2D3DLuckyNumber.cs" />
-    <Compile Include="Assets\Scripts\Screens\GameView\Sixiang\LuckyGold\SiXiangLuckyGoldView.cs" />
     <Compile Include="Assets\Scripts\TestTouchMove.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\BaseSlot\CollumSpinController.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\Lucky9\Lucky9Hitpot.cs" />
@@ -212,14 +199,11 @@
     <Compile Include="Assets\Scripts\Base\ChipBet.cs" />
     <Compile Include="Assets\Libs\Managers\LoadConfig.cs" />
     <Compile Include="Assets\Scripts\Objects\ToggleGroupControl.cs" />
-    <Compile Include="Assets\Scripts\Screens\GameView\Sixiang\SiXiangBuyPealsPopup.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\DominoGaple\PlayerViewDomino.cs" />
-    <Compile Include="Assets\Scripts\Screens\GameView\Sixiang\DragonPearlView\DragonPearlItem.cs" />
     <Compile Include="Assets\Scripts\Base\PageViewControl\PageDot.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\DealerInGameView.cs" />
     <Compile Include="Assets\Scripts\Popups\ExchangeView\ItemEx.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\Player\Player.cs" />
-    <Compile Include="Assets\Scripts\Screens\GameView\Sixiang\RapidPay\SiXiangRapidPayView.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\SlotIncaView\SlotInCaCollum.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\Tongits\ShowNoti.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\BorkKDeng\BorkSlideCard.cs" />
@@ -237,7 +221,6 @@
     <Compile Include="Assets\Scripts\Screens\GameView\Tongits\PlayerViewTongits.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\BaseSlot\BasePopupGuide.cs" />
     <Compile Include="Assets\Libs\Managers\UnityMainThread.cs" />
-    <Compile Include="Assets\Scripts\Screens\GameView\Sixiang\DragonPearlView\SiXiangDragonPearlView.cs" />
     <Compile Include="Assets\Scripts\Popups\Profile\WalletInfo.cs" />
     <Compile Include="Assets\Scripts\Popups\LeaderBoardView\ItemTopGame.cs" />
     <Compile Include="Assets\Scripts\Popups\Profile\WalletItem.cs" />
@@ -380,7 +363,6 @@
     <None Include="Assets\Resources\GameView\SlotSpine\Noel\SpineIcon\0\skeleton.atlas.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Sprites\gameview\SlotNoel\animations\ButtonShop\skeleton.atlas.txt" />
-    <None Include="Assets\Sprites\gameview\SlotSiXiang\Icon\DragonPearl\eye_turtle\skeleton.atlas.txt" />
     <None Include="Assets\Resources\GameView\SlotSpine\Tarzan\SpineIcon\5\skeleton.atlas.txt" />
     <None Include="Assets\RTLTMPro\Resources\Shaders\TMP_SDF-Mobile Fixed.shader" />
     <None Include="Assets\Libs\DOTween\readme.txt" />
@@ -392,8 +374,6 @@
     <None Include="Assets\Sprites\gameview\common\Animation\Lose\skeleton.atlas.txt" />
     <None Include="Assets\Resources\GameView\SlotSpine\freespin\vienbg\skeleton.atlas.txt" />
     <None Include="Assets\Sprites\gameview\SlotTarzan\Anim\Spin\skeleton.atlas.txt" />
-    <None Include="Assets\Sprites\gameview\SlotSiXiang\Icon\DragonPearl\phongbi\skeleton.atlas.txt" />
-    <None Include="Assets\Sprites\gameview\SlotSiXiang\Icon\DragonPearl\Gold\skeleton.atlas.txt" />
     <None Include="Assets\Resources\GameView\SlotSpine\freespin\skeleton.atlas.txt" />
     <None Include="Assets\RTLTMPro\Resources\Shaders\TMP_SDF Overlay Fixed.shader" />
     <None Include="Assets\Resources\GameView\SlotSpine\InCa\SpineIcon\bird\skeleton.atlas.txt" />
@@ -439,9 +419,7 @@
     <None Include="Assets\Sprites\gameview\SlotInca\Spine\BtnBuy\skeleton.atlas.txt" />
     <None Include="Assets\RTLTMPro\Ranges\LetterRanges.txt" />
     <None Include="Assets\Resources\GameView\SlotSpine\Common\Bigwin\skeleton.atlas.txt" />
-    <None Include="Assets\Sprites\gameview\SlotSiXiang\Spine\Buy\skeleton.atlas.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
-    <None Include="Assets\Sprites\gameview\SlotSiXiang\Spine\BgDragon\skeleton.atlas.txt" />
     <None Include="Assets\Resources\GameView\SlotSpine\Tarzan\SpineIcon\9\skeleton.atlas.txt" />
     <None Include="Assets\Resources\GameView\SlotSpine\InCa\bgFreeSpin\skeleton.atlas.txt" />
     <None Include="Assets\FacebookSDK\Plugins\Canvas\Facebook.Unity.Canvas.dll" />
@@ -449,7 +427,6 @@
     <None Include="Assets\Resources\GameView\SlotSpine\Tarzan\SpineIcon\10\skeleton.atlas.txt" />
     <None Include="Assets\Resources\GameView\SlotSpine\JuicyGarden\SpineIcon\2\skeleton.atlas.txt" />
     <None Include="Assets\RTLTMPro\Ranges\TashkilRanges.txt" />
-    <None Include="Assets\Sprites\gameview\SlotSiXiang\Icon\DragonPearl\eye_phoenix\skeleton.atlas.txt" />
     <None Include="Assets\Resources\GameView\SlotSpine\Noel\SpineIcon\6\skeleton.atlas.txt" />
     <None Include="Assets\Spines\streak\skeleton.atlas.txt" />
     <None Include="Assets\Resources\GameView\SlotSpine\Tarzan\SpineIcon\3\skeleton.atlas.txt" />
@@ -460,7 +437,6 @@
     <None Include="Assets\Resources\GameView\SlotSpine\Noel\SpineIcon\12\skeleton.atlas.txt" />
     <None Include="Assets\Sprites\gameview\SlotFruit\Spine\btn_buy\skeleton.atlas.txt" />
     <None Include="Assets\Spines\Game\win 2_doc\skeleton.atlas.txt" />
-    <None Include="Assets\Sprites\gameview\SlotSiXiang\Spine\BgRectItem\skeleton.atlas.txt" />
     <None Include="Assets\Resources\GameView\SlotSpine\Fruit\SpineIcon\3\skeleton.atlas.txt" />
     <None Include="Assets\Resources\GameView\SlotSpine\Noel\SpineIcon\7\skeleton.atlas.txt" />
     <None Include="Assets\Spines\Game\startgame\skeleton.atlas.txt" />
@@ -491,7 +467,6 @@
     <None Include="Assets\Resources\GameView\SlotSpine\JuicyGarden\SpineIcon\1\skeleton.atlas.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\Resources\GameView\SlotSpine\Noel\SpineIcon\8\skeleton.atlas.txt" />
-    <None Include="Assets\Sprites\gameview\SlotSiXiang\Spine\GameName\skeletion.atlas.txt" />
     <None Include="Assets\Resources\GameView\SlotSpine\Tarzan\SpineIcon\7\skeleton.atlas.txt" />
     <None Include="Assets\FacebookSDK\Plugins\Gameroom\Facebook.Unity.Gameroom.dll" />
     <None Include="Assets\Spines\Game\LoseFull\skeleton.atlas.txt" />
@@ -501,7 +476,6 @@
     <None Include="Assets\Spines\Game\ruong\skeleton.atlas.txt" />
     <None Include="Assets\Resources\GameView\SlotSpine\Tarzan\Model\skeleton.atlas.txt" />
     <None Include="Assets\Resources\GameView\SlotSpine\FiveOfAKind\skeleton.atlas.txt" />
-    <None Include="Assets\Sprites\gameview\SlotSiXiang\Spine\btnSpin\skeleton.atlas.txt" />
     <None Include="Assets\Resources\GameView\SlotSpine\InCa\SpineIcon\bichcorotep\skeleton.atlas.txt" />
     <None Include="Assets\Resources\GameView\SlotSpine\Noel\SpineIcon\1\skeleton.atlas.txt" />
     <None Include="Assets\Resources\GameView\SlotSpine\JuicyGarden\big_megawinJuicy\skeleton.atlas.txt" />
@@ -511,10 +485,8 @@
     <None Include="Assets\Resources\GameView\SlotSpine\Tarzan\SpineIcon\0\skeleton.atlas.txt" />
     <None Include="Assets\Resources\GameView\SlotSpine\Fruit\SpineIcon\12\skeleton.atlas.txt" />
     <None Include="Assets\Resources\GameView\SlotSpine\Noel\big_megawinNoel\skeleton.atlas.txt" />
-    <None Include="Assets\Sprites\gameview\SlotSiXiang\Icon\DragonPearl\eye_tiger\skeleton.atlas.txt" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\Sprites\gameview\SlotTarzan\Anim\bgLeaf\skeleton.atlas.txt" />
-    <None Include="Assets\Sprites\gameview\SlotSiXiang\Icon\DragonPearl\eye_dragon\skeleton.atlas.txt" />
     <None Include="Assets\Resources\GameView\SlotSpine\JuicyGarden\SpineIcon\7\skeleton.atlas.txt" />
     <None Include="Assets\Resources\GameView\SlotSpine\Fruit\SpineIcon\7\skeleton.atlas.txt" />
     <None Include="Assets\Resources\GameView\SlotSpine\Noel\SpineIcon\11\skeleton.atlas.txt" />
@@ -531,7 +503,6 @@
     <None Include="Assets\Sprites\gameview\SlotTarzan\Anim\ButtonConfirm\skeleton.atlas.txt" />
     <None Include="Assets\Spines\Game\GaoGea\win\skeleton.atlas.txt" />
     <None Include="Assets\Spines\Game\ring\ring.atlas.txt" />
-    <None Include="Assets\Sprites\gameview\SlotSiXiang\Spine\BgGame\skeleton.atlas.txt" />
     <None Include="Assets\Spines\Game\GaoGea\Allin\skeleton.atlas.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\Resources\GameView\SlotSpine\Tarzan\MiniGame\PickStone\skeleton.atlas.txt" />
