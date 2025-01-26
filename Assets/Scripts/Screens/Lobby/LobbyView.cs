@@ -34,7 +34,6 @@ public class LobbyView : BaseView
     private int TabGame = 0;
     private bool blockSpamTabGame, isHideBtnScroll, isRunStart;
 
-
     public void DoClickDownloadGame()
     {
         Application.OpenURL(Config.ApkFullUrl);

@@ -1059,9 +1059,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: "S\xEC Xi\xE0ng Slot"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 94eef266de55bee4a831593844a08794, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b7708e67653374c60af5f1595e949403, type: 2}
   m_fixThaiVowel: 1
-  m_sharedMaterial: {fileID: 7800525795003925199, guid: 94eef266de55bee4a831593844a08794, type: 2}
+  m_sharedMaterial: {fileID: 7800525795003925199, guid: b7708e67653374c60af5f1595e949403, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13845,7 +13845,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 10, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 400}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1552870527
