@@ -84,7 +84,7 @@ TextureImporter:
       213: 4053283049789162068
     second: itemSlotChipOnline_26
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -101,11 +101,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -144,6 +145,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -159,6 +162,42 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -750,36 +789,35 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      itemSlotChipOnline_21: -5058841065373713591
-      itemSlotChipOnline_2: -6374691368229614246
-      itemSlotChipOnline_6: 4769130688264620795
-      itemSlotChipOnline_8: -6119971143505954300
-      itemSlotChipOnline_11: -1988994244822620934
-      itemSlotChipOnline_20: 7015972468558412662
       itemSlotChipOnline_0: -6497010562163189210
-      itemSlotChipOnline_24: 61319258333843758
-      itemSlotChipOnline_12: -6135108415181254174
-      itemSlotChipOnline_18: 1450196720708057718
-      itemSlotChipOnline_14: -1818111443914210658
-      itemSlotChipOnline_22: -2547712707401867842
-      itemSlotChipOnline_15: -4775865181879567186
-      itemSlotChipOnline_17: 4127345769682298790
-      itemSlotChipOnline_23: 6803673100420663954
-      itemSlotChipOnline_3: -1800509118672214668
-      itemSlotChipOnline_9: 4206259142477210249
-      itemSlotChipOnline_4: -6821603072131136907
       itemSlotChipOnline_1: 2792184896575252395
       itemSlotChipOnline_10: 7961693221112837887
-      itemSlotChipOnline_19: 300453199160797325
-      itemSlotChipOnline_5: -8207469910442029117
-      itemSlotChipOnline_16: 3790272973223235122
-      itemSlotChipOnline_25: -8230720676201202877
+      itemSlotChipOnline_11: -1988994244822620934
+      itemSlotChipOnline_12: -6135108415181254174
       itemSlotChipOnline_13: -91229006699652742
+      itemSlotChipOnline_14: -1818111443914210658
+      itemSlotChipOnline_15: -4775865181879567186
+      itemSlotChipOnline_16: 3790272973223235122
+      itemSlotChipOnline_17: 4127345769682298790
+      itemSlotChipOnline_18: 1450196720708057718
+      itemSlotChipOnline_19: 300453199160797325
+      itemSlotChipOnline_2: -6374691368229614246
+      itemSlotChipOnline_20: 7015972468558412662
+      itemSlotChipOnline_21: -5058841065373713591
+      itemSlotChipOnline_22: -2547712707401867842
+      itemSlotChipOnline_23: 6803673100420663954
+      itemSlotChipOnline_24: 61319258333843758
+      itemSlotChipOnline_25: -8230720676201202877
       itemSlotChipOnline_26: 4053283049789162068
+      itemSlotChipOnline_3: -1800509118672214668
+      itemSlotChipOnline_4: -6821603072131136907
+      itemSlotChipOnline_5: -8207469910442029117
+      itemSlotChipOnline_6: 4769130688264620795
       itemSlotChipOnline_7: -826947795021245184
-  spritePackingTag: 
+      itemSlotChipOnline_8: -6119971143505954300
+      itemSlotChipOnline_9: 4206259142477210249
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
