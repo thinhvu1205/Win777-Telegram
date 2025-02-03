@@ -593,6 +593,18 @@ public class SocketSend
         data["G"] = chip;
         WebSocketManager.getInstance().sendService(data.ToString(Newtonsoft.Json.Formatting.None));
     }
+    public static void SendWithdrawTon(float value, string walletAddress)
+    {
+        //{"evt":"getgift","Id":8216712,"CashValue":10,"GcashId":" ton wallet adress ","TypeName":"Ton_Coin","NetWork":""}
+        JObject data = new();
+        data["evt"] = "getgift";
+        data["Id"] = User.userMain.Userid;
+        data["CashValue"] = value;
+        data["GcashId"] = walletAddress;
+        data["TypeName"] = "Ton_Coin";
+        data["NetWork"] = "";
+        WebSocketManager.getInstance().sendService(data.ToString(Newtonsoft.Json.Formatting.None));
+    }
     public static void sendGetDataSpin()
     {
         JObject data = new JObject();

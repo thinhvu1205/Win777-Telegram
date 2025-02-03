@@ -6,6 +6,7 @@ using TMPro;
 using System.Threading.Tasks;
 using System;
 using Globals;
+using DG.Tweening;
 
 public class ExchangeView : BaseView
 {
@@ -13,12 +14,13 @@ public class ExchangeView : BaseView
     [SerializeField] List<Sprite> spTab;
     [SerializeField]
     GameObject
-        tabTop, itemEx, itemAgency, itemHistory, m_Keyboard, m_OpenKeyboardPhone, m_OpenKeyBoardConfirmPhone, m_HighlightPhone, m_HighlightConfirmPhone;
-    [SerializeField] Transform m_PrefabHistoryTf, m_HistoryTf;
+        tabTop, itemEx, itemAgency, itemHistory, m_Keyboard, m_OpenKeyboardPhone, m_OpenKeyBoardConfirmPhone,
+        m_HighlightPhone, m_HighlightConfirmPhone, m_HighlightTonAmount, m_APKContent, m_TelegramContent;
+    [SerializeField] Transform m_PrefabHistoryTf, m_HistoryTf, m_TonBoardTf;
     [SerializeField] TextMeshProUGUI lbChips, m_RewardTMP, m_HistoryTMP;
     [SerializeField] BaseView popupInput;
     [SerializeField] ScrollRect scrContentRedeem, scrContentAgency, scrContentHistory, scrTabs, scrTabsHis;
-    [SerializeField] private InputField m_PhoneIF, m_ConfirmPhoneIF;
+    [SerializeField] private InputField m_PhoneIF, m_ConfirmPhoneIF, m_TonAddressIF, m_TonAmountIF;
 
     private List<JObject> listDataHis = new List<JObject>();
     private JObject firstTabHistItem, curDataTabNap;
@@ -42,6 +44,7 @@ public class ExchangeView : BaseView
     public void DoClickNumber(int number)
     {
         if (_CurrentIF == null) return;
+        if (_CurrentIF.text.Equals("") && number == -3) return;
         switch (number)
         {
             case 0:
@@ -66,14 +69,17 @@ public class ExchangeView : BaseView
             case -2:
                 _CurrentIF.text = "";
                 break;
+            case -3:
+                if (!_CurrentIF.text.Contains(".")) _CurrentIF.text += ".";
+                break;
             default:
                 break;
         }
     }
     public void DoClickCloseKeyboard()
     {
-        m_Keyboard.SetActive(false);
         _CurrentIF = null;
+        m_Keyboard.SetActive(false);
         m_HighlightPhone.SetActive(false);
         m_HighlightConfirmPhone.SetActive(false);
     }
@@ -90,6 +96,39 @@ public class ExchangeView : BaseView
         m_Keyboard.SetActive(true);
         m_HighlightPhone.SetActive(false);
         m_HighlightConfirmPhone.SetActive(true);
+    }
+    public void DoClickPasteWalletAddress()
+    {
+        m_TonAddressIF.text = GUIUtility.systemCopyBuffer;
+        UIManager.instance.showToast("Pasted");
+    }
+    public void DoClickOpenKeyboardTonAmount()
+    {
+        _CurrentIF = m_TonAmountIF;
+        m_HighlightTonAmount.SetActive(true);
+        m_TonBoardTf.DOLocalMoveX(-135f, .1f).SetEase(Ease.Linear).OnComplete(() => { m_Keyboard.SetActive(true); });
+    }
+    public void DoClickCloseKeyboardTonAmount()
+    {
+        _CurrentIF = null;
+        m_Keyboard.SetActive(false);
+        m_HighlightTonAmount.SetActive(false);
+        m_TonBoardTf.DOLocalMoveX(0, .1f);
+    }
+    public void DoClickWithdrawTon()
+    {
+        if (m_TonAddressIF.text.Equals(""))
+        {
+            UIManager.instance.showToast("No wallet address");
+            return;
+        }
+        if (!float.TryParse(m_TonAmountIF.text, out float tonAmount) || tonAmount <= 0)
+        {
+            UIManager.instance.showToast("Invalid amount of Ton!");
+            return;
+        }
+        Debug.Log(") =3 " + tonAmount + ", " + m_TonAddressIF.text);
+        SocketSend.SendWithdrawTon(tonAmount, m_TonAddressIF.text);
     }
     public void onConfirmCashOut()
     {
@@ -131,8 +170,11 @@ public class ExchangeView : BaseView
         lbChips.text = Globals.Config.FormatNumber(Globals.User.userMain.AG);
         m_Keyboard.SetActive(false);
         bool isTelegram = !Config.TELEGRAM_TOKEN.Equals("");
-        m_OpenKeyboardPhone.SetActive(isTelegram);
-        m_OpenKeyBoardConfirmPhone.SetActive(isTelegram);
+        m_APKContent.SetActive(!isTelegram);
+        m_TelegramContent.SetActive(isTelegram);
+        // m_OpenKeyboardPhone.SetActive(isTelegram);
+        // m_OpenKeyBoardConfirmPhone.SetActive(isTelegram);
+
     }
     public async void HandleGiftHistory(JObject data)
     {
@@ -183,13 +225,11 @@ public class ExchangeView : BaseView
         Globals.Logging.Log("updateInfo EX   " + strData);
         //[{ "title":"Truemoney","type":"phil","child":[{ "title":"truemoney","TypeName":"truemoney","title_img":"https://cdn.topbangkokclub.com/api/public/dl/VbfRjo1c/co/Truemoney.png","textBox":[{ "key_placeHolder":"txt_enter_text_gc"},{ "key_placeHolder":"txt_conf_text_gc"}]}],"items":[{ "ag":1000000,"m":50},{ "ag":2000000,"m":100},{ "ag":4000000,"m":200},{ "ag":10000000,"m":500},{ "ag":20000000,"m":1000},{ "ag":40000000,"m":2000},{ "ag":100000000,"m":5000},{ "ag":200000000,"m":10000}]}]
         dataCO = JArray.Parse(strData);
-
         SetDataButtons();
     }
 
     async void SetDataButtons()
     {
-        if (dataCO.Count <= 0) return;
         if (dataCO.Count <= 0) return;
         JObject objData = (JObject)dataCO[0];
         m_RewardTMP.text = ((string)objData["title"]).ToUpper();
