@@ -48,13 +48,21 @@ public class ShopView : BaseView
     public void DoClickCopyWalletAddress()
     {
         string[] results = m_TONAddressTMPUI.text.Split(" ");
-        GUIUtility.systemCopyBuffer = results.Last();
+        TextEditor te = new();
+        te.text = results.Last();
+        te.SelectAll();
+        te.Copy();
+        // GUIUtility.systemCopyBuffer = results.Last();
         UIManager.instance.showToast("Copied");
     }
     public void DoClickCopyMemo()
     {
         string[] results = m_MemoTMPUI.text.Split(" ");
-        GUIUtility.systemCopyBuffer = results.Last();
+        TextEditor te = new();
+        te.text = results.Last();
+        te.SelectAll();
+        te.Copy();
+        // GUIUtility.systemCopyBuffer = results.Last();
         UIManager.instance.showToast("Copied");
 
     }

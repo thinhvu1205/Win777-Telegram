@@ -392,7 +392,18 @@
     <Compile Include="Assets\Plugins\Socket\Newtonsoft.Json\Utilities\EnumValue.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Plugins\BitmapFontImporter\Examples\Font1\font1.fnt" />
     <None Include="Assets\Plugins\zxing.unity.dll" />
+    <None Include="Assets\Plugins\BitmapFontImporter\Examples\Font2\font2.fnt" />
+    <None Include="Assets\Plugins\BitmapFontImporter\Examples\font3\font3.fnt" />
+    <None Include="Assets\Plugins\Android\proguard-user.txt" />
+    <None Include="Assets\Plugins\BitmapFontImporter\Shaders\BFILogic.cginc" />
+    <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
+    <None Include="Assets\Plugins\BitmapFontImporter\Shaders\Font5.shader" />
+    <None Include="Assets\Plugins\WebGL\New Text Document.txt" />
+    <None Include="Assets\Plugins\BitmapFontImporter\Shaders\Font4.shader" />
+    <None Include="Assets\Plugins\BitmapFontImporter\Shaders\Font3.shader" />
+    <None Include="Assets\Plugins\BitmapFontImporter\Shaders\Font2.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
