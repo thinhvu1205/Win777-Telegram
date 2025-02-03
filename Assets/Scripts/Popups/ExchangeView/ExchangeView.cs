@@ -34,6 +34,11 @@ public class ExchangeView : BaseView
         if (!Config.TELEGRAM_TOKEN.Equals("")) SocketSend.sendSelectGame(Config.curGameId);
         else base.onClickClose(true);
     }
+    public void DoClickCloseInput()
+    {
+        m_Keyboard.SetActive(false);
+        popupInput.gameObject.SetActive(false);
+    }
     public void DoClickNumber(int number)
     {
         if (_CurrentIF == null) return;
@@ -89,7 +94,6 @@ public class ExchangeView : BaseView
     public void onConfirmCashOut()
     {
         SoundManager.instance.soundClick();
-        //require('SMLSocketIO').getInstance().emitSIOCCC(cc.js.formatStr("onConfirmCashOut_%s", require('GameManager').getInstance().getCurrentSceneName()));
         var value = valueCO;
         var typeName = typeNet;
         var phoneNumber = m_PhoneIF.text;
