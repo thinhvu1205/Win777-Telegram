@@ -52,7 +52,6 @@ public class ShopView : BaseView
         te.text = results.Last();
         te.SelectAll();
         te.Copy();
-        // GUIUtility.systemCopyBuffer = results.Last();
         UIManager.instance.showToast("Copied");
     }
     public void DoClickCopyMemo()
@@ -62,7 +61,6 @@ public class ShopView : BaseView
         te.text = results.Last();
         te.SelectAll();
         te.Copy();
-        // GUIUtility.systemCopyBuffer = results.Last();
         UIManager.instance.showToast("Copied");
 
     }

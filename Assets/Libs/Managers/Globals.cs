@@ -592,6 +592,7 @@ namespace Globals
         public static int curGameId = 0;
         public static bool isBackGame = false;
         public static string TELEGRAM_TOKEN = "";
+        public static string TELEGRAM_WALLET_ADDRESS = "";
 
         public static bool isChangeTable = false;
 

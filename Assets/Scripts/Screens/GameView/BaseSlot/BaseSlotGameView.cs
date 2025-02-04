@@ -1388,6 +1388,14 @@ public class BaseSlotGameView : GameView
     {
         slotViews.Clear();
         slotViews = dataFinishView.ToObject<List<List<int>>>();
+        if (!slotViews[2].Contains(12))
+        {
+            if (!slotViews[0].Contains(12)) slotViews[0][2] = 12;
+            if (!slotViews[1].Contains(12)) slotViews[1][2] = 12;
+            if (!slotViews[3].Contains(12)) slotViews[3][2] = 12;
+            if (!slotViews[4].Contains(12)) slotViews[4][2] = 12;
+        }
+        foreach (var item in slotViews) Debug.Log(") =3 " + string.Join(", ", item));
         for (int i = 0, size = dataFinishView.Count; i < size; i++)
         {
             List<int> viewCollum = dataFinishView[i].ToObject<List<int>>();

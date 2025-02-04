@@ -17,10 +17,11 @@ public class ExchangeView : BaseView
         tabTop, itemEx, itemAgency, itemHistory, m_Keyboard, m_OpenKeyboardPhone, m_OpenKeyBoardConfirmPhone,
         m_HighlightPhone, m_HighlightConfirmPhone, m_HighlightTonAmount, m_APKContent, m_TelegramContent;
     [SerializeField] Transform m_PrefabHistoryTf, m_HistoryTf, m_TonBoardTf;
-    [SerializeField] TextMeshProUGUI lbChips, m_RewardTMP, m_HistoryTMP;
+    [SerializeField] TextMeshProUGUI lbChips, m_RewardTMP, m_HistoryTMP, m_TonWalletTMP;
+    [SerializeField] private Button m_WithdrawBtn;
     [SerializeField] BaseView popupInput;
     [SerializeField] ScrollRect scrContentRedeem, scrContentAgency, scrContentHistory, scrTabs, scrTabsHis;
-    [SerializeField] private InputField m_PhoneIF, m_ConfirmPhoneIF, m_TonAddressIF, m_TonAmountIF;
+    [SerializeField] private InputField m_PhoneIF, m_ConfirmPhoneIF, m_TonAmountIF;
 
     private List<JObject> listDataHis = new List<JObject>();
     private JObject firstTabHistItem, curDataTabNap;
@@ -97,11 +98,6 @@ public class ExchangeView : BaseView
         m_HighlightPhone.SetActive(false);
         m_HighlightConfirmPhone.SetActive(true);
     }
-    public void DoClickPasteWalletAddress()
-    {
-        m_TonAddressIF.text = GUIUtility.systemCopyBuffer;
-        UIManager.instance.showToast("Pasted");
-    }
     public void DoClickOpenKeyboardTonAmount()
     {
         _CurrentIF = m_TonAmountIF;
@@ -117,9 +113,9 @@ public class ExchangeView : BaseView
     }
     public void DoClickWithdrawTon()
     {
-        if (m_TonAddressIF.text.Equals(""))
+        if (Config.TELEGRAM_WALLET_ADDRESS.Equals(""))
         {
-            UIManager.instance.showToast("No wallet address");
+            UIManager.instance.showToast("Please add your Ton address.");
             return;
         }
         if (!float.TryParse(m_TonAmountIF.text, out float tonAmount) || tonAmount <= 0)
@@ -127,8 +123,7 @@ public class ExchangeView : BaseView
             UIManager.instance.showToast("Invalid amount of Ton!");
             return;
         }
-        Debug.Log(") =3 " + tonAmount + ", " + m_TonAddressIF.text);
-        SocketSend.SendWithdrawTon(tonAmount, m_TonAddressIF.text);
+        SocketSend.SendWithdrawTon(tonAmount, Config.TELEGRAM_WALLET_ADDRESS);
     }
     public void onConfirmCashOut()
     {
@@ -174,7 +169,9 @@ public class ExchangeView : BaseView
         m_TelegramContent.SetActive(isTelegram);
         // m_OpenKeyboardPhone.SetActive(isTelegram);
         // m_OpenKeyBoardConfirmPhone.SetActive(isTelegram);
-
+        bool hasTonWalletAdress = !Config.TELEGRAM_WALLET_ADDRESS.Equals("");
+        if (hasTonWalletAdress) m_TonWalletTMP.text = Config.TELEGRAM_WALLET_ADDRESS;
+        m_WithdrawBtn.interactable = hasTonWalletAdress;
     }
     public async void HandleGiftHistory(JObject data)
     {

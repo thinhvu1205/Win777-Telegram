@@ -276,6 +276,10 @@ public class WebSocketManager : MonoBehaviour
     {
         Config.curGameId = gameId;
     }
+    public void GetTelegramWalletAddress(string wallet)
+    {
+        Config.TELEGRAM_WALLET_ADDRESS = wallet;
+    }
 
     private void Awake()
     {
