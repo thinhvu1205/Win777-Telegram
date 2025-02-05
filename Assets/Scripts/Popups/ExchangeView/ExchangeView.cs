@@ -113,17 +113,22 @@ public class ExchangeView : BaseView
     }
     public void DoClickWithdrawTon()
     {
+        // Config.TELEGRAM_WALLET_ADDRESS = "test";
         if (Config.TELEGRAM_WALLET_ADDRESS.Equals(""))
         {
-            UIManager.instance.showToast("Please add your Ton address.");
+            UIManager.instance.showMessageBox("Please add your Ton address.");
             return;
         }
         if (!float.TryParse(m_TonAmountIF.text, out float tonAmount) || tonAmount <= 0)
         {
-            UIManager.instance.showToast("Invalid amount of Ton!");
+            UIManager.instance.showMessageBox("Invalid amount of Ton!");
             return;
         }
-        SocketSend.SendWithdrawTon(tonAmount, Config.TELEGRAM_WALLET_ADDRESS);
+        UIManager.instance.showMessageBox(
+            "You will receive " + tonAmount + " Ton for " + Mathf.CeilToInt(tonAmount * 6000000) + " chips",
+            () => SocketSend.SendWithdrawTon(tonAmount, Config.TELEGRAM_WALLET_ADDRESS),
+            true
+        );
     }
     public void onConfirmCashOut()
     {
@@ -147,6 +152,10 @@ public class ExchangeView : BaseView
     }
     #endregion
 
+    public void UpdateAg()
+    {
+        lbChips.text = Config.FormatNumber(User.userMain.AG);
+    }
     protected override void Awake()
     {
         base.Awake();
@@ -554,12 +563,14 @@ public class ExchangeView : BaseView
         UIManager.instance.showMessageBox((string)data["data"]);
         if ((bool)data["status"])
         {
-            m_PhoneIF.text = "";
-            m_ConfirmPhoneIF.text = "";
             SocketSend.sendUAG();
-            popupInput.hide(false);
-            DoClickButton(m_HistoryTMP.transform.parent.gameObject, null);
-
+            if (Config.TELEGRAM_TOKEN.Equals(""))
+            {
+                m_PhoneIF.text = "";
+                m_ConfirmPhoneIF.text = "";
+                popupInput.hide(false);
+                DoClickButton(m_HistoryTMP.transform.parent.gameObject, null);
+            }
         }
     }
 }

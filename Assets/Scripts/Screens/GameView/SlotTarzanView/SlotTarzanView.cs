@@ -788,7 +788,7 @@ public class SlotTarzanView : BaseSlotGameView
             TweenCallback acShowFreeSpinResult = () => { showPopupResultFreeSpin(); };
             listActionHandleSpin.Add(acShowFreeSpinResult);
         }
-        if ((isInFreeSpin && freespinLeft == 0) || (winType == 100 && !isInFreeSpin))
+        if ((isInFreeSpin && freespinLeft == 0) || (winType >= 100 && !isInFreeSpin))
         {//spin thuong hoac spin turn do dc frespin nhung freespin nay ko trong luc dang freespin. thi moi show update tien con khong thi het freespin moi update
             lbCurrentChips.setValue((long)finishData["AG"], true);
         }

@@ -31,8 +31,8 @@ public class SlotFruitView : BaseSlotGameView
         RECT_SIZE = new Vector2(130, 130f);
         BIGWIN_ANIMPATH = "GameView/SlotSpine/Common/Bigwin/skeleton_SkeletonData";
         MEGAWIN_ANIMPATH = "GameView/SlotSpine/Common/Bigwin/skeleton_SkeletonData";
-        ANIM_BIGWIN_NAME = "bigwin_cam";
-        ANIM_MEGAWIN_NAME = "megawin_cam";
+        ANIM_BIGWIN_NAME = "bigwin";
+        ANIM_MEGAWIN_NAME = "megawin";
         m_ButtonExchange.SetActive(!Config.TELEGRAM_TOKEN.Equals(""));
     }
 

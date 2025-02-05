@@ -141,8 +141,8 @@ public class BaseSlotGameView : GameView
     protected string ANIM_HUGEWIN_NAME = "hugethai";
     protected string ANIM_BG_FREESPIN = "GameView/SlotSpine/freespin/vienBg/skeleton_SkeletonData";
     protected int TYPE_BIGWIN = 1;
-    protected int TYPE_HUGEWIN = 3;
     protected int TYPE_MEGA = 2;
+    protected int TYPE_HUGEWIN = 3;
     protected int singleLineBet;
     protected bool isSendingSpin = false;
     protected int indexCheck3rdScatter = 3;
@@ -816,6 +816,7 @@ public class BaseSlotGameView : GameView
         //finishData = JObject.Parse("{\"evt\":\"slotViews\",\"slotViews\":[[1,7,1],[1,7,7],[12,7,10],[12,7,3],[6,9,0]],\"creditWin\":130,\"winningLine\":[],\"lineDetail\":[],\"freeSpinLeft\":0,\"winType\":0,\"freeSpin\":true,\"agWin\":2000,\"AG\":150063,\"MarkBet\":[1,5,50,500,1000,5000,10000,25000,50000,100000,250000,500000]}");
         //}
         //indexSpin++;
+        Debug.Log(") =3 " + finishData.ToString());
         setFinishView((JArray)finishData["slotViews"]);
         winningLines = finishData["winningLine"].ToObject<List<int>>();
         linesDetail = (JArray)finishData["lineDetail"];
@@ -845,7 +846,7 @@ public class BaseSlotGameView : GameView
     public virtual bool checkWinScatter()
     {
         int numberScatter = slotViews.FindAll(arr => arr.Contains(12)).Count;
-        isGetFreeSpin = numberScatter == 3;
+        isGetFreeSpin = (int)finishData["winType"] >= 100;
         return numberScatter >= 2;
     }
     public virtual void showNearFreeSpin(int indexCol)
@@ -1388,17 +1389,16 @@ public class BaseSlotGameView : GameView
     {
         slotViews.Clear();
         slotViews = dataFinishView.ToObject<List<List<int>>>();
-        if (!slotViews[2].Contains(12))
+        // if (!slotViews[0].Contains(12))
+        // {
+        // if (!slotViews[1].Contains(12)) slotViews[1][2] = 12;
+        // if (!slotViews[2].Contains(12)) slotViews[2][2] = 12;
+        // if (!slotViews[3].Contains(12)) slotViews[3][2] = 12;
+        // if (!slotViews[4].Contains(12)) slotViews[4][2] = 12;
+        // }
+        for (int i = 0; i < slotViews.Count; i++)
         {
-            if (!slotViews[0].Contains(12)) slotViews[0][2] = 12;
-            if (!slotViews[1].Contains(12)) slotViews[1][2] = 12;
-            if (!slotViews[3].Contains(12)) slotViews[3][2] = 12;
-            if (!slotViews[4].Contains(12)) slotViews[4][2] = 12;
-        }
-        foreach (var item in slotViews) Debug.Log(") =3 " + string.Join(", ", item));
-        for (int i = 0, size = dataFinishView.Count; i < size; i++)
-        {
-            List<int> viewCollum = dataFinishView[i].ToObject<List<int>>();
+            List<int> viewCollum = slotViews[i];
             listCollum[i].setFinishView(viewCollum);
         }
     }
@@ -1424,29 +1424,35 @@ public class BaseSlotGameView : GameView
         //{
         if (countScatter >= 2 && currentIndexStop == indexCheck3rdScatter - 1 && Config.curGameId != (int)GAMEID.SLOT_JUICY_GARDEN)
         {
-            DOTween.Sequence()
-                .AppendInterval(2.0f)
-                .AppendCallback(() =>
+            bool isArrayScatters = false;
+            List<int> foundScatterIds = new();
+            for (int i = 0; i < slotViews.Count; i++) if (slotViews[i].Contains(12)) foundScatterIds.Add(i);
+            for (int i = 0; i < foundScatterIds.Count - 1; i++)
+            {
+                if (foundScatterIds[i] + 1 != foundScatterIds[i + 1]) break;
+                if (i + 1 == foundScatterIds.Count - 1) isArrayScatters = true;
+            }
+            if (isArrayScatters)
+            {
+                DOTween.Sequence().AppendInterval(2.0f).AppendCallback(() =>
                 {
                     currentIndexStop++;
-                    if (currentIndexStop < listCollum.Count)
-                    {
-                        listCollum[currentIndexStop].isStop = true;
-                    }
+                    if (currentIndexStop < listCollum.Count) listCollum[currentIndexStop].isStop = true;
                 });
-            showNearFreeSpin(currentIndexStop + 1);
-            listCollum[currentIndexStop + 1].isNearFreeSpin = true;
+                showNearFreeSpin(currentIndexStop + 1);
+                listCollum[currentIndexStop + 1].isNearFreeSpin = true;
+            }
+            else
+            {
+                currentIndexStop++;
+                if (currentIndexStop < listCollum.Count) listCollum[currentIndexStop].isStop = true;
+            }
         }
         else
         {
             currentIndexStop++;
-            if (currentIndexStop < listCollum.Count)
-            {
-                listCollum[currentIndexStop].isStop = true;
-            }
+            if (currentIndexStop < listCollum.Count) listCollum[currentIndexStop].isStop = true;
         }
-
-
         //}
     }
     public virtual void changeBetRoom(string type)

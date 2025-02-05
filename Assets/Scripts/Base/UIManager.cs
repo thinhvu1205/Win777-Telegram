@@ -758,6 +758,10 @@ public class UIManager : MonoBehaviour
         {
             TableView.instance.updateAg();
         }
+        if (ExchangeView.instance != null && ExchangeView.instance.gameObject.activeSelf)
+        {
+            ExchangeView.instance.UpdateAg();
+        }
     }
     public void updateAGSafe()
     {
