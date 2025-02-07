@@ -34,6 +34,17 @@ public class ButtonBetSicbo : MonoBehaviour
         ///////////////////////////////////////////////////////////////
         IEnumerator ShowButtons()
         {
+            int valueBet = 0;
+            for (int i = 0; i < sicboGameView.boxBet.dataBet.Count; i++)
+            {
+                JObject data = (JObject)sicboGameView.boxBet.dataBet[i];
+                valueBet += (int)data["value"];
+            }
+            bool enableRebet = sicboGameView.matchCount != 0 && !(sicboGameView.thisPlayer.ag < valueBet || sicboGameView.boxBet.dataBet.Count <= 0);
+            btn_Rebet.interactable = enableRebet;
+            // ske_rebet.gameObject.SetActive(enableRebet);
+            btn_Double.interactable = false;
+            //ske_double.gameObject.SetActive(false);
             CanvasGroup canvasGr = GetComponent<CanvasGroup>();
             canvasGr.alpha = 0;
             for (int i = 0; i < listBtnBetChip.Count; i++) listBtnBetChip[i].gameObject.SetActive(false);
@@ -52,17 +63,6 @@ public class ButtonBetSicbo : MonoBehaviour
             yield return new WaitForSecondsRealtime(.6f);
             onClickChip(sicboGameView.chipDealLastMatch.ToString());
             sicboGameView.gateBet.setStateButtonBet(false);
-            btn_Double.interactable = false;
-            //ske_double.gameObject.SetActive(false);
-            int valueBet = 0;
-            for (int i = 0; i < sicboGameView.boxBet.dataBet.Count; i++)
-            {
-                JObject data = (JObject)sicboGameView.boxBet.dataBet[i];
-                valueBet += (int)data["value"];
-            }
-            bool enableRebet = sicboGameView.matchCount != 0 && !(sicboGameView.thisPlayer.ag < valueBet || sicboGameView.boxBet.dataBet.Count <= 0);
-            btn_Rebet.interactable = enableRebet;
-            // ske_rebet.gameObject.SetActive(enableRebet);
         }
     }
     public void onClickDouble()
