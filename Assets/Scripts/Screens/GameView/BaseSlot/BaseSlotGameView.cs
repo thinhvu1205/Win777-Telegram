@@ -816,7 +816,6 @@ public class BaseSlotGameView : GameView
         //finishData = JObject.Parse("{\"evt\":\"slotViews\",\"slotViews\":[[1,7,1],[1,7,7],[12,7,10],[12,7,3],[6,9,0]],\"creditWin\":130,\"winningLine\":[],\"lineDetail\":[],\"freeSpinLeft\":0,\"winType\":0,\"freeSpin\":true,\"agWin\":2000,\"AG\":150063,\"MarkBet\":[1,5,50,500,1000,5000,10000,25000,50000,100000,250000,500000]}");
         //}
         //indexSpin++;
-        Debug.Log(") =3 " + finishData.ToString());
         setFinishView((JArray)finishData["slotViews"]);
         winningLines = finishData["winningLine"].ToObject<List<int>>();
         linesDetail = (JArray)finishData["lineDetail"];
@@ -1389,13 +1388,6 @@ public class BaseSlotGameView : GameView
     {
         slotViews.Clear();
         slotViews = dataFinishView.ToObject<List<List<int>>>();
-        // if (!slotViews[0].Contains(12))
-        // {
-        // if (!slotViews[1].Contains(12)) slotViews[1][2] = 12;
-        // if (!slotViews[2].Contains(12)) slotViews[2][2] = 12;
-        // if (!slotViews[3].Contains(12)) slotViews[3][2] = 12;
-        // if (!slotViews[4].Contains(12)) slotViews[4][2] = 12;
-        // }
         for (int i = 0; i < slotViews.Count; i++)
         {
             List<int> viewCollum = slotViews[i];
@@ -1424,35 +1416,29 @@ public class BaseSlotGameView : GameView
         //{
         if (countScatter >= 2 && currentIndexStop == indexCheck3rdScatter - 1 && Config.curGameId != (int)GAMEID.SLOT_JUICY_GARDEN)
         {
-            bool isArrayScatters = false;
-            List<int> foundScatterIds = new();
-            for (int i = 0; i < slotViews.Count; i++) if (slotViews[i].Contains(12)) foundScatterIds.Add(i);
-            for (int i = 0; i < foundScatterIds.Count - 1; i++)
-            {
-                if (foundScatterIds[i] + 1 != foundScatterIds[i + 1]) break;
-                if (i + 1 == foundScatterIds.Count - 1) isArrayScatters = true;
-            }
-            if (isArrayScatters)
-            {
-                DOTween.Sequence().AppendInterval(2.0f).AppendCallback(() =>
+            DOTween.Sequence()
+                .AppendInterval(2.0f)
+                .AppendCallback(() =>
                 {
                     currentIndexStop++;
-                    if (currentIndexStop < listCollum.Count) listCollum[currentIndexStop].isStop = true;
+                    if (currentIndexStop < listCollum.Count)
+                    {
+                        listCollum[currentIndexStop].isStop = true;
+                    }
                 });
-                showNearFreeSpin(currentIndexStop + 1);
-                listCollum[currentIndexStop + 1].isNearFreeSpin = true;
-            }
-            else
-            {
-                currentIndexStop++;
-                if (currentIndexStop < listCollum.Count) listCollum[currentIndexStop].isStop = true;
-            }
+            showNearFreeSpin(currentIndexStop + 1);
+            listCollum[currentIndexStop + 1].isNearFreeSpin = true;
         }
         else
         {
             currentIndexStop++;
-            if (currentIndexStop < listCollum.Count) listCollum[currentIndexStop].isStop = true;
+            if (currentIndexStop < listCollum.Count)
+            {
+                listCollum[currentIndexStop].isStop = true;
+            }
         }
+
+
         //}
     }
     public virtual void changeBetRoom(string type)
