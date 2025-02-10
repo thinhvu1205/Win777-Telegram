@@ -20,22 +20,21 @@ public class ItemHistoryEx : MonoBehaviour
         return (i < 10 ? "0" : "") + i;
     }
 
-    public void setInfo(JObject _dataItem, int chip)
+    public void setInfo(JObject _dataItem)
     {
-        //    {
-        //        "id": 1,
-        //  "CashValue": 50.0,
-        //  "GcashId": "123",
-        //  "typeName": "Gcash",
-        //  "CreateTime": 1621239907437,
-        //  "status": 2
-        //}
+        // "id": 123,
+        // "CashValue": 0.1,
+        // "GcashId": "UQBh05mPFYqqqDfcFW9nlNmYYHlC-bnXG8VzoNgnSep_n4R9",
+        // "typeName": "Ton_Coin",
+        // "CreateTime": 456789678,
+        // "typeCashout": 0,
+        // "status": 2
         dataItem = _dataItem;
         DateTime time_ = new DateTime(1970, 1, 1).AddMilliseconds((double)dataItem["CreateTime"]);
         time_ = time_.ToLocalTime();
         txtTime.text = addZero(time_.Day) + "/" + addZero(time_.Month) + "/" + time_.Year + "\n" + addZero(time_.Hour) + ":" + addZero(time_.Minute);
-        int cash = (int)dataItem["CashValue"];
-        txtAmount.text = Globals.Config.FormatNumber(cash);
+        float cash = (float)dataItem["CashValue"];
+        txtAmount.text = ((string)_dataItem["typeName"]).Equals("Ton_Coin") ? (cash + " Ton") : (Globals.Config.FormatNumber(cash) + " Peso");
         txtPrice.text = Globals.Config.FormatNumber(cash * 20000); // sv bảo fix rate là 20000
         //Debug.Log("txtPrice:" + chip);
         this.txtMobile.text = (string)dataItem["GcashId"];

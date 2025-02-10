@@ -252,7 +252,6 @@ public class LoadConfig : MonoBehaviour
     public void getInfoEX(Action<string> callback)
     {
         var wWForm = createBodyJson();
-        //StartCoroutine(GetRequest(Globals.Config.infoDT, wWForm.ToString(), callback));
         ProgressHandle(Globals.Config.infoDT, wWForm.ToString(), callback);
     }
 
