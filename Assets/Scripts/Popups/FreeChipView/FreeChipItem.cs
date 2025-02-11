@@ -65,7 +65,7 @@ public class FreeChipItem : MonoBehaviour
         freechipIcon.sprite = listIconType[type];
         lbMessage.text = message;
         lbChip.text = Globals.Config.FormatNumber(numChip);
-     
+
         if (receiveType == 69 && type == 3)
         {
             btnReceive.gameObject.SetActive(false);
@@ -103,15 +103,15 @@ public class FreeChipItem : MonoBehaviour
         else if (type == 7 || type == 8)
         {
             List<int> data = new List<int> { type_receive };
-            SocketSend.getArrGold(data);
+            SocketSend.OpenMultipleMailsContainChip(data);
             Globals.User.userMain.nmAg--;
             if (FreeChipView.instance.transform.parent != null)
             {
                 FreeChipView.instance.dataFreeChipAdmin.Remove(dataItem);
             }
         }
-       
-        Debug.Log("Item Chip=" + chip+"--Item:"+transform.name);
+
+        Debug.Log("Item Chip=" + chip + "--Item:" + transform.name);
         string msg = Globals.Config.getTextConfig("nhan_ag_tu_ngan_hang");
         UIManager.instance.showMessageBox(Globals.Config.formatStr(msg, Globals.Config.FormatNumber(chip)));
         FreeChipView.instance.reloadList();

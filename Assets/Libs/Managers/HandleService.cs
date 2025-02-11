@@ -263,8 +263,14 @@ public class HandleService
                     {
                         UIManager.instance.checkAlertMail(true);
                     }
+                    // Telegram: cứ có mail ở event này về là mở ra nhận hết
+                    List<int> mailIds = new();
+                    foreach (JToken item in listFreeChip) mailIds.Add((int)item["Id"]);
+                    SocketSend.OpenMultipleMailsContainChip(mailIds);
                     break;
-
+                case "31":
+                    Globals.User.userMain.AG = (long)jsonData["totalAG"];
+                    break;
                 case "messagelist":
                     if (jsonData.ContainsKey("data"))
                     {

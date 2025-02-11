@@ -212,7 +212,6 @@ public class WebSocketManager : MonoBehaviour
      */
     public void sendService(string strData, bool ping = true)
     {
-
         //if (NetworkManager.getInstance().statusConnect != FIREBASE.ConnectionStatus.CONNECTED) return;
         ServiceTransportPacket serviceTransport = new ServiceTransportPacket();
         serviceTransport.service = "com.athena.services.api.ServiceContract";

@@ -170,6 +170,7 @@ public class SocketSend
     }
     public static void getMessList()
     {
+        return; // bỏ ở tele
         JObject data = new JObject();
         data["evt"] = "messagelist";
 
@@ -448,7 +449,7 @@ public class SocketSend
         data["idtable"] = tableid;
         WebSocketManager.getInstance().sendService(data.ToString(Newtonsoft.Json.Formatting.None));
     }
-    public static void getArrGold(List<int> arr)
+    public static void OpenMultipleMailsContainChip(List<int> arr)
     {
         JObject data = new JObject();
         data["evt"] = 15;
@@ -541,6 +542,7 @@ public class SocketSend
     }
     public static void getInfoSafe()
     {
+        return; // bỏ ở tele
         JObject data = new JObject();
         data["idevt"] = 300;
         WebSocketManager.getInstance().sendService(data.ToString(Newtonsoft.Json.Formatting.None));
@@ -580,7 +582,7 @@ public class SocketSend
     }
     public static void sendPromotion()
     {
-        //hien test
+        return; // bỏ ở tele
         JObject data = new JObject();
         data["evt"] = "promotion_info";
         WebSocketManager.getInstance().sendService(data.ToString(Newtonsoft.Json.Formatting.None));
