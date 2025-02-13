@@ -18,7 +18,6 @@ public class LoginView : BaseView
     public string accPlayNow = "";
     public string passPlayNow = "";
     bool isOpenFirst = true;
-
     bool isLoginingFB = false;
     protected override void Start()
     {

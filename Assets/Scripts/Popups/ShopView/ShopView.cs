@@ -13,7 +13,7 @@ public class ShopView : BaseView
     [SerializeField] private List<Sprite> spTab;
     [SerializeField] private List<TMP_InputField> listEdb;
     [SerializeField] private ScrollRect scrTabsChannel, scrTabs, scrContent;
-    [SerializeField] private GameObject btnTab, itemShop, m_ContentOnApk, m_ContentOnTelegram;
+    [SerializeField] private GameObject btnTab, itemShop, m_APKContent, m_ContentOnTelegram;
     [SerializeField] private TextMeshProUGUI txt_best, m_BestDealChipsTMPUI, m_TONAddressTMPUI, m_MemoTMPUI;
     [SerializeField] private BaseView inputView;
     [SerializeField] private Button btnConfirmInput;
@@ -28,11 +28,11 @@ public class ShopView : BaseView
 
         if (UIManager.instance.gameView == null)
         {
-            Globals.CURRENT_VIEW.setCurView(Globals.CURRENT_VIEW.PAYMENT);
-            SocketIOManager.getInstance().emitSIOCCCNew(Globals.Config.formatStr("ClickShop_%s", Globals.CURRENT_VIEW.getCurrentSceneName()));
+            CURRENT_VIEW.setCurView(CURRENT_VIEW.PAYMENT);
+            SocketIOManager.getInstance().emitSIOCCCNew(Config.formatStr("ClickShop_%s", CURRENT_VIEW.getCurrentSceneName()));
         }
         instance = this;
-        if (Globals.Config.infoChip != "")
+        if (Config.infoChip != "")
         {
             LoadConfig.instance.getInfoShop(updateInfo, () =>
             {
@@ -68,19 +68,35 @@ public class ShopView : BaseView
     {
         Logging.Log("updateInfo shop   " + strData + " / " + Config.TELEGRAM_TOKEN);
         bool isTelegram = !Config.TELEGRAM_TOKEN.Equals("");
-        m_ContentOnApk.SetActive(!isTelegram);
-        m_ContentOnTelegram.SetActive(isTelegram);
         JArray arrayData = JArray.Parse(strData);
-        if (!isTelegram)
+        //ton
+        JToken tonData = null;
+        foreach (JToken data in arrayData)
         {
-            if (strData == "" || arrayData.Count <= 0)
+            if (((string)data["title"]).ToLower().Equals("ton"))
             {
-                updateInfo(dataDefault);
-                return;
+                tonData = data;
+                break;
             }
+        }
+        if (tonData != null)
+        {
+            string paymentUrl = (string)tonData["linkpayment"];
+            string[] results = paymentUrl.Split("/").Last().Split("?text=");
+            m_TONAddressTMPUI.text = "Wallet address: " + results[0];
+            m_MemoTMPUI.text = "Memo: " + results[1];
+            Color32[] outputC32 = EncodeTextToQRCode(paymentUrl, 256, 256);
+            Texture2D t2D = new(256, 256);
+            t2D.SetPixels32(outputC32);
+            t2D.Apply();
+            m_QRCodeRI.texture = t2D;
+        }
+        //other
+        if (arrayData.Count > 0)
+        {
             UIManager.instance.destroyAllChildren(scrTabs.content.transform);
             UIManager.instance.destroyAllChildren(scrContent.content.transform);
-            if (arrayData.Count == 1)
+            if (arrayData.Count == 1 && !arrayData[0]["title"].Equals("ton"))
             {
                 iapManager = new IAPManager((JObject)arrayData[0]);
                 scrTabs.gameObject.SetActive(false);
@@ -91,13 +107,13 @@ public class ShopView : BaseView
             }
             scrTabs.gameObject.SetActive(true);
             JObject item0 = null;
-            int indSelect = 0;
+            int chosenId = 0;
             for (int i = 0; i < arrayData.Count; i++)
             {
                 JObject obItem = (JObject)arrayData[i];
                 if (obItem.ContainsKey("focus") && (bool)obItem["focus"])
                 {
-                    indSelect = i;
+                    chosenId = i;
                     item0 = obItem;
                 }
                 string title = (string)obItem["title"], title_img = (string)obItem["title_img"];
@@ -111,23 +127,23 @@ public class ShopView : BaseView
                     bkg.transform.localScale = new Vector3(-1, 1, 1);
                     btn.transform.Find("Line").gameObject.SetActive(false);
                 }
-                TextMeshProUGUI txt = btn.transform.Find("Text").GetComponent<TextMeshProUGUI>();
-                txt.text = "";
-                Image spLogo = btn.transform.Find("Icon").GetComponent<Image>();
-                spLogo.gameObject.SetActive(false);
-                if (title_img.Equals("")) txt.text = title.ToUpper();
+                TextMeshProUGUI titleTMP = btn.transform.Find("Text").GetComponent<TextMeshProUGUI>();
+                titleTMP.text = "";
+                Image logoImg = btn.transform.Find("Icon").GetComponent<Image>();
+                logoImg.gameObject.SetActive(false);
+                if (title_img.Equals("")) titleTMP.text = title.ToUpper();
                 else
                 {
                     Sprite spr = await Config.GetRemoteSprite(title_img);
                     if (spr != null)
                     {
-                        spLogo.sprite = spr;
-                        if (spLogo != null && spLogo.sprite != null)
+                        logoImg.sprite = spr;
+                        if (logoImg != null && logoImg.sprite != null)
                         {
-                            spLogo.gameObject.SetActive(true);
-                            spLogo.SetNativeSize();
+                            logoImg.gameObject.SetActive(true);
+                            logoImg.SetNativeSize();
                         }
-                        else txt.text = title.ToUpper();
+                        else titleTMP.text = title.ToUpper();
                     }
                 }
                 btn.transform.localScale = Vector3.one;
@@ -139,33 +155,12 @@ public class ShopView : BaseView
             scrTabs.content.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, contentWidth);
             if (item0 == null && arrayData.Count > 0)
             {
-                indSelect = 0;
+                chosenId = 0;
                 item0 = (JObject)arrayData[0];
             }
-            if (scrTabs.content.childCount > indSelect) onClickTab(scrTabs.content.transform.GetChild(indSelect).gameObject, item0);
+            if (scrTabs.content.childCount > chosenId) onClickTab(scrTabs.content.transform.GetChild(chosenId).gameObject, item0);
         }
-        else
-        {
-            JToken tonData = null;
-            foreach (JToken data in arrayData)
-            {
-                if (((string)data["title"]).ToLower().Equals("ton"))
-                {
-                    tonData = data;
-                    break;
-                }
-            }
-            if (tonData == null) return;
-            string paymentUrl = (string)tonData["linkpayment"];
-            string[] results = paymentUrl.Split("/").Last().Split("?text=");
-            m_TONAddressTMPUI.text = "Wallet address: " + results[0];
-            m_MemoTMPUI.text = "Memo: " + results[1];
-            Color32[] outputC32 = EncodeTextToQRCode(paymentUrl, 256, 256);
-            Texture2D t2D = new(256, 256);
-            t2D.SetPixels32(outputC32);
-            t2D.Apply();
-            m_QRCodeRI.texture = t2D;
-        }
+
     }
     private Color32[] EncodeTextToQRCode(string inputText, int width, int height)
     {
@@ -180,61 +175,31 @@ public class ShopView : BaseView
     void getBest(JArray items, string partner, string title)
     {
         //console.log('-=-= title   ', title)
-        var vip = Globals.User.userMain.VIP;
+        var vip = User.userMain.VIP;
         var priceBest = 0.0f;
         switch (title.ToUpper().Trim())
         {
             case "XL":
                 {
-                    if (vip <= 1)
-                    {
-                        priceBest = 20000;
-                    }
-                    else if (vip <= 4)
-                    {
-                        priceBest = 50000;
-                    }
-                    else if (vip <= 7)
-                    {
-                        priceBest = 70000;
-                    }
-                    else
-                    {
-                        priceBest = 100000;
-                    }
+                    if (vip <= 1) priceBest = 20000;
+                    else if (vip <= 4) priceBest = 50000;
+                    else if (vip <= 7) priceBest = 70000;
+                    else priceBest = 100000;
                     break;
                 }
             case "TELKOMSEL":
                 {
-                    if (vip <= 1)
-                    {
-                        priceBest = 25000;
-                    }
-                    else if (vip <= 7)
-                    {
-                        priceBest = 50000;
-                    }
-                    else
-                    {
-                        priceBest = 100000;
-                    }
+                    if (vip <= 1) priceBest = 25000;
+                    else if (vip <= 7) priceBest = 50000;
+                    else priceBest = 100000;
                     break;
                 }
             case "HUTCHISON":
             case "H3I":
                 {
-                    if (vip <= 1)
-                    {
-                        priceBest = 10000;
-                    }
-                    else if (vip <= 7)
-                    {
-                        priceBest = 30000;
-                    }
-                    else
-                    {
-                        priceBest = 100000;
-                    }
+                    if (vip <= 1) priceBest = 10000;
+                    else if (vip <= 7) priceBest = 30000;
+                    else priceBest = 100000;
                     break;
                 }
             case "OVO":
@@ -242,30 +207,12 @@ public class ShopView : BaseView
             case "GOPAY":
             case "LINKAJA":
                 {
-                    if (vip <= 1)
-                    {
-                        priceBest = 20000;
-                    }
-                    else if (vip <= 3)
-                    {
-                        priceBest = 50000;
-                    }
-                    else if (vip <= 5)
-                    {
-                        priceBest = 100000;
-                    }
-                    else if (vip <= 7)
-                    {
-                        priceBest = 200000;
-                    }
-                    else if (vip <= 9)
-                    {
-                        priceBest = 500000;
-                    }
-                    else
-                    {
-                        priceBest = 1000000;
-                    }
+                    if (vip <= 1) priceBest = 20000;
+                    else if (vip <= 3) priceBest = 50000;
+                    else if (vip <= 5) priceBest = 100000;
+                    else if (vip <= 7) priceBest = 200000;
+                    else if (vip <= 9) priceBest = 500000;
+                    else priceBest = 1000000;
                     break;
                 }
 
@@ -274,64 +221,28 @@ public class ShopView : BaseView
             case "GOPAY SPECIAL":
             case "LINKAJA SPECIAL":
                 {
-                    if (vip <= 1)
-                    {
-                        priceBest = 10000;
-                    }
-                    else if (vip <= 3)
-                    {
-                        priceBest = 50000;
-                    }
-                    else if (vip <= 5)
-                    {
-                        priceBest = 100000;
-                    }
-                    else if (vip <= 7)
-                    {
-                        priceBest = 200000;
-                    }
-                    else if (vip <= 9)
-                    {
-                        priceBest = 500000;
-                    }
-                    else
-                    {
-                        priceBest = 1000000;
-                    }
+                    if (vip <= 1) priceBest = 10000;
+                    else if (vip <= 3) priceBest = 50000;
+                    else if (vip <= 5) priceBest = 100000;
+                    else if (vip <= 7) priceBest = 200000;
+                    else if (vip <= 9) priceBest = 500000;
+                    else priceBest = 1000000;
                     break;
                 }
 
             case "IAP":
                 {
-                    if (vip <= 1)
-                    {
-                        priceBest = 1.99f;
-                    }
-                    else if (vip <= 3)
-                    {
-                        priceBest = 4.99f;
-                    }
-                    else if (vip == 4)
-                    {
-                        priceBest = 9.99f;
-                    }
-                    else if (vip <= 6)
-                    {
-                        priceBest = 19.99f;
-                    }
-                    else if (vip <= 8)
-                    {
-                        priceBest = 49.99f;
-                    }
-                    else
-                    {
-                        priceBest = 99.99f;
-                    }
+                    if (vip <= 1) priceBest = 1.99f;
+                    else if (vip <= 3) priceBest = 4.99f;
+                    else if (vip == 4) priceBest = 9.99f;
+                    else if (vip <= 6) priceBest = 19.99f;
+                    else if (vip <= 8) priceBest = 49.99f;
+                    else priceBest = 99.99f;
                     break;
                 }
         }
         JObject itemData = null;
-        var itemData2 = items.FirstOrDefault(it => Globals.Config.convertStringToNumber((string)it["txtBuy"]) == priceBest);
+        var itemData2 = items.FirstOrDefault(it => Config.convertStringToNumber((string)it["txtBuy"]) == priceBest);
         //console.log('-=-= data best   ', itemData)
         if (itemData2 == null)
         {
@@ -349,12 +260,12 @@ public class ShopView : BaseView
         if (txtBuy.Contains("USD"))
         {
             //this.txt_best.node.parent.getChildByName("P").active = false;
-            this.txt_best.text = Globals.Config.convertStringToNumber(txtBuy).ToString().Replace(",", ".") + "$";
+            this.txt_best.text = Config.convertStringToNumber(txtBuy).ToString().Replace(",", ".") + "$";
         }
         else
         {
             //this.txt_best.node.parent.getChildByName("P").active = true;
-            this.txt_best.text = txtBuy;//Globals.Config.FormatNumber(this.convertStringToNumber(txtBuy));
+            this.txt_best.text = txtBuy;//Config.FormatNumber(this.convertStringToNumber(txtBuy));
         }
         itemData["partner"] = partner;
         this.itemBest = itemData;
@@ -366,85 +277,64 @@ public class ShopView : BaseView
     {
 
     }
-    void onClickTab(GameObject evv, JObject dataItem)
+    void onClickTab(GameObject tab, JObject dataItem)
     {
         Debug.Log("onClickTab  " + dataItem.ToString());
         SoundManager.instance.soundClick();
+        bool isTonTab = ((string)dataItem["title"]).Equals("ton");
+        m_APKContent.SetActive(!isTonTab);
+        m_ContentOnTelegram.SetActive(isTonTab);
         for (var i = 0; i < scrTabs.content.childCount; i++)
         {
-            var bkg = scrTabs.content.GetChild(i).transform.Find("Bkg");
-            bkg.gameObject.SetActive(evv == scrTabs.content.GetChild(i).gameObject);
-            if (evv == scrTabs.content.GetChild(i).gameObject)
-            {
-                handleInfoItem(dataItem);
-            }
+            Transform thisTf = scrTabs.content.GetChild(i);
+            bool isTab = tab == thisTf.gameObject;
+            thisTf.Find("Bkg").gameObject.SetActive(isTab);
+            if (!isTonTab && isTab) handleInfoItem(dataItem);
         }
-
         //reloadListContent(dataItem);
     }
 
     async void handleInfoItem(JObject data)
     {
         Debug.Log("handleInfoItem   " + data.ToString());
-
-        var rectTransform = scrContent.transform.Find("Viewport").GetComponent<RectTransform>();
+        RectTransform rectTransform = scrContent.transform.Find("Viewport").GetComponent<RectTransform>();
         if (data.ContainsKey("child"))
         {
-            JArray child = (JArray)data["child"];
             scrTabsChannel.gameObject.SetActive(true);
-            var indexSuget = 0;
+            JArray child = (JArray)data["child"];
             JObject dataSuget = null;
-            var indexSugetFromBaner = -1;
-            //COUNT_TAB_CHANNEL = child.Count;
-            var fromBaner = false;//require("GameManager").getInstance().isClickFormBanner;
-
+            int suggestedId = 0, suggestedIdFromBanner = -1;
             if (child.Count == 1)
             {
                 rectTransform.offsetMax = new Vector2(rectTransform.offsetMax.x, -10);
-
-                this.scrTabsChannel.gameObject.SetActive(false);
+                scrTabsChannel.gameObject.SetActive(false);
                 reloadListContent((JArray)child[0]["items"], (string)child[0]["type"], (string)child[0]["title"]);
                 return;
             }
-
             rectTransform.offsetMax = new Vector2(rectTransform.offsetMax.x, -65);
             for (var i = 0; i < child.Count; i++)
             {
-                var dataChild = (JObject)child[i];
-
-                string title = (string)dataChild["title"];
-                string title_img = (string)dataChild["title_img"];
+                JObject dataChild = (JObject)child[i];
+                string title = (string)dataChild["title"], title_img = (string)dataChild["title_img"];
                 GameObject itemTab;// = this.scv_tab_channel.content.children[i]
-                if (i < scrTabsChannel.content.childCount)
-                {
-                    itemTab = scrTabsChannel.content.GetChild(i).gameObject;
-                }
-                else
-                {
-                    itemTab = Instantiate(scrTabsChannel.content.GetChild(0).gameObject, scrTabsChannel.content.transform);
-
-                }
+                if (i < scrTabsChannel.content.childCount) itemTab = scrTabsChannel.content.GetChild(i).gameObject;
+                else itemTab = Instantiate(scrTabsChannel.content.GetChild(0).gameObject, scrTabsChannel.content.transform);
                 itemTab.SetActive(true);
-                var bkg = itemTab.transform.Find("Bkg").GetComponent<Image>();
-                // bkg.sprite = spTab[(child.Count == 1) ? 1 : (i == 0 || i >= child.Count - 1) ? 0 : 1];
+                Image bkg = itemTab.transform.Find("Bkg").GetComponent<Image>();
                 bkg.transform.localScale = new Vector3(1, 1, 1);
                 if (i >= child.Count - 1)
                 {
                     bkg.transform.localScale = new Vector3(-1, 1, 1);
                     itemTab.transform.Find("Line").gameObject.SetActive(false);
                 }
-                var txt = itemTab.transform.Find("Text").GetComponent<TextMeshProUGUI>();
+                TextMeshProUGUI txt = itemTab.transform.Find("Text").GetComponent<TextMeshProUGUI>();
                 txt.text = "";
-
-                var spLogo = itemTab.transform.Find("Icon").GetComponent<Image>();
+                Image spLogo = itemTab.transform.Find("Icon").GetComponent<Image>();
                 spLogo.gameObject.SetActive(false);
-                if (title_img.Equals(""))
-                {
-                    txt.text = title.ToUpper();
-                }
+                if (title_img.Equals("")) txt.text = title.ToUpper();
                 else
                 {
-                    Sprite spr = await Globals.Config.GetRemoteSprite(title_img);
+                    Sprite spr = await Config.GetRemoteSprite(title_img);
                     if (spr != null)
                     {
                         spLogo.sprite = spr;
@@ -453,55 +343,33 @@ public class ShopView : BaseView
                             spLogo.gameObject.SetActive(true);
                             spLogo.SetNativeSize();
                         }
-                        else
-                        {
-                            txt.text = title.ToUpper();
-                        }
+                        else txt.text = title.ToUpper();
                     }
                 }
                 itemTab.transform.localScale = Vector3.one;
                 itemTab.transform.localPosition = new Vector3(itemTab.transform.localPosition.x, 0);
-                itemTab.GetComponent<Button>().onClick.AddListener(() =>
+                itemTab.GetComponent<Button>().onClick.AddListener(() => { onClickTabChannel(itemTab.gameObject, dataChild); });
+                if (dataChild.ContainsKey("focus") && ((bool)dataChild["focus"]))
                 {
-                    onClickTabChannel(itemTab.gameObject, dataChild);
-                });
-                if (dataChild.ContainsKey("focus") && ((bool)dataChild["focus"]) == true)
-                {
-                    indexSuget = i;
+                    suggestedId = i;
                     dataSuget = dataChild;
                 }
-                //if (fromBaner && require("GameManager").getInstance().typeShop == data.child[i].title)
-                //    indexSugetFromBaner = i;
             }
-            if (indexSugetFromBaner < 0) indexSugetFromBaner = indexSuget;
+            if (suggestedIdFromBanner < 0) suggestedIdFromBanner = suggestedId;
             for (var i = child.Count; i < scrTabsChannel.content.childCount; i++)
-            {
                 scrTabsChannel.content.GetChild(i).gameObject.SetActive(false);
-            }
-
-            //if (fromBaner) this.onClickTabChannel({ target: this.scv_tab_channel.content.children[indexSugetFromBaner] }, null)
-            //else this.onClickTabChannel({ target: this.scv_tab_channel.content.children[indexSuget] }, null);
-
             if (dataSuget == null && child.Count > 0)
             {
-                indexSuget = 0;
+                suggestedId = 0;
                 dataSuget = (JObject)child[0];
-
             }
-
-
-            if (scrTabsChannel.content.childCount > indexSuget)
-            {
-                this.onClickTabChannel(scrTabsChannel.content.GetChild(indexSuget).gameObject, dataSuget);
-            }
+            if (scrTabsChannel.content.childCount > suggestedId)
+                onClickTabChannel(scrTabsChannel.content.GetChild(suggestedId).gameObject, dataSuget);
         }
         else
         {
-
             rectTransform.offsetMax = new Vector2(rectTransform.offsetMax.x, -10);
-            // chinrh laij view
-            this.scrTabsChannel.gameObject.SetActive(false);
-            //this.nodeGuide.active = false
+            scrTabsChannel.gameObject.SetActive(false);
             reloadListContent((JArray)data["items"], (string)data["type"], (string)data["title"]);
         }
     }
@@ -563,12 +431,11 @@ public class ShopView : BaseView
     }
     public void onBuy(JObject dataItem)
     {
-        Globals.Logging.Log("onBuy  " + Globals.Config.formatStr("ClickPrice_%s", Globals.CURRENT_VIEW.getCurrentSceneName()));
-        SocketIOManager.getInstance().emitSIOCCCNew(Globals.Config.formatStr("ClickPrice_%s", Globals.CURRENT_VIEW.getCurrentSceneName()));
-        Globals.Logging.Log("ShopView: Data Item= " + dataItem);
+        Logging.Log("onBuy  " + Config.formatStr("ClickPrice_%s", CURRENT_VIEW.getCurrentSceneName()));
+        SocketIOManager.getInstance().emitSIOCCCNew(Config.formatStr("ClickPrice_%s", CURRENT_VIEW.getCurrentSceneName()));
+        Logging.Log("ShopView: Data Item= " + dataItem);
         var url = (string)dataItem["url"];
-        url.Replace("%uid%", Globals.User.userMain.Userid.ToString());
-
+        url.Replace("%uid%", User.userMain.Userid.ToString());
         if (!Config.TELEGRAM_TOKEN.Equals(""))
         { // luồng chươi tele thì auto mở web
             Application.OpenURL(url);
@@ -577,33 +444,33 @@ public class ShopView : BaseView
 
         switch ((string)dataItem["type"])
         {
-            case Globals.CMD.W_DEFAULT:
+            case CMD.W_DEFAULT:
                 {
                     //open webview
                     //require("Util").onCallWebView(data.url);
                     UIManager.instance.showWebView(url);
                     break;
                 }
-            case Globals.CMD.W_REPLACE:
+            case CMD.W_REPLACE:
                 {
                     //show input, replace in textbox, open webview
                     onShowInput(dataItem);
                     break;
                 }
-            case Globals.CMD.U_DEFAULT:
+            case CMD.U_DEFAULT:
                 {
                     //cc.sys.openURL(data.url);
                     Application.OpenURL(url);
                     break;
                 }
-            case Globals.CMD.U_REPLACE:
+            case CMD.U_REPLACE:
                 {
                     ////show input, replace in textbox open url
 
                     onShowInput(dataItem);
                     break;
                 }
-            case Globals.CMD.IAP:
+            case CMD.IAP:
                 {
                     //require("Util").onBuyIap(data.url);
                     Debug.Log("-=-= buy iapp 0");
@@ -651,7 +518,7 @@ public class ShopView : BaseView
             if (canSend)
             {
                 UIManager.instance.showWebView(url);
-                Globals.Logging.Log("URL====" + url);
+                Logging.Log("URL====" + url);
                 inputView.hide(false);
             }
         });
@@ -665,10 +532,11 @@ public class ShopView : BaseView
     }
     public override void OnDestroy()
     {
+        instance = null;
         base.OnDestroy();
         if (UIManager.instance.gameView == null)
         {
-            Globals.CURRENT_VIEW.setCurView(Globals.CURRENT_VIEW.GAMELIST_VIEW);
+            CURRENT_VIEW.setCurView(CURRENT_VIEW.GAMELIST_VIEW);
         }
 
     }

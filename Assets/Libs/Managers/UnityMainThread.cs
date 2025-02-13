@@ -59,7 +59,7 @@ public class UnityMainThread : MonoBehaviour
         if (_TimePing >= TIME_PING_MAX)
         {
             _TimePing = 0;
-            Debug.Log("-=-=-= send ping");
+            // Debug.Log("-=-=-= send ping");
             if (isConnected) SocketSend.sendPing();
         }
     }
