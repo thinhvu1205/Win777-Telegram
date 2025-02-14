@@ -50,7 +50,7 @@
     <UnityVersion>2023.1.19f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Users\ThinhVu\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.0.5\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Users\ThinhVu\.vscode\extensions\visualstudiotoolsforunity.vstuc-1.1.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2023.1.19f1-x86_64\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2023.1.19f1-x86_64\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
@@ -118,6 +118,7 @@
     <Compile Include="Assets\Scripts\Objects\TabView.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\Dummy\GaoGea\PlayerViewGaoGea.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\Dummy\GaoGea\BoxBetShow.cs" />
+    <Compile Include="Assets\Scripts\JSlib.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\DragonTiger\DragonTigerView.cs" />
     <Compile Include="Assets\Scripts\Screens\TableView\ItemTabBet.cs" />
     <Compile Include="Assets\Scripts\Screens\GameView\BaseSlot\InfoBarController.cs" />

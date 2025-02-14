@@ -437,7 +437,7 @@ public class ShopView : BaseView
         var url = (string)dataItem["url"];
         url.Replace("%uid%", User.userMain.Userid.ToString());
         if (!Config.TELEGRAM_TOKEN.Equals(""))
-        { // luồng chươi tele thì auto mở web
+        { // luồng chơi tele thì auto mở web
             Application.OpenURL(url);
             return;
         }

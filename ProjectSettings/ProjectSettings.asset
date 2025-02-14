@@ -40,7 +40,7 @@ PlayerSettings:
     width: 1
     height: 1
   m_SplashScreenLogos:
-  - logo: {fileID: 21300000, guid: 0146d814e4b5bb64cb8d1eec3e0472f9, type: 3}
+  - logo: {fileID: 1705958419074665472, guid: 2bfd10161e47934489a1e440a7a29886, type: 3}
     duration: 2
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
@@ -139,7 +139,8 @@ PlayerSettings:
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
   bundleVersion: 1.0.2
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 11400000, guid: d3ac7e341b3a84041add48f16d6e0a53, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -286,7 +287,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 0146d814e4b5bb64cb8d1eec3e0472f9, type: 3}
+      m_Icon: {fileID: 2800000, guid: 2bfd10161e47934489a1e440a7a29886, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0

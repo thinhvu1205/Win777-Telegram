@@ -191,8 +191,9 @@ public class LoadConfig : MonoBehaviour
         wWForm["version"] = Globals.Config.versionGame + "";
         wWForm["operatorID"] = Globals.Config.OPERATOR + "";
         // wWForm["bundleID"] = "tongits11.game.cocos"; //old
-        wWForm["bundleID"] = "win777.unity.tele"; wWForm["publisher"] = "win777_unity_tele_100"; //luồng vào từ telegram bằng WebGL
-        // wWForm["bundleID"] = "win777.unity.apk"; wWForm["publisher"] = "win777_unity_apk _100"; //luồng vào bt
+        wWForm["bundleID"] = "win777.unity.tele"; //luồng vào từ telegram bằng WebGL
+        // wWForm["bundleID"] = "win777.unity.apk"; //luồng vào bt
+        wWForm["publisher"] = Config.publisher;
         wWForm["os"] = osName;
         wWForm["mcc"] = "[0,0]";
         if (Globals.User.userMain != null)

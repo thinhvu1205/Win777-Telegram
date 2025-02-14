@@ -22,7 +22,7 @@ public class LoginView : BaseView
     protected override void Start()
     {
         base.Start();
-        // Config.TELEGRAM_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzAyNTY5MjksInVpZCI6NTMxMX0.AdGBJS3mhnfbCNYTU-8TppsTuq40la9pk6eqMaG_QzQ";
+        // Config.TELEGRAM_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mzk1ODc1OTUsInVpZCI6ODM0OTI3MH0.OLNqqH_ekV2Xdfnhjq5No2QIK_u5vNf3qVaudtO9e6Q";
         if (!Config.TELEGRAM_TOKEN.Equals(""))
         {
             m_AccountTMPIF.gameObject.SetActive(false);

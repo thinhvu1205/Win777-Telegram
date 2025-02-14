@@ -365,7 +365,7 @@ public class SocketSend
             // else
             // {
             sendSelectG2(gameId);
-            if (Globals.Config.listGamePlaynow.Contains(gameId) || gameId == (int)GAMEID.SLOT_SIXIANG || Globals.User.userMain.VIP < 1)
+            if (Globals.Config.listGamePlaynow.Contains(gameId) || gameId == (int)GAMEID.SLOT_SIXIANG)
             {
                 sendPlayNow(gameId);
                 SocketIOManager.getInstance().emitSIOCCCNew(Globals.Config.formatStr("ActionPlayNow_%d", gameId));
