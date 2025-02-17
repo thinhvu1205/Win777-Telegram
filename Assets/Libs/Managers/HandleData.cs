@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Threading;
 using Globals;
+using System.Collections;
 
 public class HandleData
 {
@@ -166,27 +167,13 @@ public class HandleData
             tags.Add("group", User.userMain.Group.ToString());
             OneSignalSDK.OneSignal.Default.SendTags(tags);
 
-            new Thread(new ThreadStart(() =>
-            {
-                Thread.Sleep(100);
-                SocketSend.sendRef();
-                Thread.Sleep(100);
-                if (Config.TELEGRAM_TOKEN.Equals("")) SocketSend.sendSelectG2(Config.curGameId);
-                Thread.Sleep(100);
-                SocketSend.getInfoSafe();
-                Thread.Sleep(100);
-                SocketSend.sendPromotion();
-                Thread.Sleep(100);
-                SocketSend.getMessList();
-                Thread.Sleep(100);
-                SocketSend.getMail(10);
-                Thread.Sleep(100);
-                SocketSend.getMail(12);
-                // Thread.Sleep(100);
-                // SocketSend.getChatWorld();
-                // Thread.Sleep(100);
-                // SocketSend.getFarmInfo();
-            })).Start();
+            SocketSend.sendRef();
+            if (Config.TELEGRAM_TOKEN.Equals("")) SocketSend.sendSelectG2(Config.curGameId);
+            SocketSend.getInfoSafe();
+            SocketSend.sendPromotion();
+            SocketSend.getMessList();
+            SocketSend.getMail(10);
+            SocketSend.getMail(12);
         }
         else
         {
@@ -201,7 +188,6 @@ public class HandleData
             SocketIOManager.getInstance().emitSIOWithValue(objData, "LoginPacket", false);
         }
     }
-
 
     public static void handleServiceTransportPacket(string strData)
     {
