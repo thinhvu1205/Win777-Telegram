@@ -46,7 +46,7 @@ public class SlotJuicyGardenView : BaseSlotGameView
         BIGWIN_ANIMPATH = "GameView/SlotSpine/JuicyGarden/big_megawinJuicy/skeleton_SkeletonData";
         MEGAWIN_ANIMPATH = "GameView/SlotSpine/JuicyGarden/big_megawinJuicy/skeleton_SkeletonData";
         RECT_SIZE = new Vector2(120, 120);
-        m_ButtonExchange.SetActive(!Config.TELEGRAM_TOKEN.Equals(""));
+        // m_ButtonExchange.SetActive(!Config.TELEGRAM_TOKEN.Equals(""));
     }
     public override void handleCTable(string data)
     {

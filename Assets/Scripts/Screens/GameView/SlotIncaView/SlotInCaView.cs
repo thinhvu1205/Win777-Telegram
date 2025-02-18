@@ -27,7 +27,7 @@ public class SlotInCaView : BaseSlotGameView
         MEGAWIN_ANIMPATH = "GameView/SlotSpine/Common/Bigwin/skeleton_SkeletonData";
         ANIM_BIGWIN_NAME = "bigwin";
         ANIM_MEGAWIN_NAME = "megawin";
-        m_ButtonExchange.SetActive(!Config.TELEGRAM_TOKEN.Equals(""));
+        // m_ButtonExchange.SetActive(!Config.TELEGRAM_TOKEN.Equals(""));
     }
     public override void HandlerUpdateUserChips(JObject data)
     {

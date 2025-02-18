@@ -95,6 +95,6 @@ public class SlotNoelView : BaseSlotGameView
     protected override void Start()
     {
         base.Start();
-        m_ButtonExchange.SetActive(!Config.TELEGRAM_TOKEN.Equals(""));
+        // m_ButtonExchange.SetActive(!Config.TELEGRAM_TOKEN.Equals(""));
     }
 }

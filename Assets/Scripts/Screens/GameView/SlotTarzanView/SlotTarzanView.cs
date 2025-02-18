@@ -93,7 +93,7 @@ public class SlotTarzanView : BaseSlotGameView
         TYPE_MEGA = 2;
         indexCheck3rdScatter = 4;
         RECT_SIZE = new Vector2(135, 135);
-        m_ButtonExchange.SetActive(!Config.TELEGRAM_TOKEN.Equals(""));
+        // m_ButtonExchange.SetActive(!Config.TELEGRAM_TOKEN.Equals(""));
     }
 
     public override void handleCTable(string data)
