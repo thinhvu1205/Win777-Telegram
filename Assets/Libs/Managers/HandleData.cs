@@ -321,6 +321,6 @@ public class HandleData
             dataJson["msgError"] = packet["status"];
             SocketIOManager.getInstance().emitSIOWithValue(dataJson, "LeavePacket", false);
         }
-        if (!Config.TELEGRAM_TOKEN.Equals("")) UIManager.instance.openEx();
+        // if (!Config.TELEGRAM_TOKEN.Equals("")) UIManager.instance.openEx();
     }
 }
