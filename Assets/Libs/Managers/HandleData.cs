@@ -142,31 +142,6 @@ public class HandleData
             //Logging.Log("emit update info o day nua");
             SocketIOManager.getInstance().emitUpdateInfo();
             Dictionary<string, object> tags = new Dictionary<string, object>();
-
-            tags.Add("deviceid", Config.deviceId);
-            tags.Add("publisher", Config.publisher);
-            tags.Add("username", User.userMain.Username);
-            tags.Add("displayName", User.userMain.displayName);
-            tags.Add("uservip", User.userMain.VIP.ToString());
-            tags.Add("userid", User.userMain.Userid.ToString());
-            tags.Add("usergold", User.userMain.AG.ToString());
-            tags.Add("gameport", Config.OPERATOR.ToString());
-            tags.Add("pkgname", Config.package_name);
-            tags.Add("version", Config.versionGame);
-            tags.Add("userlq", User.userMain.LQ.ToString());
-            tags.Add("co", User.userMain.CO.ToString());
-            tags.Add("co0", User.userMain.CO0.ToString());
-            tags.Add("lqsms", User.userMain.LQSMS.ToString());
-            tags.Add("lqiap", User.userMain.LQIAP.ToString());
-            tags.Add("lqother", User.userMain.LQOther.ToString());
-            tags.Add("blq1", User.userMain.BLQ1.ToString());
-            tags.Add("blq3", User.userMain.BLQ3.ToString());
-            tags.Add("blq5", User.userMain.BLQ5.ToString());
-            tags.Add("blq7", User.userMain.BLQ7.ToString());
-            tags.Add("avg7", User.userMain.AVG7.ToString());
-            tags.Add("group", User.userMain.Group.ToString());
-            OneSignalSDK.OneSignal.Default.SendTags(tags);
-
             SocketSend.sendRef();
             if (Config.TELEGRAM_TOKEN.Equals("")) SocketSend.sendSelectG2(Config.curGameId);
             SocketSend.getInfoSafe();
