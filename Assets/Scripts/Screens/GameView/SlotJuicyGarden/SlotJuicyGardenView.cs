@@ -1103,15 +1103,11 @@ public class SlotJuicyGardenView : BaseSlotGameView
         foreach (JArray data in dataFinishView)
         {
             List<int> collumView = new List<int>();
-            foreach (JObject item in data)
-            {
-                collumView.Add(getInt(item, "id"));
-            }
+            foreach (JObject item in data) collumView.Add(getInt(item, "id"));
             slotViews.Add(collumView);
         }
         for (int i = 0; i < dataFinishView.Count; i++)
         {
-
             JArray data = (JArray)dataFinishView[i];
             listCollum[i].setFinishView(data);
         }

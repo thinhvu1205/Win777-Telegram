@@ -860,18 +860,26 @@ public class BaseSlotGameView : GameView
     }
     protected void showWinScatter()
     {
-        List<int> collumScatter = new List<int>();
-        slotViews.ForEach(arr =>
+        List<int> scatterColumnIds = new List<int>();
+        slotViews.ForEach(arr => { if (arr.Contains(12)) scatterColumnIds.Add(slotViews.IndexOf(arr)); });
+        if (Config.curGameId == (int)GAMEID.SLOT_JUICY_GARDEN && scatterColumnIds.Count >= 3)
         {
-            if (arr.Contains(12))
+            for (int i = 0; i < scatterColumnIds.Count; i++)
             {
-                collumScatter.Add(slotViews.IndexOf(arr));
+                List<int> rowIds = new() { scatterColumnIds[i] };
+                for (int j = i + 1; j < scatterColumnIds.Count; j++)
+                {
+                    if (scatterColumnIds[j] == scatterColumnIds[j - 1] + 1) rowIds.Add(scatterColumnIds[j]);
+                    else break;
+                }
+                if (rowIds.Count >= 3)
+                {
+                    foreach (int id in rowIds) listCollum[id].itemResult.showScatterAnim();
+                    break;
+                }
             }
-        });
-        for (int i = 0, l = collumScatter.Count; i < l; i++)
-        {
-            listCollum[collumScatter[i]].itemResult.showScatterAnim();
         }
+        else foreach (int id in scatterColumnIds) listCollum[id].itemResult.showScatterAnim();
         DOTween.Sequence().AppendInterval(3.5f).AppendCallback(() =>
         {
             setDarkAllItem(false);
