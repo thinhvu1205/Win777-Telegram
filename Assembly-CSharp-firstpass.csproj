@@ -81,8 +81,8 @@
     <Compile Include="Assets\Plugins\Socket\WebSocket4Net\SuperSocket.ClientEngine\Protocol\ArraySegmentEx.cs" />
     <Compile Include="Assets\Plugins\Socket\Newtonsoft.Json\Linq\JValue.cs" />
     <Compile Include="Assets\Plugins\Socket\Newtonsoft.Json\Converters\DataSetConverter.cs" />
-    <Compile Include="Assets\Plugins\Socket\Newtonsoft.Json\JsonDictionaryAttribute.cs" />
     <Compile Include="Assets\Plugins\Socket\Newtonsoft.Json\Linq\JsonPath\ScanMultipleFilter.cs" />
+    <Compile Include="Assets\Plugins\Socket\Newtonsoft.Json\JsonDictionaryAttribute.cs" />
     <Compile Include="Assets\Plugins\Socket\WebSocket4Net\Protocol\FramePartReader\ExtendedLenghtReader.cs" />
     <Compile Include="Assets\Plugins\Socket\Newtonsoft.Json\Serialization\JsonSerializerProxy.cs" />
     <Compile Include="Assets\Plugins\Socket\WebSocket4Net\Protocol\DraftHybi00HandshakeReader.cs" />
@@ -241,8 +241,8 @@
     <Compile Include="Assets\Plugins\Socket\Quobject\EngineIoClientDotNet\Client\Transport.cs" />
     <Compile Include="Assets\Plugins\Socket\Newtonsoft.Json\Converters\KeyValuePairConverter.cs" />
     <Compile Include="Assets\Plugins\Socket\Quobject\EngineIoClientDotNet\Client\HandshakeData.cs" />
-    <Compile Include="Assets\Plugins\Socket\WebSocket4Net\SuperSocket.ClientEngine\SslStreamTcpSession.cs" />
     <Compile Include="Assets\Plugins\Socket\WebSocket4Net\SuperSocket.ClientEngine\ConnectedCallback.cs" />
+    <Compile Include="Assets\Plugins\Socket\WebSocket4Net\SuperSocket.ClientEngine\SslStreamTcpSession.cs" />
     <Compile Include="Assets\Plugins\Socket\WebSocket4Net\Default\WebSocketState.cs" />
     <Compile Include="Assets\Plugins\Socket\WebSocket4Net\SuperSocket.ClientEngine\IBatchQueue.cs" />
     <Compile Include="Assets\Plugins\Socket\Newtonsoft.Json\Schema\JsonSchemaWriter.cs" />
@@ -354,8 +354,8 @@
     <Compile Include="Assets\Plugins\Socket\Newtonsoft.Json\Bson\BsonString.cs" />
     <Compile Include="Assets\Plugins\Socket\Newtonsoft.Json\Serialization\JsonContractType.cs" />
     <Compile Include="Assets\Plugins\Socket\Newtonsoft.Json\Utilities\ReflectionMember.cs" />
-    <Compile Include="Assets\Plugins\Socket\Newtonsoft.Json\Utilities\TypeExtensions.cs" />
     <Compile Include="Assets\Plugins\Socket\WebSocket4Net\Protocol\HandshakeReader.cs" />
+    <Compile Include="Assets\Plugins\Socket\Newtonsoft.Json\Utilities\TypeExtensions.cs" />
     <Compile Include="Assets\Plugins\Socket\Newtonsoft.Json\Utilities\CollectionWrapper.cs" />
     <Compile Include="Assets\Plugins\Socket\Newtonsoft.Json\Serialization\TraceJsonReader.cs" />
     <Compile Include="Assets\Plugins\Socket\Newtonsoft.Json\Serialization\DefaultNamingStrategy.cs" />
@@ -379,8 +379,8 @@
     <Compile Include="Assets\Plugins\Socket\Quobject\EngineIoClientDotNet\Thread\EasyTimer.cs" />
     <Compile Include="Assets\Plugins\Socket\Newtonsoft.Json\Linq\JContainer.cs" />
     <Compile Include="Assets\Plugins\Socket\WebSocket4Net\Command\Binary.cs" />
-    <Compile Include="Assets\Plugins\Socket\WebSocket4Net\Default\Extensions.cs" />
     <Compile Include="Assets\Plugins\Socket\Newtonsoft.Json\Serialization\ErrorEventArgs.cs" />
+    <Compile Include="Assets\Plugins\Socket\WebSocket4Net\Default\Extensions.cs" />
     <Compile Include="Assets\Plugins\Socket\Newtonsoft.Json\JsonWriterException.cs" />
     <Compile Include="Assets\Plugins\Socket\WebSocket4Net\SuperSocket.ClientEngine\IClientSession.cs" />
     <Compile Include="Assets\Plugins\Socket\WebSocket4Net\Default\MessageReceivedEventArgs.cs" />
