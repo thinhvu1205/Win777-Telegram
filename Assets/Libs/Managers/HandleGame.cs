@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using DG.Tweening;
+using Globals;
 public class HandleGame
 {
     public static List<JObject> listDelayEvt = new List<JObject>();
@@ -111,7 +112,6 @@ public class HandleGame
                     Debug.Log("dataLeave=" + UIManager.instance.gameView.dataLeave.ToString());
                     SocketIOManager.getInstance().emitSIOWithValue(UIManager.instance.gameView.dataLeave, "LeavePacket", false);
                 }
-                ;
                 gameView.handleLTable(jData);
                 break;
             case "rjtable":
@@ -131,6 +131,8 @@ public class HandleGame
                 gameView.updateItemVip(jsonData);
                 break;
             case "updateChip":
+                //{"evt":"updateChip","ag":123}
+                User.userMain.AG = (long)jData["ag"];
                 gameView.HandlerUpdateUserChips(jData);
                 break;
             default:

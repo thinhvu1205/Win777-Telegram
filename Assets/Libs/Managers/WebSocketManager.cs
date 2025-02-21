@@ -12,7 +12,7 @@ using WebSocketSharp;
 public class WebSocketManager : MonoBehaviour
 {
     Queue<Action> jobsResend = new Queue<Action>();
-    [HideInInspector] public Globals.ConnectionStatus connectionStatus = Globals.ConnectionStatus.NONE;
+    [HideInInspector] public ConnectionStatus connectionStatus = ConnectionStatus.NONE;
     WebSocket ws = null;
     Action _OnConnectCb;
     bool _IsJSWebSocketReady;
@@ -31,34 +31,27 @@ public class WebSocketManager : MonoBehaviour
     {
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
-            if (Globals.Config.isErrorNet) return;
-            Globals.Config.isErrorNet = true;
-            UIManager.instance.showMessageBox(Globals.Config.getTextConfig("err_network"));
+            if (Config.isErrorNet) return;
+            Config.isErrorNet = true;
+            UIManager.instance.showMessageBox(Config.getTextConfig("err_network"));
             UIManager.instance.hideWatting();
             return;
         }
         _OnConnectCb = callback;
-        Globals.Config.isErrorNet = false;
+        Config.isErrorNet = false;
         stop();
         jobsResend.Clear();
 #if UNITY_WEBGL && !UNITY_EDITOR
-            connectionStatus = Globals.ConnectionStatus.CONNECTING;
+            connectionStatus = ConnectionStatus.CONNECTING;
             Application.ExternalCall("createWebSocket");
 #else
-        //Globals.Config.isSvTest = true;
-        //Globals.Config.curServerIp = "app.test.topbangkokclub.com";
-        //Globals.Config.curServerIp = "app1.jakartagames.net";
-        Globals.Config.curServerIp = "app2.davaogames.com";
-        // Globals.Config.curServerIp = "test.app.1707casino.com";
-        //Globals.Config.curServerIp = "app-002.ngwcasino.com";
-        Debug.Log(" Globals.Config.curServerI=" + Globals.Config.curServerIp);
-        Debug.Log(" Globals.Config.PORT=" + Globals.Config.PORT);
-        ws = new WebSocket("wss://" + Globals.Config.curServerIp);
-        //ws = new WebSocket("ws://" + Globals.Config.curServerIp + ":80" );
-        Globals.Logging.Log("IP CONNECT:" + Globals.Config.curServerIp);
-        connectionStatus = Globals.ConnectionStatus.CONNECTING;
+        Config.curServerIp = "app2.davaogames.com";
+        Debug.Log(" Config.curServerI=" + Config.curServerIp);
+        Debug.Log(" Config.PORT=" + Config.PORT);
+        ws = new WebSocket("wss://" + Config.curServerIp);
+        Logging.Log("IP CONNECT:" + Config.curServerIp);
+        connectionStatus = ConnectionStatus.CONNECTING;
         ws.ConnectAsync();
-        //ws.Connect();
 
         ws.EmitOnPing = true;
         ws.WaitTime = TimeSpan.FromSeconds(10); ;
@@ -71,9 +64,9 @@ public class WebSocketManager : MonoBehaviour
     }
     public void HandleOnErrorWebSocket()
     {
-        if (connectionStatus == Globals.ConnectionStatus.DISCONNECTED) return;
-        connectionStatus = Globals.ConnectionStatus.DISCONNECTED;
-        Globals.Logging.Log("OnError ");
+        if (connectionStatus == ConnectionStatus.DISCONNECTED) return;
+        connectionStatus = ConnectionStatus.DISCONNECTED;
+        Logging.Log("OnError ");
         UnityMainThread.instance.AddJob(() =>
         {
             UIManager.instance.showLoginScreen(false);
@@ -81,9 +74,9 @@ public class WebSocketManager : MonoBehaviour
     }
     public void HandleOnCloseWebSocket()
     {
-        if (connectionStatus == Globals.ConnectionStatus.DISCONNECTED) return;
-        connectionStatus = Globals.ConnectionStatus.DISCONNECTED;
-        Globals.Logging.Log("OnClose ");
+        if (connectionStatus == ConnectionStatus.DISCONNECTED) return;
+        connectionStatus = ConnectionStatus.DISCONNECTED;
+        Logging.Log("OnClose ");
         UnityMainThread.instance.AddJob(() =>
         {
             UIManager.instance.showLoginScreen(false);
@@ -91,9 +84,9 @@ public class WebSocketManager : MonoBehaviour
     }
     public void HandleOnOpenWebSocket()
     {
-        connectionStatus = Globals.ConnectionStatus.CONNECTED;
+        connectionStatus = ConnectionStatus.CONNECTED;
         _OnConnectCb?.Invoke();
-        Globals.Logging.Log("OnOpen ");
+        Logging.Log("OnOpen ");
         while (jobsResend.Count > 0)
             jobsResend.Dequeue().Invoke();
     }
@@ -106,26 +99,26 @@ public class WebSocketManager : MonoBehaviour
                 int cmdId = (int)objData["classId"];
                 switch (cmdId)
                 {
-                    case Globals.CMD.LOGIN_RESPONSE:
+                    case CMD.LOGIN_RESPONSE:
                         HandleData.handleLoginResponse(data);
                         break;
-                    case Globals.CMD.SERVICE_TRANSPORT:
+                    case CMD.SERVICE_TRANSPORT:
                         HandleData.handleServiceTransportPacket(data);
                         break;
-                    case Globals.CMD.GAME_TRANSPORT:
+                    case CMD.GAME_TRANSPORT:
                         HandleData.handleGameTransportPacket(data);
                         break;
-                    case Globals.CMD.FORCE_LOGOUT:
+                    case CMD.FORCE_LOGOUT:
                         HandleData.handleForcedLogoutPacket(data);
                         break;
-                    case Globals.CMD.JOIN_RESPONSE:
+                    case CMD.JOIN_RESPONSE:
                         HandleData.handleJoinResponsePacket(data);
                         break;
-                    case Globals.CMD.LEAVE_RESPONSE:
+                    case CMD.LEAVE_RESPONSE:
                         HandleData.handleLeaveResponsePacket(data);
                         break;
-                    case Globals.CMD.PING:
-                        Globals.Logging.Log("PING PONG!!!!");
+                    case CMD.PING:
+                        Logging.Log("PING PONG!!!!");
                         break;
                     default:
                         {
@@ -174,7 +167,7 @@ public class WebSocketManager : MonoBehaviour
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
         Application.ExternalCall("checkWebSocketReady");
-        if (connectionStatus == Globals.ConnectionStatus.CONNECTED && _IsJSWebSocketReady)
+        if (connectionStatus == ConnectionStatus.CONNECTED && _IsJSWebSocketReady)
         {
             Application.ExternalCall("SendData",dataSend);
             _IsJSWebSocketReady = false;
@@ -187,7 +180,7 @@ public class WebSocketManager : MonoBehaviour
             });
         }
 #else
-        if (connectionStatus == Globals.ConnectionStatus.CONNECTED && ws.ReadyState == WebSocketState.Open)
+        if (connectionStatus == ConnectionStatus.CONNECTED && ws.ReadyState == WebSocketState.Open)
         {
             ws.SendAsync(dataSend, (msg) => { });
         }
@@ -215,9 +208,9 @@ public class WebSocketManager : MonoBehaviour
         //if (NetworkManager.getInstance().statusConnect != FIREBASE.ConnectionStatus.CONNECTED) return;
         ServiceTransportPacket serviceTransport = new ServiceTransportPacket();
         serviceTransport.service = "com.athena.services.api.ServiceContract";
-        serviceTransport.servicedata = Globals.Config.getByte(strData);// utf8.toByteArray(data);
+        serviceTransport.servicedata = Config.getByte(strData);// utf8.toByteArray(data);
 
-        serviceTransport.pid = Globals.User.userMain.Userid;
+        serviceTransport.pid = User.userMain.Userid;
         serviceTransport.seq = 1;
         serviceTransport.idtype = 1;
         //connector.sendProtocolObject(serviceTransport);
@@ -246,11 +239,11 @@ public class WebSocketManager : MonoBehaviour
      */
     public void sendDataGame(string strData)
     {
-        //Globals.Logging.Log("sendDataGame:" + strData);
+        //Logging.Log("sendDataGame:" + strData);
         GameTransportPacket gameTransportPacket = new GameTransportPacket();
-        gameTransportPacket.pid = Globals.User.userMain.Userid;
-        gameTransportPacket.tableid = Globals.Config.tableId;
-        gameTransportPacket.gamedata = Globals.Config.Base64Encode(strData);
+        gameTransportPacket.pid = User.userMain.Userid;
+        gameTransportPacket.tableid = Config.tableId;
+        gameTransportPacket.gamedata = Config.Base64Encode(strData);
         SendData(JsonUtility.ToJson(gameTransportPacket));
 
 

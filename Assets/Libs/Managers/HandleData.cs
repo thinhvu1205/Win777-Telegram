@@ -120,35 +120,15 @@ public class HandleData
             LoadConfig.instance.getInfoUser(strUser);
 
             if (Config.typeLogin == LOGIN_TYPE.NORMAL) Config.saveLoginAccount();
-            if (!Config.TELEGRAM_TOKEN.Equals(""))
-            {
-                if (Config.curGameId != (int)GAMEID.SLOT_SIXIANG)
-                {
-                    //game slot sixaing dùng service. k can select game. e đang thấy bị select game con này toàn bị treo trong bàn.
-                    Debug.Log("select game  " + Config.curGameId);
-                    SocketSend.sendSelectGame(Config.curGameId);
-                    if (Config.TELEGRAM_TOKEN.Equals("")) Config.isSendingSelectGame = true;
-                }
-                else
-                {
-                    UIManager.instance.playVideoSiXiang();
-                    SocketSend.sendSelectGame(Config.curGameId);
-                }
-                if (Config.isShowTableWithGameId(Config.curGameId) && User.userMain.VIP >= 1)
-                {
-                    UIManager.instance.openTableView();
-                }
-            }
             //Logging.Log("emit update info o day nua");
             SocketIOManager.getInstance().emitUpdateInfo();
             Dictionary<string, object> tags = new Dictionary<string, object>();
             SocketSend.sendRef();
-            if (Config.TELEGRAM_TOKEN.Equals("")) SocketSend.sendSelectG2(Config.curGameId);
+            // SocketSend.getMail(10);
+            SocketSend.getMail(12);
             SocketSend.getInfoSafe();
             SocketSend.sendPromotion();
             SocketSend.getMessList();
-            SocketSend.getMail(10);
-            SocketSend.getMail(12);
         }
         else
         {

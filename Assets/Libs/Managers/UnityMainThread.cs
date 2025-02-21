@@ -8,7 +8,7 @@ public class UnityMainThread : MonoBehaviour
 {
     public static UnityMainThread instance;
     private Queue<Action> jobs = new Queue<Action>();
-    private const float TIME_PING_MAX = 4f;
+    private const float TIME_PING_MAX = 10f;
     private float _TimePing = 0;
     public bool isHasNet = true;
     void Awake()
@@ -22,6 +22,14 @@ public class UnityMainThread : MonoBehaviour
         while (jobs.Count > 0)
         {
             jobs.Dequeue().Invoke();
+        }
+        _TimePing += Time.deltaTime;
+        if (_TimePing >= TIME_PING_MAX)
+        {
+            _TimePing = 0;
+            // Debug.Log("-=-=-= send ping");
+            if (WebSocketManager.getInstance().connectionStatus == Globals.ConnectionStatus.CONNECTED)
+                SocketSend.sendPing();
         }
     }
 
@@ -54,13 +62,6 @@ public class UnityMainThread : MonoBehaviour
                 LoadConfig.instance.getConfigInfo();
             }
             isHasNet = true;
-        }
-        _TimePing += Time.fixedDeltaTime;
-        if (_TimePing >= TIME_PING_MAX)
-        {
-            _TimePing = 0;
-            // Debug.Log("-=-=-= send ping");
-            if (isConnected) SocketSend.sendPing();
         }
     }
 

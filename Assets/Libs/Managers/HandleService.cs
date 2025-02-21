@@ -217,7 +217,6 @@ public class HandleService
                     UIManager.instance.updateMailAndMessageNoti();
                     break;
                 case "22":
-
                     if (FreeChipView.instance != null && FreeChipView.instance.gameObject.activeSelf)
                     {
                         FreeChipView.instance.dataFreeChipAdmin.Clear();
@@ -267,6 +266,7 @@ public class HandleService
                     List<int> mailIds = new();
                     foreach (JToken item in listFreeChip) mailIds.Add((int)item["Id"]);
                     SocketSend.OpenMultipleMailsContainChip(mailIds);
+                    if (!Config.TELEGRAM_TOKEN.Equals("")) SocketSend.sendSelectG2(Config.curGameId);
                     break;
                 case "31":
                     Globals.User.userMain.AG = (long)jsonData["totalAG"];
