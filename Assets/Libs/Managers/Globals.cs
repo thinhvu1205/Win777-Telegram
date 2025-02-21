@@ -1630,7 +1630,7 @@ namespace Globals
         static JObject jsonConfig = null;
         static JObject jsonConfigOff = null;
 
-        public static void loadTextConfig(string lang = "THAI")
+        public static void loadTextConfig(string lang = "EN")
         {
             if (!TELEGRAM_TOKEN.Equals("")) lang = "EN";
             jsonConfig = null;
