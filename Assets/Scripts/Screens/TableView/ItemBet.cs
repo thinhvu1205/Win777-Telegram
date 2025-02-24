@@ -67,11 +67,11 @@ public class ItemBet : MonoBehaviour
             {
                 TableView.instance.isSelectGame = false;
             });
-            if (Globals.User.userMain.AG <= 0 || Globals.User.userMain.AG < (int)dataItem["minAgCon"])
-            {
-                UIManager.instance.showPopupWhenNotEnoughChip();
-                return;
-            }
+            // if (Globals.User.userMain.AG <= 0 || Globals.User.userMain.AG < (int)dataItem["minAgCon"])
+            // {
+            //     UIManager.instance.showPopupWhenNotEnoughChip();
+            //     return;
+            // }
             SocketSend.sendChangeTable((int)dataItem["mark"], 0);
         }
         else

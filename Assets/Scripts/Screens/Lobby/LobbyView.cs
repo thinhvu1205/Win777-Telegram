@@ -541,11 +541,11 @@ public class LobbyView : BaseView
 
         });
 
-        if (User.userMain.AG <= 0)
-        {
-            UIManager.instance.showPopupWhenLostChip(false, true);
-            return;
-        }
+        // if (User.userMain.AG <= 0)
+        // {
+        //     UIManager.instance.showPopupWhenLostChip(false, true);
+        //     return;
+        // }
         Config.curGameId = itemGame.gameID;
         if (Config.curGameId != (int)GAMEID.SLOT_SIXIANG)
         {
