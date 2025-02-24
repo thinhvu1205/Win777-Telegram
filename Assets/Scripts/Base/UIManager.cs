@@ -1020,6 +1020,7 @@ public class UIManager : MonoBehaviour
 
     public void openShop()
     {
+        return;
         var shopView = Instantiate(loadPrefabPopup("PopupShop"), parentPopups).GetComponent<ShopView>();
         shopView.init();
         shopView.transform.localScale = Vector3.one;
@@ -1225,8 +1226,7 @@ public class UIManager : MonoBehaviour
         {
             showDialog(textShow, textBtn1, () =>
             {
-                if (!isInGame)
-                    openFreeChipView();
+                if (!isInGame) openFreeChipView();
             }, textBtn2, () =>
             {
                 openShop();
@@ -1237,8 +1237,7 @@ public class UIManager : MonoBehaviour
             textShow = getTextConfig("txt_not_enough_money_gl");
             showDialog(textShow, textBtn2, () =>
             {
-                if (!isInGame)
-                    openShop();
+                if (!isInGame) openShop();
             }, textBtn3);
         }
     }

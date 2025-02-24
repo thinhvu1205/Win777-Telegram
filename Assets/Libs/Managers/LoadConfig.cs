@@ -63,7 +63,7 @@ public class LoadConfig : MonoBehaviour
 
     void init()
     {
-        Globals.Config.deviceId = SystemInfo.deviceUniqueIdentifier;
+        Config.deviceId = SystemInfo.deviceUniqueIdentifier.Equals("n/a") ? "" : SystemInfo.deviceUniqueIdentifier;
         //Globals.Config.versionGame = Application.version;
 
     }
