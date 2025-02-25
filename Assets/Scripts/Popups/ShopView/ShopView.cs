@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using TMPro;
 using System.Linq;
 using Globals;
-using ZXing;
 public class ShopView : BaseView
 {
     public static ShopView instance = null;
@@ -164,12 +163,13 @@ public class ShopView : BaseView
     }
     private Color32[] EncodeTextToQRCode(string inputText, int width, int height)
     {
-        BarcodeWriter writer = new()
-        {
-            Format = BarcodeFormat.QR_CODE,
-            Options = new() { Height = height, Width = width }
-        };
-        return writer.Write(inputText);
+        // BarcodeWriter writer = new()
+        // {
+        //     Format = BarcodeFormat.QR_CODE,
+        //     Options = new() { Height = height, Width = width }
+        // };
+        // return writer.Write(inputText);
+        return new Color32[2];
     }
 
     void getBest(JArray items, string partner, string title)

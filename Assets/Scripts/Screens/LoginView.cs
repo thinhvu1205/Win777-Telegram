@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Facebook.Unity;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using UnityEngine.EventSystems;
@@ -22,7 +21,7 @@ public class LoginView : BaseView
     protected override void Start()
     {
         base.Start();
-        // Config.TELEGRAM_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAyMDk3NDgsInVpZCI6ODM5NDcwNn0.I6CxPyGRPeMWCF4yTalRvo1LNuor3F02ffEBEP5nJqU";
+        // Config.TELEGRAM_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDA1NTcwOTksInVpZCI6ODM5NDcwNn0.90-pSDtTbLIzr2dTW9eS_3tb3X5UxuS-f5bWDlV8rLg";
         // Config.curGameId = 8010;
         if (!Config.TELEGRAM_TOKEN.Equals(""))
         {
@@ -36,8 +35,6 @@ public class LoginView : BaseView
         else
         {
             if (!Config.username_normal.Equals("")) m_AccountTMPIF.text = Config.username_normal;
-            if (!FB.IsInitialized) FB.Init(InitCallback, OnHideUnity); // Initialize the Facebook SDK
-            else FB.ActivateApp(); // Already initialized, signal an app activation App Event
             var isFirstOpen = PlayerPrefs.GetInt("isFirstOpen", 0);
             Globals.Logging.Log("isFirstOpen " + isFirstOpen);
             if (isFirstOpen == 0)
@@ -125,21 +122,6 @@ public class LoginView : BaseView
 
     private void InitCallback()
     {
-        if (FB.IsInitialized)
-        {
-            // Signal an app activation App Event
-            FB.ActivateApp();
-            // Continue with Facebook SDK
-            // ...
-            if (isLoginingFB)
-            {
-                onClickLoginFB();
-            }
-        }
-        else
-        {
-            Globals.Logging.Log("Failed to Initialize the Facebook SDK");
-        }
     }
 
     private void OnHideUnity(bool isGameShown)
@@ -162,105 +144,10 @@ public class LoginView : BaseView
 
     public void onClickLoginFB()
     {
-        SoundManager.instance.soundClick();
-        isLoginingFB = true;
-        if (!FB.IsInitialized)
-        {
-            Debug.Log("-=- !FB.IsInitialized");
-            return;
-        }
-        Globals.Config.typeLogin = Globals.LOGIN_TYPE.FACEBOOK;
-        if (FB.IsLoggedIn)
-        {
-            try
-            {
-                if (checkTokenExpirated())
-                {
-                    var aToken = AccessToken.CurrentAccessToken;
-
-
-                    Globals.User.AccessToken = aToken.TokenString;
-                    Globals.User.FacebookID = aToken.UserId;
-
-                    // Print current access token's User ID
-                    Globals.Logging.Log("token:  " + aToken.TokenString + " UserId: " + Globals.User.FacebookID);
-                    SocketSend.sendLogin("", aToken.TokenString, false);
-                }
-                else
-                {
-                    var perms = new List<string>() { "public_profile" };
-                    FB.LogInWithReadPermissions(perms, AuthCallback);
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.Log("errorFB=" + e);
-            }
-
-        }
-        else
-        {
-            var perms = new List<string>() { "public_profile" };
-            FB.LogInWithReadPermissions(perms, AuthCallback);
-        }
-        isLoginingFB = false;
     }
 
-    bool checkTokenExpirated()
-    {
-        var timeNow = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-        var timeEnd = new DateTimeOffset(AccessToken.CurrentAccessToken.ExpirationTime).ToUnixTimeMilliseconds();
-        return timeEnd >= timeNow;
-    }
     public void onClickLoginToken()
     {
-        isLoginingFB = true;
-        if (!FB.IsInitialized)
-        {
-            Debug.Log("-=- !FB.IsInitialized");
-            return;
-        }
-        Globals.Config.typeLogin = Globals.LOGIN_TYPE.FACEBOOK;
-        Globals.User.AccessToken = "GGQVlZANVVFYzVPYUdrcEJES01SSjF2MHgyQUNrNmtvTUp5eHFycTd2dy1tR1VyeHQ4SEZAjaGN2OHB5dkprOFdicU8zbDZAITXVoTmNQVmxFZAlduR1dKZAnZAXMG05SDVtMFhsUGQ0ZAFR4MU5ZAQUFFaVl3SWJvZAU9zOFpNcWdCbTdFNnQwQTZAJU3pCRngwNXNqaHpuS2tPUS1B";
-
-        // Print current access token's User ID
-        //Globals.Logging.Log("token:  " + aToken.TokenString + " UserId: " + aToken.UserId);
-        SocketSend.sendLogin("", Globals.User.AccessToken, false);
-    }
-    private void AuthCallback(ILoginResult result)
-    {
-        if (!string.IsNullOrEmpty(result.Error))
-        {
-            Globals.Logging.Log("Error: " + result.Error);
-        }
-        else if (result.Cancelled)
-        {
-            Globals.Logging.Log("Cancelled: Access Token could not be retrieved");
-        }
-        else
-        {
-            // Successfully logged user in
-            // A popup notification will appear that says "Logged in as <User Name>"
-            Globals.Logging.Log("Success: " + result.AccessToken.UserId);
-            //fbid = result.AccessToken.UserId;
-            Globals.User.FacebookID = result.AccessToken.UserId;
-            Globals.Logging.Log("FacebookID: " + Globals.User.FacebookID);
-        }
-        if (FB.IsLoggedIn)
-        {
-            // AccessToken class will have session details
-            var aToken = AccessToken.CurrentAccessToken;
-            Globals.User.AccessToken = aToken.TokenString;
-
-            // Print current access token's User ID
-            Globals.Logging.Log("token:  " + aToken.TokenString + " UserId: " + aToken.UserId);
-
-            SocketSend.sendLogin("", aToken.TokenString, false);
-        }
-        else
-        {
-            Globals.Logging.Log("User cancelled login");
-        }
     }
 
     public void onClickPlayNow()

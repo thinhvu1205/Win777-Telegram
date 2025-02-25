@@ -164,7 +164,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      framenoti_small_0: -5060922894137303703
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

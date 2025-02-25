@@ -963,10 +963,6 @@ public class UIManager : MonoBehaviour
 
     public void showWebView(string url, string title = "")
     {
-        //if (url == "") return;
-        var webview = Instantiate(loadPrefabPopup("WebView"), transform).GetComponent<WebViewControl>();
-        webview.loadUrl(url, title);
-        webview.transform.SetAsLastSibling();
     }
     public void showToast(string msg, Transform tfParent)
     {

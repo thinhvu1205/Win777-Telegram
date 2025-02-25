@@ -110,10 +110,6 @@ public class GameView : BaseView
         {
             Destroy(chip.gameObject);
         });
-        if (WebViewControl.instance != null)
-        {
-            WebViewControl.instance.closeWebView();
-        }
         UIManager.instance.destroyAllPopup();
         chipPool.Clear();
         HandleGame.listDelayEvt.Clear();

@@ -16,7 +16,7 @@ public class HandleService
         if (jsonData.ContainsKey("evt"))
         {
             string evt = (string)jsonData["evt"];
-            Globals.Logging.Log("--------------------------------------------------->EVT: " + evt + " <------------------------------------------->\n" + jsonData);
+            Logging.Log("--------------------------------------------------->EVT: " + evt + " <------------------------------------------->\n" + jsonData);
             switch (evt)
             {
                 case "promotion_info":
@@ -27,7 +27,7 @@ public class HandleService
                     //Global.MainView.lbTimeOnline.node.stopAllActions();
                     //Global.MainView.setTimeGetMoney();
                     //
-                    Globals.Promotion.setPromotionInfo(jsonData);
+                    Promotion.setPromotionInfo(jsonData);
                     UIManager.instance.updateMailAndMessageNoti();
                     UIManager.instance.setTimeOnline();
                     if (DailyBonusView.instance != null)
@@ -43,8 +43,8 @@ public class HandleService
 
                     break;
                 case "reconnect":
-                    Globals.User.userMain.lastGameID = (int)jsonData["gameid"];
-                    Globals.Config.curGameId = (int)jsonData["gameid"];
+                    User.userMain.lastGameID = (int)jsonData["gameid"];
+                    Config.curGameId = (int)jsonData["gameid"];
                     break;
                 case "promotion":
                     break;
@@ -53,7 +53,7 @@ public class HandleService
                     UIManager.instance.hideWatting();
                     if (isSuccess)
                     {
-                        Globals.User.userMain.canInputInvite = false;
+                        User.userMain.canInputInvite = false;
                         UIManager.instance.updateCanInviteFriend();
                         UIManager.instance.showToast((string)jsonData["data"]);
                         if (ProfileView.instance)
@@ -82,7 +82,7 @@ public class HandleService
                         string msg = (string)jsonData["Msg"];
                         if (gold > 0)
                         {
-                            Globals.User.userMain.AG += gold;
+                            User.userMain.AG += gold;
                             System.Action cb1 = () =>
                             {
                                 UIManager.instance.lobbyView.onClickFreechip();
@@ -92,7 +92,7 @@ public class HandleService
                                 }
                             };
                             SocketSend.sendPromotion();
-                            UIManager.instance.showDialog(msg, Globals.Config.getTextConfig("txt_free_chip"), cb1, Globals.Config.getTextConfig("ok"));
+                            UIManager.instance.showDialog(msg, Config.getTextConfig("txt_free_chip"), cb1, Config.getTextConfig("ok"));
                         }
                         else
                         {
@@ -129,10 +129,10 @@ public class HandleService
                         else
                         {
                             //UIManager.instance.showMessageBox((string)jsonData["Cmd"]);
-                            UIManager.instance.showDialog((string)jsonData["Cmd"], Globals.Config.getTextConfig("ok"), () =>
+                            UIManager.instance.showDialog((string)jsonData["Cmd"], Config.getTextConfig("ok"), () =>
                             {
-                                //if (Globals.Config.curGameId == (int)Globals.GAMEID.SLOT50LINE ||
-                                //        Globals.Config.curGameId == (int)Globals.GAMEID.SLOT20FRUIT)
+                                //if (Config.curGameId == (int)GAMEID.SLOT50LINE ||
+                                //        Config.curGameId == (int)GAMEID.SLOT20FRUIT)
                                 //{
                                 //    GameManager.getInstance().onReconnect();
                                 //}
@@ -150,7 +150,7 @@ public class HandleService
                     //    // GameManager.getInstance().onShowConfirmDialog(GameManager.getInstance().getTextConfig('success_change_ava'), null, true, 2);
                     //}
                     int status = (int)jsonData["error"];
-                    Globals.Logging.Log("status avatar:" + status);
+                    Logging.Log("status avatar:" + status);
 
                     if (status == 0)
                     {
@@ -187,15 +187,15 @@ public class HandleService
                 case "20":
 
 
-                    Globals.User.userMain.listMailAdmin.Clear();
+                    User.userMain.listMailAdmin.Clear();
                     JArray listMail = JArray.Parse((string)jsonData["data"]);
                     for (int i = 0, l = listMail.Count; i < l; i++)
                     {
                         JObject data = new JObject((JObject)listMail[i]);
                         data["S"] = (bool)data["S"] ? 1 : 0;
-                        Globals.User.userMain.listMailAdmin.Add(data);
+                        User.userMain.listMailAdmin.Add(data);
                     }
-                    Globals.User.userMain.listMailAdmin.Sort((a, b) =>
+                    User.userMain.listMailAdmin.Sort((a, b) =>
                     {
                         if ((int)a["S"] != (int)b["S"])
                         {
@@ -207,10 +207,10 @@ public class HandleService
                             else return 1;
                         }
                     });
-                    Globals.User.userMain.mailUnRead = Globals.User.userMain.listMailAdmin.FindAll(data => (int)data["S"] == 0).Count;
+                    User.userMain.mailUnRead = User.userMain.listMailAdmin.FindAll(data => (int)data["S"] == 0).Count;
                     if (MailView.instance != null && MailView.instance.gameObject.activeSelf)
                     {
-                        MailView.instance.listMailData = Globals.User.userMain.listMailAdmin;
+                        MailView.instance.listMailData = User.userMain.listMailAdmin;
                         MailView.instance.reloadListMail();
                     }
 
@@ -241,7 +241,7 @@ public class HandleService
                             item["d"] = data["D"];
                             if (((string)item["from"]).ToLower() == "admin")
                             {
-                                Globals.Config.mail20.Add(item);
+                                Config.mail20.Add(item);
                             }
                             ;
                             if (FreeChipView.instance != null && FreeChipView.instance.gameObject.activeSelf)
@@ -251,7 +251,7 @@ public class HandleService
                         }
                     }
 
-                    Globals.User.userMain.nmAg = listFreeChip.Count;
+                    User.userMain.nmAg = listFreeChip.Count;
 
                     UIManager.instance.updateMailAndMessageNoti();
                     if (FreeChipView.instance != null && FreeChipView.instance.gameObject.activeSelf)
@@ -263,13 +263,16 @@ public class HandleService
                         UIManager.instance.checkAlertMail(true);
                     }
                     // Telegram: cứ có mail ở event này về là mở ra nhận hết
-                    List<int> mailIds = new();
-                    foreach (JToken item in listFreeChip) mailIds.Add((int)item["Id"]);
-                    SocketSend.OpenMultipleMailsContainChip(mailIds);
+                    if (listFreeChip.Count > 0)
+                    {
+                        List<int> mailIds = new();
+                        foreach (JToken item in listFreeChip) mailIds.Add((int)item["Id"]);
+                        SocketSend.OpenMultipleMailsContainChip(mailIds);
+                    }
                     if (!Config.TELEGRAM_TOKEN.Equals("")) SocketSend.sendSelectG2(Config.curGameId);
                     break;
                 case "31":
-                    Globals.User.userMain.AG = (long)jsonData["totalAG"];
+                    User.userMain.AG = (long)jsonData["totalAG"];
                     break;
                 case "messagelist":
                     if (jsonData.ContainsKey("data"))
@@ -280,7 +283,7 @@ public class HandleService
                         {
                             listMes = JArray.Parse((string)jsonData["data"]).ToObject<List<JObject>>();
                         }
-                        Globals.User.userMain.messageUnRead = listMes.FindAll(data => (int)data["count"] != 0).Count;
+                        User.userMain.messageUnRead = listMes.FindAll(data => (int)data["count"] != 0).Count;
                         if (ChatPrivateView.instance != null && ChatPrivateView.instance.gameObject.activeSelf)
                         {
                             if ((string)jsonData["data"] != "")
@@ -377,16 +380,16 @@ public class HandleService
                             else if (UIManager.instance.lobbyView.gameObject.activeSelf && UIManager.instance.gameView == null)
                             {
                                 UIManager.instance.setNotiMessage(true);
-                                UIManager.instance.showDialog(Globals.Config.getTextConfig("has_mail"), Globals.Config.getTextConfig("txt_ok"), () =>
+                                UIManager.instance.showDialog(Config.getTextConfig("has_mail"), Config.getTextConfig("txt_ok"), () =>
                                 {
                                     if (TableView.instance != null) TableView.instance.onClickClose();
                                     UIManager.instance.destroyAllPopup();
                                     // UIManager.instance.lobbyView.onShowChatWorld(true);
-                                }, Globals.Config.getTextConfig("label_cancel"));
+                                }, Config.getTextConfig("label_cancel"));
                             }
                             else
                             {
-                                UIManager.instance.showToast(Globals.Config.getTextConfig("has_mail"));
+                                UIManager.instance.showToast(Config.getTextConfig("has_mail"));
                                 UIManager.instance.setNotiMessage(true);
                             }
                         }
@@ -475,7 +478,7 @@ public class HandleService
                             MainChatWorld.instance.setInfo(jsonData);
                         }
 
-                        Globals.COMMON_DATA.ListChatWorld = JArray.Parse((string)jsonData["data"]);
+                        COMMON_DATA.ListChatWorld = JArray.Parse((string)jsonData["data"]);
                         break;
                     }
 
@@ -509,7 +512,7 @@ public class HandleService
                         messageData["time"] = jsonData["time"];
                         messageData["level"] = jsonData["level"];
                         messageData["Ag"] = jsonData["Ag"];
-                        Globals.COMMON_DATA.ListChatWorld.Add(messageData);
+                        COMMON_DATA.ListChatWorld.Add(messageData);
                         if (ChatWorldView.instance != null)
                         {
                             ChatWorldView.instance.addMessage(jsonData);
@@ -518,16 +521,16 @@ public class HandleService
                     }
 
                 case "ivp":
-                    Globals.Logging.Log("-=-= IVP laf loiwf mowif");
+                    Logging.Log("-=-= IVP laf loiwf mowif");
                     if (UIManager.instance.gameView != null)
                     {
                         if (InviteView.instance != null)
                         {
-                            Globals.Logging.Log("Invite data:" + jsonData.ToString());
+                            Logging.Log("Invite data:" + jsonData.ToString());
                             InviteView.instance.receiveData(jsonData);
                         }
                     }
-                    else if (TableView.instance != null && Globals.Config.invitePlayGame)
+                    else if (TableView.instance != null && Config.invitePlayGame)
                     {
                         TableView.instance.showInvite(jsonData);
                     }
@@ -552,20 +555,20 @@ public class HandleService
 
                         // jsonData= JObject.Parse("{\"evt\":\"salert\",\"data\":\"ขอแสดงความยินดี! ตุณ ตา'ไนท์ท' ข้าว หลาม'ซิ่ง'ง แลกรางวัลสำเร็จ 5000.0 บาท\",\"gameId\":0,\"title\":\"ตา'ไนท์ท' ข้าว หลาม'ซิ่ง'ง\",\"content\":\"แลกเปลี่ยน 5000.0 baht สำเหร็จแล้ว\",\"urlAvatar\":\"fb.560999282058245\",\"isfb\":true,\"vip\":5}");
 
-                        if (Globals.Config.show_new_alert)
+                        if (Config.show_new_alert)
                         {
 
-                            if (Globals.Config.list_Alert.Count < 20)
+                            if (Config.list_Alert.Count < 20)
                             {
                                 if (jsonData.ContainsKey("data"))
                                 {
 
-                                    Globals.Config.list_Alert.Add(jsonData);
+                                    Config.list_Alert.Add(jsonData);
                                     UIManager.instance.showAlertMessage(jsonData);
                                 }
                                 if (jsonData.ContainsKey("content"))
                                 {
-                                    Globals.Config.list_AlertShort.Add(jsonData);
+                                    Config.list_AlertShort.Add(jsonData);
                                     AlertShort.Instance.checkShowAlertShort();
                                     //DOTween.Kill("checkAlertSort");
                                     //DOTween.Sequence().AppendCallback(() =>
@@ -611,9 +614,9 @@ public class HandleService
                         //  "diamond": 0
                         //}
 
-                        Globals.User.userMain.AG = (long)jsonData["ag"];
-                        Globals.User.userMain.VIP = (int)jsonData["vip"];
-                        Globals.User.userMain.LQ = (int)jsonData["lq"];
+                        User.userMain.AG = (long)jsonData["ag"];
+                        User.userMain.VIP = (int)jsonData["vip"];
+                        User.userMain.LQ = (int)jsonData["lq"];
                         //GameManager.getInstance().user.ag = jsonData.ag;
                         //GameManager.getInstance().user.vip = jsonData.vip;
                         //GameManager.getInstance().user.lq = jsonData.lq;
@@ -631,12 +634,12 @@ public class HandleService
                 case "uvip":
                     {
                         //GameManager.getInstance().userUpVip(jsonData);
-                        Globals.User.userMain.VIP = 1;
-                        Globals.User.userMain.AG += (long)jsonData["AG"];
+                        User.userMain.VIP = 1;
+                        User.userMain.AG += (long)jsonData["AG"];
                         UIManager.instance.updateVip();
 
                         SocketIOManager.getInstance().emitUpdateInfo();
-                        UIManager.instance.showMessageBox(Globals.Config.getTextConfig("archive_vip1"));
+                        UIManager.instance.showMessageBox(Config.getTextConfig("archive_vip1"));
 
 
                         if (ProfileView.instance)
@@ -660,7 +663,7 @@ public class HandleService
                         //}
                         if ((int)jsonData["error"] == 1)
                         {
-                            UIManager.instance.showDialog(Globals.Config.getTextConfig("change_pass_succes"), Globals.Config.getTextConfig("ok"), () =>
+                            UIManager.instance.showDialog(Config.getTextConfig("change_pass_succes"), Config.getTextConfig("ok"), () =>
                             {
                                 //this.onShowConfirmDialog(this.getTextConfig('change_pass_succes'), () => {
                                 //    UIManager.instance.onLogout();
@@ -683,7 +686,7 @@ public class HandleService
                                     ChangeNameView.intance.saveData();
                                     ChangeNameView.intance.hide();
                                 }
-                                Globals.Config.typeLogin = Globals.LOGIN_TYPE.PLAYNOW;
+                                Config.typeLogin = LOGIN_TYPE.PLAYNOW;
                                 if (ProfileView.instance)
                                 {
                                     ProfileView.instance.setInfo();
@@ -693,7 +696,7 @@ public class HandleService
                         }
                         else
                         {
-                            UIManager.instance.showMessageBox(Globals.Config.getTextConfig("error_change_pass"));
+                            UIManager.instance.showMessageBox(Config.getTextConfig("error_change_pass"));
                         }
                         break;
                     }
@@ -707,14 +710,14 @@ public class HandleService
                         //}
                         if (jsonData.ContainsKey("U"))
                         {
-                            Globals.User.userMain.Username = (string)jsonData["U"];
-                            Globals.User.userMain.displayName = (string)jsonData["U"];
+                            User.userMain.Username = (string)jsonData["U"];
+                            User.userMain.displayName = (string)jsonData["U"];
                             //cc.NGWlog("!> user change name", jsonData);
                             //Global.MainView.updateName();
                             //Global.ProfileView.updateName();
 
                             UIManager.instance.showDialog(
-                                Globals.Config.getTextConfig("change_name_success") + " " + jsonData["U"], Globals.Config.getTextConfig("ok"),
+                                Config.getTextConfig("change_name_success") + " " + jsonData["U"], Config.getTextConfig("ok"),
                                 () =>
                                 {
                                     UIManager.instance.showLoginScreen(true);
@@ -768,16 +771,16 @@ public class HandleService
 
                         if (chip > 0)
                         {
-                            Globals.User.userMain.AG += chip;
+                            User.userMain.AG += chip;
                             UIManager.instance.updateAG();
                             SocketSend.sendUAG();
                         }
                         UIManager.instance.showMessageBox(msg);
 
-                        var key_iap = Globals.User.userMain.Userid + "_iap_count";
+                        var key_iap = User.userMain.Userid + "_iap_count";
                         var countIAP = PlayerPrefs.GetInt(key_iap, 0);
-                        //var key_signdata = Globals.User.userMain.Userid + "_signdata_" + countIAP;
-                        //var key_signature = Globals.User.userMain.Userid + "_signature_" + countIAP;
+                        //var key_signdata = User.userMain.Userid + "_signdata_" + countIAP;
+                        //var key_signature = User.userMain.Userid + "_signature_" + countIAP;
                         //PlayerPrefs.SetString(key_signdata, _signdata);
                         //PlayerPrefs.SetString(key_signature, _signature);
                         //countIAP++;
@@ -792,8 +795,8 @@ public class HandleService
                         //}
                         for (var i = 0; i < countIAP; i++)
                         {
-                            var key_signdata = Globals.User.userMain.Userid + "_signdata_" + i;
-                            var key_signature = Globals.User.userMain.Userid + "_signature_" + i;
+                            var key_signdata = User.userMain.Userid + "_signdata_" + i;
+                            var key_signature = User.userMain.Userid + "_signature_" + i;
                             var _signature = PlayerPrefs.GetString(key_signature);
 
                             if (_signature == signature)
@@ -817,16 +820,16 @@ public class HandleService
 
                         if (chip > 0)
                         {
-                            Globals.User.userMain.AG += chip;
+                            User.userMain.AG += chip;
                             UIManager.instance.updateAG();
                             SocketSend.sendUAG();
                         }
                         UIManager.instance.showMessageBox(msg);
-                        var key_iap = Globals.User.userMain.Userid + "_iap_count";
+                        var key_iap = User.userMain.Userid + "_iap_count";
                         var countIAP = PlayerPrefs.GetInt(key_iap, 0);
                         for (var i = 0; i < countIAP; i++)
                         {
-                            var key_receipt = Globals.User.userMain.Userid + "_receipt_" + i;
+                            var key_receipt = User.userMain.Userid + "_receipt_" + i;
                             var _receipt = PlayerPrefs.GetString(key_receipt);
 
                             if (_receipt == receipt)
@@ -1002,21 +1005,21 @@ public class HandleService
                     break;
                 /* END LOTO */
                 ///-------SLOT SIXIANG--------//
-                case Globals.ACTION_SLOT_SIXIANG.getInfo:
-                case Globals.ACTION_SLOT_SIXIANG.normalSpin:
-                case Globals.ACTION_SLOT_SIXIANG.getBonusGames:
-                case Globals.ACTION_SLOT_SIXIANG.scatterSpin:
-                case Globals.ACTION_SLOT_SIXIANG.buyBonusGame:
-                case Globals.ACTION_SLOT_SIXIANG.dragonPearlSpin:
-                case Globals.ACTION_SLOT_SIXIANG.rapidPay:
-                case Globals.ACTION_SLOT_SIXIANG.goldPick:
-                case Globals.ACTION_SLOT_SIXIANG.luckyDraw:
-                case Globals.ACTION_SLOT_SIXIANG.selectBonusGame:
+                case ACTION_SLOT_SIXIANG.getInfo:
+                case ACTION_SLOT_SIXIANG.normalSpin:
+                case ACTION_SLOT_SIXIANG.getBonusGames:
+                case ACTION_SLOT_SIXIANG.scatterSpin:
+                case ACTION_SLOT_SIXIANG.buyBonusGame:
+                case ACTION_SLOT_SIXIANG.dragonPearlSpin:
+                case ACTION_SLOT_SIXIANG.rapidPay:
+                case ACTION_SLOT_SIXIANG.goldPick:
+                case ACTION_SLOT_SIXIANG.luckyDraw:
+                case ACTION_SLOT_SIXIANG.selectBonusGame:
                     // handleGameSiXiang(jsonData);
                     break;
                 case "farmInfo":
                     {
-                        Globals.Config.dataVipFarm = jsonData;
+                        Config.dataVipFarm = jsonData;
                         UIManager.instance.SetDataVipFarmList();
                         float farmPercent = (float)jsonData["farmPercent"];
                         if (farmPercent >= 100f)
@@ -1070,7 +1073,7 @@ public class HandleService
         {
 
             int idevt = (int)jsonData["idevt"];
-            Globals.Logging.Log("------------------------------------------------>ID EVT:" + idevt + "<------------------------------------------->\n" + jsonData);
+            Logging.Log("------------------------------------------------>ID EVT:" + idevt + "<------------------------------------------->\n" + jsonData);
             switch (idevt)
             {
                 case 300:
@@ -1082,16 +1085,16 @@ public class HandleService
                     //Global.MainView.lbSafe.string = GameManager.getInstance().formatNumber(
                     //    GameManager.getInstance().user.agSafe);
                     //require('UIManager').instance.onHideLoad();
-                    Globals.Logging.Log("-=- update bank   " + jsonData.ToString());
-                    Globals.User.userMain.agSafe = (long)jsonData["chip"];
+                    Logging.Log("-=- update bank   " + jsonData.ToString());
+                    User.userMain.agSafe = (long)jsonData["chip"];
                     UIManager.instance.updateAGSafe();
                     break;
                 case 301://send to safe {"idevt":301,"status":true,"chipbank":11558654,"chipuser":84600}
 
                     if ((bool)jsonData["status"] == true)
                     {
-                        Globals.User.userMain.AG = (long)jsonData["chipuser"];
-                        Globals.User.userMain.agSafe = (long)jsonData["chipbank"];
+                        User.userMain.AG = (long)jsonData["chipuser"];
+                        User.userMain.agSafe = (long)jsonData["chipbank"];
                         if (SafeView.instance != null)
                         {
                             SafeView.instance.setInfo();
@@ -1102,14 +1105,14 @@ public class HandleService
                     }
                     else
                     {
-                        UIManager.instance.showDialog((string)jsonData["msg"], Globals.Config.getTextConfig("ok"));
+                        UIManager.instance.showDialog((string)jsonData["msg"], Config.getTextConfig("ok"));
                     }
                     break;
                 case 302://get from safe
                     if ((bool)jsonData["status"] == true)
                     {
-                        Globals.User.userMain.AG = (long)jsonData["chipuser"];
-                        Globals.User.userMain.agSafe = (long)jsonData["chipbank"];
+                        User.userMain.AG = (long)jsonData["chipuser"];
+                        User.userMain.agSafe = (long)jsonData["chipbank"];
                         if (SafeView.instance != null)
                         {
                             SafeView.instance.setInfo();
@@ -1230,11 +1233,11 @@ public class HandleService
                           //}
                     if ((bool)jsonData["status"])
                     {
-                        Globals.User.userMain.displayName = Globals.Config.user_name_temp;
-                        //Globals.Config.user_name = Globals.Config.user_name_temp;
-                        //Globals.Config.user_pass = Globals.Config.user_pass_temp;
+                        User.userMain.displayName = Config.user_name_temp;
+                        //Config.user_name = Config.user_name_temp;
+                        //Config.user_pass = Config.user_pass_temp;
 
-                        Globals.User.userMain.Username = Globals.Config.user_name_temp;
+                        User.userMain.Username = Config.user_name_temp;
                         PlayerPrefs.SetInt("isReg", 1);
                         UIManager.instance.updateInfo();
                         if (ChangeNameView.intance)
@@ -1266,7 +1269,7 @@ public class HandleService
                     bool status = (bool)jsonData["status"];
                     if (status)
                     {
-                        Globals.User.userMain.AG = (long)jsonData["AG"];
+                        User.userMain.AG = (long)jsonData["AG"];
                         UIManager.instance.hideWatting();
                         UIManager.instance.updateAG();
                         if (SendGiftView.instance != null && SendGiftView.instance.gameObject.activeSelf)
@@ -1299,35 +1302,35 @@ public class HandleService
     //     }
     //     switch ((string)data["evt"])
     //     {
-    //         case Globals.ACTION_SLOT_SIXIANG.getInfo:
+    //         case ACTION_SLOT_SIXIANG.getInfo:
     //             //dataGame = JObject.Parse(SiXiangFakeData.Instance.getInfoDragonPearl);
     //             SiXiangView.Instance.handleGetInfo(dataGame);
     //             break;
-    //         case Globals.ACTION_SLOT_SIXIANG.getBonusGames:
+    //         case ACTION_SLOT_SIXIANG.getBonusGames:
     //             SiXiangView.Instance.handleBonusInfo(dataGame);
     //             break;
-    //         case Globals.ACTION_SLOT_SIXIANG.normalSpin:
+    //         case ACTION_SLOT_SIXIANG.normalSpin:
     //             SiXiangView.Instance.handleNormalSpin(dataGame);
     //             break;
-    //         case Globals.ACTION_SLOT_SIXIANG.scatterSpin:
+    //         case ACTION_SLOT_SIXIANG.scatterSpin:
     //             SiXiangView.Instance.handleScatterSpin(dataGame);
     //             break;
-    //         case Globals.ACTION_SLOT_SIXIANG.buyBonusGame:
+    //         case ACTION_SLOT_SIXIANG.buyBonusGame:
     //             SiXiangView.Instance.handleBuyBonusGame(dataGame);
     //             break;
-    //         case Globals.ACTION_SLOT_SIXIANG.dragonPearlSpin:
+    //         case ACTION_SLOT_SIXIANG.dragonPearlSpin:
     //             SiXiangView.Instance.handleDragonPealsSpin(dataGame);
     //             break;
-    //         case Globals.ACTION_SLOT_SIXIANG.rapidPay:
+    //         case ACTION_SLOT_SIXIANG.rapidPay:
     //             SiXiangView.Instance.handleRapidPay(dataGame);
     //             break;
-    //         case Globals.ACTION_SLOT_SIXIANG.goldPick:
+    //         case ACTION_SLOT_SIXIANG.goldPick:
     //             SiXiangView.Instance.handleGoldPick(dataGame);
     //             break;
-    //         case Globals.ACTION_SLOT_SIXIANG.luckyDraw:
+    //         case ACTION_SLOT_SIXIANG.luckyDraw:
     //             SiXiangView.Instance.handleLuckyDraw(dataGame);
     //             break;
-    //         case Globals.ACTION_SLOT_SIXIANG.selectBonusGame:
+    //         case ACTION_SLOT_SIXIANG.selectBonusGame:
     //             SiXiangView.Instance.handleSelectBonusGame(dataGame);
     //             break;
     //     }
