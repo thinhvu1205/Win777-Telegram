@@ -18,7 +18,7 @@ public class AutoResize : MonoBehaviour
     }
     void Start()
     {
-        if (Screen.width >= Screen.height) return; // test, remove on build
+        if (Screen.width >= Screen.height) return;
         _VerticalRotate();
     }
 }

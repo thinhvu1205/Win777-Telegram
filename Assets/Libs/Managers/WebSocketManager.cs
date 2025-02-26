@@ -45,7 +45,7 @@ public class WebSocketManager : MonoBehaviour
             connectionStatus = ConnectionStatus.CONNECTING;
             Application.ExternalCall("createWebSocket");
 #else
-        Config.curServerIp = "app2.davaogames.com";
+        Config.curServerIp = "app3.davaogames.com";
         Debug.Log(" Config.curServerI=" + Config.curServerIp);
         Debug.Log(" Config.PORT=" + Config.PORT);
         ws = new WebSocket("wss://" + Config.curServerIp);
