@@ -242,7 +242,6 @@ public class HandleData
     {
         Logging.Log("handleLeaveResponsePacket  " + strData);
         Logging.Log("-=-= " + Config.curGameId);
-        // UIManager.instance.showDialog("")
         UIManager.instance.showMessageBox("You have been inactive for a while, please reconnect.",
             () =>
             {

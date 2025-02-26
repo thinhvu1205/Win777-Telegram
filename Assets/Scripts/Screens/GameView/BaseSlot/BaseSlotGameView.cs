@@ -291,6 +291,11 @@ public class BaseSlotGameView : GameView
             timeHoldSpin += Time.deltaTime;
             if (timeHoldSpin > 1.3f)
             {
+                if (agPlayer < totalListBetRoom[currentMarkBet])
+                {
+                    lbInfoSession.text = Config.getTextConfig("msg_warrning_send");
+                    return;
+                }
                 spintype = SPIN_TYPE.AUTO;
                 setSpinType();
                 if (gameState != GAME_STATE.SPINNING)
@@ -1534,7 +1539,6 @@ public class BaseSlotGameView : GameView
 
         if (timeHoldSpin < 1.3f)
         {
-
             if (gameState != GAME_STATE.SPINNING) //dang dung.chua quay
             {
                 if (isFreeSpin == false && (listBetRoom.Count == 0 || agPlayer < totalListBetRoom[currentMarkBet]))
@@ -1599,38 +1603,19 @@ public class BaseSlotGameView : GameView
             //Logging.Log("isGetFreeSpin==" + isGetFreeSpin);
             if (!isGetFreeSpin)
             {
-                if (spintype == SPIN_TYPE.AUTO)
-                {
-                    spintype = SPIN_TYPE.FREE_AUTO;
-                }
-                else if (spintype == SPIN_TYPE.NORMAL)
-                {
-                    spintype = SPIN_TYPE.FREE_NORMAL;
-                }
+                if (spintype == SPIN_TYPE.AUTO) spintype = SPIN_TYPE.FREE_AUTO;
+                else if (spintype == SPIN_TYPE.NORMAL) spintype = SPIN_TYPE.FREE_NORMAL;
             }
             else
             {
-                if (spintype == SPIN_TYPE.NORMAL)
-                {
-                    spintype = SPIN_TYPE.FREE_NORMAL;
-                }
-                else if (spintype == SPIN_TYPE.AUTO)
-                {
-                    spintype = SPIN_TYPE.FREE_AUTO;
-                }
+                if (spintype == SPIN_TYPE.NORMAL) spintype = SPIN_TYPE.FREE_NORMAL;
+                else if (spintype == SPIN_TYPE.AUTO) spintype = SPIN_TYPE.FREE_AUTO;
             }
-
         }
         else
         {
-            if (spintype == SPIN_TYPE.FREE_AUTO)
-            {
-                spintype = SPIN_TYPE.AUTO;
-            }
-            else if (spintype == SPIN_TYPE.FREE_NORMAL)
-            {
-                spintype = SPIN_TYPE.NORMAL;
-            }
+            if (spintype == SPIN_TYPE.FREE_AUTO) spintype = SPIN_TYPE.AUTO;
+            else if (spintype == SPIN_TYPE.FREE_NORMAL) spintype = SPIN_TYPE.NORMAL;
         }
     }
     public void onSpinHold()

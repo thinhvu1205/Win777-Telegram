@@ -171,6 +171,7 @@ public class GameView : BaseView
     }
     public void checkAutoExit()
     {
+        return;
         Globals.Logging.Log("Check Auto Exit:" + Config.isBackGame);
         if (Config.isBackGame)
         {
