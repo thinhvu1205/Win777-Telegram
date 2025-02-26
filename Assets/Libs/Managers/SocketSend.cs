@@ -30,6 +30,7 @@ public class SocketSend
                     user["gameid"] = 9007;
                     user["sIP"] = obj["ip"].ToString();
                     user["deviceId"] = Config.deviceId;
+                    user["language"] = "EN";
                     string strUser = user.ToString(Newtonsoft.Json.Formatting.None);
                     byte[] credential = { };
                     LoginRequestPacket loginRequest = new LoginRequestPacket(strUser, Config.TELEGRAM_TOKEN, 7001, credential);
