@@ -721,13 +721,17 @@ public class SiXiangView : BaseSlotView
             if ((gameState == GAME_STATE.PREPARE || gameState == GAME_STATE.JOIN_GAME) && agPlayer < validBetLevels[currentBetLevel])
             {
                 infoBar.setInfoText(Globals.Config.getTextConfig("not_enought_gold"));
-                string textShow = Globals.Config.getTextConfig("txt_not_enough_money_gl");
-                string textBtn2 = Globals.Config.getTextConfig("shop");
-                string textBtn3 = Globals.Config.getTextConfig("label_cancel");
-                UIManager.instance.showDialog(textShow, textBtn2, () =>
-                {
-                    UIManager.instance.openShop();
-                }, textBtn3);
+                // string textShow = Config.getTextConfig("txt_not_enough_money_gl");
+                // string textBtn2 = Config.getTextConfig("shop");
+                // string textBtn3 = Config.getTextConfig("label_cancel");
+                // UIManager.instance.showDialog(textShow, textBtn2, () =>
+                // {
+                //     UIManager.instance.openShop();
+                // }, textBtn3);
+
+                string textShow = Config.getTextConfig("txt_not_enough_money_gl");
+                string textBtn3 = Config.getTextConfig("label_cancel");
+                UIManager.instance.showDialog(textShow, textBtn3);
             }
             else
             {

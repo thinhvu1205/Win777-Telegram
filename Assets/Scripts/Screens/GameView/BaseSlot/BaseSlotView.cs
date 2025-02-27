@@ -10,7 +10,6 @@ using Spine.Unity;
 using Newtonsoft.Json.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using OneSignalSDK;
 using static SiXiangView;
 using Unity.VisualScripting;
 using Socket.Quobject.EngineIoClientDotNet.Modules;
@@ -133,7 +132,7 @@ public class BaseSlotView : GameView
     private CancellationTokenSource spineJPCancelToken = new CancellationTokenSource();
     protected UniTaskCompletionSource spineSpecialWinTask = null;
     protected UniTaskCompletionSource spineJPWinTask = null;
-    
+
     protected string PATH_ANIM_SPECICAL_WIN = "";
 
     protected List<List<int>> payLines = new List<List<int>> {new List<int>{1, 1, 1, 1, 1}, new List<int>{0, 0, 0, 0, 0}, new List<int>{2, 2, 2, 2, 2}, new List<int>{0, 1, 2, 1, 0}, new List<int>{2, 1, 0, 1, 2},
@@ -754,13 +753,17 @@ public class BaseSlotView : GameView
         if ((gameState == GAME_STATE.PREPARE || gameState == GAME_STATE.JOIN_GAME) && agPlayer < validBetLevels[currentBetLevel])
         {
             infoBar.setInfoText(Globals.Config.getTextConfig("not_enought_gold"));
-            string textShow = Globals.Config.getTextConfig("txt_not_enough_money_gl");
-            string textBtn2 = Globals.Config.getTextConfig("shop");
-            string textBtn3 = Globals.Config.getTextConfig("label_cancel");
-            UIManager.instance.showDialog(textShow, textBtn2, () =>
-            {
-                UIManager.instance.openShop();
-            }, textBtn3);
+            // string textShow = Config.getTextConfig("txt_not_enough_money_gl");
+            // string textBtn2 = Config.getTextConfig("shop");
+            // string textBtn3 = Config.getTextConfig("label_cancel");
+            // UIManager.instance.showDialog(textShow, textBtn2, () =>
+            // {
+            //     UIManager.instance.openShop();
+            // }, textBtn3);
+
+            string textShow = Config.getTextConfig("txt_not_enough_money_gl");
+            string textBtn3 = Config.getTextConfig("label_cancel");
+            UIManager.instance.showDialog(textShow, textBtn3);
         }
         else
         {
@@ -1088,10 +1091,10 @@ public class BaseSlotView : GameView
     }
     public async UniTask showSpineJackpotWin(long chipWin)
     {
-        spineJPCancelToken?.Cancel(); 
+        spineJPCancelToken?.Cancel();
         spineJPCancelToken = new CancellationTokenSource();
         spineJPWinTask = new UniTaskCompletionSource();
-        
+
         Action<SkeletonDataAsset> cb = async (skeData) =>
         {
             string animName = "";
@@ -1166,7 +1169,7 @@ public class BaseSlotView : GameView
            {
                StartCoroutine(UIManager.instance.loadSkeletonDataAsync("GameView/SiXiang/Spine/LuckyDraw/BigWin/skeleton_SkeletonData", cb));
            });
-        
+
         await spineJPWinTask.Task;
         //spineSpecialWin.transform.parent.gameObject.SetActive(false);
         //spineSpecialWin.gameObject.SetActive(false);

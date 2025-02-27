@@ -582,11 +582,6 @@ public class SlotTarzanView : BaseSlotGameView
         });
 
     }
-    [ContextMenu("test")]
-    public void Test()
-    {
-        showGetItemDiamond(Vector2.zero);
-    }
     private void showGetItemDiamond(Vector2 posItem, TweenCallback cb = null)
     {
         GameObject diamondContainer = new GameObject("Diamond");
