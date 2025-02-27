@@ -1545,17 +1545,13 @@ public class BaseSlotGameView : GameView
                 {
                     resetSlotView();
                     lbInfoSession.text = Config.getTextConfig("msg_warrning_send");
-                    // string textShow = Config.getTextConfig("txt_not_enough_money_gl");
-                    // string textBtn2 = Config.getTextConfig("shop");
-                    // string textBtn3 = Config.getTextConfig("label_cancel");
-                    // UIManager.instance.showDialog(textShow, textBtn2, () =>
-                    // {
-                    //     UIManager.instance.openShop();
-                    // }, textBtn3);
-
                     string textShow = Config.getTextConfig("txt_not_enough_money_gl");
+                    string textBtn2 = Config.getTextConfig("shop");
                     string textBtn3 = Config.getTextConfig("label_cancel");
-                    UIManager.instance.showDialog(textShow, textBtn3);
+                    UIManager.instance.showDialog(textShow, textBtn2, () =>
+                    {
+                        UIManager.instance.openShop();
+                    }, textBtn3);
                     return;
                 }
                 if ((spintype == SPIN_TYPE.FREE_NORMAL || spintype == SPIN_TYPE.FREE_AUTO) && (gameState == GAME_STATE.PREPARE || gameState == GAME_STATE.SHOWING_RESULT) && !isGetFreeSpin)//neu turn do dc freespin thi van cho click
