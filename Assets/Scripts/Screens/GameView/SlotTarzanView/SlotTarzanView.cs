@@ -582,12 +582,19 @@ public class SlotTarzanView : BaseSlotGameView
         });
 
     }
+    [ContextMenu("test")]
+    public void Test()
+    {
+        showGetItemDiamond(Vector2.zero);
+    }
     private void showGetItemDiamond(Vector2 posItem, TweenCallback cb = null)
     {
         GameObject diamondContainer = new GameObject("Diamond");
         diamondContainer.AddComponent<RectTransform>();
         diamondContainer.transform.SetParent(transform);
         diamondContainer.transform.localScale = Vector3.one;
+        if (Screen.width < Screen.height)
+            diamondContainer.transform.localRotation = Quaternion.Euler(diamondContainer.transform.localRotation.x, diamondContainer.transform.localRotation.y, 0);
         SkeletonGraphic diamond = Instantiate(animBtnSpin.gameObject, diamondContainer.transform).GetComponent<SkeletonGraphic>();
 
         diamond.skeletonDataAsset = animDiamond;

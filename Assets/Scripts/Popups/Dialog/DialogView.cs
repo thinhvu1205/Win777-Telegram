@@ -31,12 +31,12 @@ public class DialogView : BaseView
         if (TableView.instance != null && TableView.instance.isHorizontal)
         {
             background.transform.localEulerAngles = new Vector3(0, 0, 270);
-            transform.eulerAngles = new Vector3(0, 0, 0);
+            transform.localEulerAngles = new Vector3(0, 0, 0);
         }
         else
         {
             background.transform.localEulerAngles = new Vector3(0, 0, 0);
-            transform.eulerAngles = new Vector3(0, 0, 0);
+            transform.localEulerAngles = new Vector3(0, 0, 0);
         }
     }
 
