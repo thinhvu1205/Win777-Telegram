@@ -38,7 +38,6 @@ public class LobbyView : BaseView
     {
         Application.OpenURL(Config.ApkFullUrl);
     }
-
     protected override void Start()
     {
         isRunStart = true;
