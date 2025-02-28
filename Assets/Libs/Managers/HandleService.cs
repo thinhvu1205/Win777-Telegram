@@ -269,7 +269,11 @@ public class HandleService
                         foreach (JToken item in listFreeChip) mailIds.Add((int)item["Id"]);
                         SocketSend.OpenMultipleMailsContainChip(mailIds);
                     }
-                    if (!Config.TELEGRAM_TOKEN.Equals("")) SocketSend.sendSelectG2(Config.curGameId);
+                    if (!Config.TELEGRAM_TOKEN.Equals(""))
+                    {
+                        if (Config.curGameId == (int)GAMEID.SLOT_SIXIANG) UIManager.instance.playVideoSiXiang();
+                        SocketSend.sendSelectG2(Config.curGameId);
+                    }
                     break;
                 case "31":
                     User.userMain.AG = (long)jsonData["totalAG"];

@@ -40,7 +40,7 @@ public class LoginView : BaseView
             if (isFirstOpen == 0)
             {
                 PlayerPrefs.SetInt("isFirstOpen", 1);
-                onClickPlayNow();
+                // onClickPlayNow();
                 PlayerPrefs.Save();
             }
             else
@@ -49,7 +49,7 @@ public class LoginView : BaseView
                 if (isOpenFirst)
                 {
                     isOpenFirst = false;
-                    reconnect();
+                    // reconnect();
                 }
             }
         }
