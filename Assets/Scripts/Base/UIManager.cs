@@ -51,7 +51,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] Canvas canvasGame;
     [HideInInspector] public GameView gameView;
     [SerializeField] AlertMessage alertMessage;
-    [SerializeField] public VideoPlayer videoPlayer;
+    [SerializeField] VideoPlayer videoPlayer;
     [SerializeField] GameObject videoBg;
 
     private DialogView currentDialogNoti = null;
@@ -180,6 +180,16 @@ public class UIManager : MonoBehaviour
     {
         lobbyView.hide(false);
         videoPlayer.Prepare();
+        if (Screen.width <= Screen.height)
+        {
+            RectTransform videoRT = videoPlayer.GetComponent<RectTransform>();
+            RectTransform bgVideoRT = videoBg.GetComponent<RectTransform>();
+            float ratio = Mathf.Max(Screen.width / 720f, Screen.height / 1280f);
+            videoRT.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, ratio * 1280);
+            videoRT.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, ratio * 720);
+            bgVideoRT.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, ratio * 1280);
+            bgVideoRT.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, ratio * 720);
+        }
         // OneSignal.Default.Initialize("def6e8d4-8348-439e-8294-760cb99e4864");
 #if UNITY_ANDROID
         //if (Permission.HasUserAuthorizedPermission(Permission.))
