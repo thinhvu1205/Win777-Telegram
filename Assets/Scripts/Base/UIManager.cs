@@ -67,7 +67,7 @@ public class UIManager : MonoBehaviour
     public bool SendChatEmoToHiddenPlayers = false;
     
     private string _videoSiXiangUrl =
-        "https://res.cloudinary.com/dytclhw7n/video/upload/v1740734548/intromp4_wxsfza.mp4";
+        "https://storage.googleapis.com/cdn.davaogames.com/unity/video/intro.mp4";
 
     public Sprite spAvatarMe;
     void Awake()
