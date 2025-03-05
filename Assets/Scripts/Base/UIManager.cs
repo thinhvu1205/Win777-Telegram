@@ -65,9 +65,6 @@ public class UIManager : MonoBehaviour
     private List<ButtonVipFarm> _VipFarmVFs = new();
     public long PusoyJackPot;
     public bool SendChatEmoToHiddenPlayers = false;
-    
-    private string _videoSiXiangUrl =
-        "https://storage.googleapis.com/cdn.davaogames.com/unity/video/intro.mp4";
 
     public Sprite spAvatarMe;
     void Awake()
@@ -114,15 +111,13 @@ public class UIManager : MonoBehaviour
     {
         if (!videoPlayer.isPlaying)
         {
-            videoPlayer.url = _videoSiXiangUrl;
-
             videoBg.SetActive(false);
             videoBg.GetComponent<RawImage>().color = new Color32(255, 255, 225, 0);
             videoPlayer.gameObject.SetActive(true);
 
             videoPlayer.prepareCompleted += (vp) =>
             {
-                Debug.Log("videoPlayer.prepareCompleted is run "+ (float)videoPlayer.length);
+                Debug.Log("videoPlayer.prepareCompleted is run " + (float)videoPlayer.length);
                 videoPlayer.Play();
 
                 DOTween.Sequence().AppendInterval(1.4f).AppendCallback(() =>
@@ -145,12 +140,12 @@ public class UIManager : MonoBehaviour
                 Debug.Log("videoEndedListener is run");
                 videoBg.SetActive(false);
                 videoPlayer.gameObject.SetActive(false);
-                videoPlayer.loopPointReached -= videoEndedListener; 
+                videoPlayer.loopPointReached -= videoEndedListener;
             };
-            
+
             videoPlayer.started += videoStartedListener;
             videoPlayer.loopPointReached += videoEndedListener;
-            
+
             videoPlayer.errorReceived += (vp, message) =>
             {
                 Debug.LogError("Error: " + message);
@@ -161,7 +156,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    
+
     //internal void PermissionCallbacks_PermissionDeniedAndDontAskAgain(string permissionName)
     //{
     //    //Globals.Logging.Log($"{permissionName} PermissionDeniedAndDontAskAgain");
