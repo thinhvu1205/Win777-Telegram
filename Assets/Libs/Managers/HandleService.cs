@@ -218,9 +218,7 @@ public class HandleService
                     break;
                 case "22":
                     if (FreeChipView.instance != null && FreeChipView.instance.gameObject.activeSelf)
-                    {
                         FreeChipView.instance.dataFreeChipAdmin.Clear();
-                    }
                     JArray listFreeChip = JArray.Parse((string)jsonData["data"]);
                     foreach (JObject data in listFreeChip)
                     {
@@ -240,28 +238,17 @@ public class HandleService
                             item["s"] = (bool)data["S"] ? 0 : 1;
                             item["d"] = data["D"];
                             if (((string)item["from"]).ToLower() == "admin")
-                            {
                                 Config.mail20.Add(item);
-                            }
-                            ;
                             if (FreeChipView.instance != null && FreeChipView.instance.gameObject.activeSelf)
-                            {
                                 FreeChipView.instance.pushMailAdmin(7, (string)item["msg"], (int)item["gold"], (int)item["idMsg"]);
-                            }
                         }
                     }
-
                     User.userMain.nmAg = listFreeChip.Count;
-
                     UIManager.instance.updateMailAndMessageNoti();
                     if (FreeChipView.instance != null && FreeChipView.instance.gameObject.activeSelf)
-                    {
                         FreeChipView.instance.loadFreeChip();
-                    }
                     else
-                    {
                         UIManager.instance.checkAlertMail(true);
-                    }
                     // Telegram: cứ có mail ở event này về là mở ra nhận hết
                     if (listFreeChip.Count > 0)
                     {
@@ -272,7 +259,7 @@ public class HandleService
                     if (!Config.TELEGRAM_TOKEN.Equals(""))
                     {
                         if (Config.curGameId == (int)GAMEID.SLOT_SIXIANG) UIManager.instance.playVideoSiXiang();
-                        SocketSend.sendSelectG2(Config.curGameId);
+                        SocketSend.sendSelectGame(Config.curGameId);
                     }
                     break;
                 case "31":
