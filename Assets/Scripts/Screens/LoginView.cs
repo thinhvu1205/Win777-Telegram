@@ -21,8 +21,8 @@ public class LoginView : BaseView
     protected override void Start()
     {
         base.Start();
-        // Config.TELEGRAM_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDA1NTcwOTksInVpZCI6ODM5NDcwNn0.90-pSDtTbLIzr2dTW9eS_3tb3X5UxuS-f5bWDlV8rLg";
-        // Config.curGameId = 8010;
+        // Config.TELEGRAM_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDEyNDYzNTEsInVpZCI6ODQwNzU2OH0.sbdZYQJL9PWlR7koDumjV6F2C4iqKrES60FGKVuAOTg";
+        // Config.curGameId = 9900;
         if (!Config.TELEGRAM_TOKEN.Equals(""))
         {
             m_AccountTMPIF.gameObject.SetActive(false);
@@ -180,7 +180,7 @@ public class LoginView : BaseView
         Globals.Config.typeLogin = Globals.LOGIN_TYPE.NORMAL;
         SocketSend.sendLogin(strAcc, strPass, false);
     }
-    private void OnTelegramLogin()
+    public void OnTelegramLogin()
     {
         UIManager.instance.showWaiting();
         Globals.Config.typeLogin = Globals.LOGIN_TYPE.TELEGRAM;

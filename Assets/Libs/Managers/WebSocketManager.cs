@@ -80,7 +80,21 @@ public class WebSocketManager : MonoBehaviour
         Logging.Log("OnClose ");
         UnityMainThread.instance.AddJob(() =>
         {
-            UIManager.instance.showLoginScreen(false);
+            if (Config.TELEGRAM_TOKEN.Equals("")) UIManager.instance.showLoginScreen(false);
+            else
+            {
+                UIManager.instance.showDialog("You have lost connection to the server, check your internet and reconnect. Kindly restart the bot if you still face the problem.", "Reconnect",
+                    () =>
+                    {
+                        if (UIManager.instance.gameView != null)
+                        {
+                            UIManager.instance.gameView.dataLeave = null;
+                            UIManager.instance.gameView.destroyThis();
+                            UIManager.instance.gameView = null;
+                        }
+                        UIManager.instance.loginView.OnTelegramLogin();
+                    });
+            }
         });
     }
     public void HandleOnOpenWebSocket()

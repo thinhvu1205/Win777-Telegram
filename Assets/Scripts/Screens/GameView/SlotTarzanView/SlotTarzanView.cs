@@ -166,7 +166,7 @@ public class SlotTarzanView : BaseSlotGameView
         if (isFreeSpin)
         {
 
-            currentMarkBet = listMarkbet.IndexOf(singleLineBet * payLines.Count);
+            currentMarkBet = listMarkbet.IndexOf(singleLineBet);
             lbFreespinLeft.gameObject.SetActive(true);
             lbFreespinLeft.text = freespinLeft + "";
         }

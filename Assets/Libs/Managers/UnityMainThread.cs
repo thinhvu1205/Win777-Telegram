@@ -42,16 +42,14 @@ public class UnityMainThread : MonoBehaviour
             {
                 isHasNet = false;
                 Globals.Logging.Log("Error. Check internet connection!");
-                WebSocketManager.getInstance().connectionStatus = Globals.ConnectionStatus.DISCONNECTED;
-                UIManager.instance.showLoginScreen(false);
-                return;
+                if (WebSocketManager.getInstance().connectionStatus != Globals.ConnectionStatus.DISCONNECTED)
+                    WebSocketManager.getInstance().stop();
             }
             else if (isHasNet)
             {
                 Globals.Logging.Log("vao day roi");
                 isHasNet = false;
                 StartCoroutine(delayBox());
-                return;
             }
         }
         else
