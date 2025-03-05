@@ -10,6 +10,8 @@ using DG.Tweening;
 using Spine.Unity;
 using System.Threading.Tasks;
 using Globals;
+using System;
+using Random = UnityEngine.Random;
 
 public class SlotJuicyGardenView : BaseSlotGameView
 {
@@ -386,34 +388,11 @@ public class SlotJuicyGardenView : BaseSlotGameView
     {
         isSendingSpin = false;
         finishData = data;
-        //if (indexPick == 0)
-        //{
-        //    finishData = JObject.Parse(GetFakeDataJuicy.instance.getdataEndFSGio());
-        //}
-        //if (indexPick > 16)
-        //{
-        //    finishData = data;
-        //}
-        //else
-        //{
-        //    finishData = JObject.Parse(GetFakeDataJuicy.instance.getDataBonusFruitRain(indexPick));
-        //    Logging.Log("finish Fake=" + finishData.ToString());
-        //    indexPick++;
-        //}
-        //if (indexPick == 1)
-        //{
-        //    finishData = JObject.Parse("{\"evt\":\"slotViews\",\"slotViews\":[[{\"id\":10,\"value\":0},{\"id\":14,\"value\":0},{\"id\":15,\"value\":0}],[{\"id\":6,\"value\":0},{\"id\":6,\"value\":0},{\"id\":12,\"value\":0}],[{\"id\":7,\"value\":0},{\"id\":12,\"value\":0},{\"id\":10,\"value\":0}],[{\"id\":12,\"value\":0},{\"id\":13,\"value\":500},{\"id\":0,\"value\":0}],[{\"id\":10,\"value\":0},{\"id\":5,\"value\":0},{\"id\":13,\"value\":3600}]],\"creditWin\":300,\"winningLine\":[],\"lineDetail\":[],\"freeSpinLeft\":3,\"winType\":0,\"freeSpin\":false,\"isBonusGame\":false,\"agWin\":300,\"AG\":8097412,\"level\":{\"levelUser\":0,\"curLevelExp\":0,\"maxLevelExp\":0,\"agUser\":8097412},\"MarkBet\":[1,5,10,15,20,25,50,100,200,500,1000,2000,2500,5000],\"jackPot\":{\"typeJP\":\"NONE\",\"winJP\":0},\"allowSelectBonus\":true,\"selectBonus\":{\"typeBonus\":4,\"numSpin\":3,\"view\":[[{\"id\":10,\"value\":0},{\"id\":14,\"value\":0},{\"id\":15,\"value\":0}],[{\"id\":6,\"value\":0},{\"id\":6,\"value\":0},{\"id\":12,\"value\":0}],[{\"id\":7,\"value\":0},{\"id\":12,\"value\":0},{\"id\":10,\"value\":0}],[{\"id\":12,\"value\":0},{\"id\":13,\"value\":500},{\"id\":0,\"value\":0}],[{\"id\":10,\"value\":0},{\"id\":5,\"value\":0},{\"id\":13,\"value\":3600}]]},\"lineScatter\":[-1,-1,-1,-1,-1],\"jpGrandPlayer\":4320905,\"jpMajorPlayer\":864181}");
-        //}
-        //indexPick++;
 
         JObject jackPot = (JObject)finishData["jackPot"];
         string typeJP = getString(jackPot, "typeJP");
         long winJP = getLong(jackPot, "winJP");
-        if (typeJP != "NONE" && typeJP != "")
-        {
-            setValueJPToSlotViews(typeJP, winJP);
-        }
-
+        if (typeJP != "NONE" && typeJP != "") setValueJPToSlotViews(typeJP, winJP);
         allowSelectBonus = getBool(finishData, "allowSelectBonus");
         setFinishView((JArray)finishData["slotViews"]);
         isFreeSpin = (int)finishData["freeSpinLeft"] > 0;
@@ -428,29 +407,20 @@ public class SlotJuicyGardenView : BaseSlotGameView
         if (isBonusGame && freespinLeft == 0)//turn cuoi, check lai tong tien xem co duoc big,mega win ko vi server turn cuoi tra ve ko chuan
         {
             long totalPkgVl = getLong(finishData, "creditWin");
-            if (totalPkgVl > 50 * totalListBetRoom[currentMarkBet])
-            {
-                winType = 2;
-            }
-            else if (totalPkgVl > 20 * totalListBetRoom[currentMarkBet])
-            {
-                winType = 1;
-            }
-            else
-            {
-                winType = 0;
-            }
+            if (totalPkgVl > 50 * totalListBetRoom[currentMarkBet]) winType = 2;
+            else if (totalPkgVl > 20 * totalListBetRoom[currentMarkBet]) winType = 1;
+            else winType = 0;
         }
         checkFiveOfAKind();
         isWinScatter = checkWinScatter();
-        Sequence s = DOTween.Sequence();
-        s.AppendInterval(1.0f)
-        .AppendCallback(() =>
+        StartCoroutine(delayStop());
+        IEnumerator delayStop()
         {
+            StopCoroutine(delayStop());
+            yield return new WaitForSeconds(1f);
             listCollum[0].isStop = true;
             currentIndexStop = 0;
-        });
-
+        }
     }
     private long getTotalPkgVl(string typeJP, long jpValue)
     {

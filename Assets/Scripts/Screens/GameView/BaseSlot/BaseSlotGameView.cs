@@ -798,29 +798,6 @@ public class BaseSlotGameView : GameView
     {
         isSendingSpin = false;
         finishData = data;
-
-        //get freespin
-        //if (indexSpin == 1)
-
-
-        //indexSpin++;
-        //5ofakind + bigwin
-        //finishData = JObject.Parse("{\"evt\":\"slotViews\",\"slotViews\":[[7,10,9],[7,7,0],[7,9,8],[11,10,1],[5,7,8]],\"creditWin\":1150,\"winningLine\":[1,11],\"lineDetail\":[{\"lineId\":1,\"win\":7500},{\"lineId\":11,\"win\":50000}],\"freeSpinLeft\":0,\"winType\":2,\"freeSpin\":false,\"agWin\":57500,\"AG\":145113,\"MarkBet\":[1,5,50,500,1000,5000,10000,25000,50000,100000,250000,500000]}");
-
-        //win scatter
-        //finishData = JObject.Parse("{\"evt\":\"slotViews\",\"slotViews\":[[1,7,1],[12,7,7],[12,7,10],[1,7,3],[6,9,0]],\"creditWin\":130,\"winningLine\":[],\"lineDetail\":[],\"freeSpinLeft\":0,\"winType\":0,\"freeSpin\":false,\"agWin\":20000,\"AG\":148063,\"MarkBet\":[1,5,50,500,1000,5000,10000,25000,50000,100000,250000,500000]}");
-
-        //finishData = JObject.Parse(" {\"evt\":\"slotViews\",\"slotViews\":[[6,0,8],[11,11,5],[10,1,0],[10,8,9],[8,2,11]],\"creditWin\":26,\"winningLine\":[4,12,14,15,18],\"lineDetail\":[{\"lineId\":4,\"win\":20},{\"lineId\":12,\"win\":20},{\"lineId\":14,\"win\":20},{\"lineId\":15,\"win\":50},{\"lineId\":18,\"win\":20}],\"freeSpinLeft\":0,\"winType\":0,\"freeSpin\":false,\"agWin\":130,\"AG\":15262,\"MarkBet\":[1,5,50,500,1000,5000,10000,25000,50000,100000,250000,500000]}");
-        //finishData = JObject.Parse("{\"evt\":\"slotViews\",\"slotViews\":[[4,2,7],[2,12,4],[1,12,11],[2,12,8],[0,0,0]],\"creditWin\":70,\"winningLine\":[15,19],\"lineDetail\":[{\"lineId\":15,\"win\":50000},{\"lineId\":19,\"win\":20000}],\"freeSpinLeft\":15,\"winType\":0,\"freeSpin\":false,\"agWin\":70000,\"AG\":574384,\"level\":{\"levelUser\":0,\"curLevelExp\":0,\"maxLevelExp\":0,\"agUser\":574384},\"MarkBet\":[1,5,10,25,50,500,1000,5000,10000,25000,50000,100000,250000,500000]}");
-        //if (indexSpin == 0)
-        //{
-        //    finishData = JObject.Parse("{\"evt\":\"slotViews\",\"slotViews\":[[1,7,1],[12,7,7],[1,7,10],[4,7,3],[6,9,0]],\"creditWin\":130,\"winningLine\":[],\"lineDetail\":[],\"freeSpinLeft\":0,\"winType\":0,\"freeSpin\":true,\"agWin\":0,\"AG\":18000,\"MarkBet\":[1,5,50,500,1000,5000,10000,25000,50000,100000,250000,500000]}");
-        //}
-        //else if (indexSpin == 1)
-        //{
-        //finishData = JObject.Parse("{\"evt\":\"slotViews\",\"slotViews\":[[1,7,1],[1,7,7],[12,7,10],[12,7,3],[6,9,0]],\"creditWin\":130,\"winningLine\":[],\"lineDetail\":[],\"freeSpinLeft\":0,\"winType\":0,\"freeSpin\":true,\"agWin\":2000,\"AG\":150063,\"MarkBet\":[1,5,50,500,1000,5000,10000,25000,50000,100000,250000,500000]}");
-        //}
-        //indexSpin++;
         setFinishView((JArray)finishData["slotViews"]);
         winningLines = finishData["winningLine"].ToObject<List<int>>();
         linesDetail = (JArray)finishData["lineDetail"];
@@ -833,14 +810,14 @@ public class BaseSlotGameView : GameView
             animFreespinNum.gameObject.SetActive(false);
         }
         checkFiveOfAKind();
-
-        Sequence s = DOTween.Sequence();
-        s.AppendInterval(1.0f).AppendCallback(() =>
+        StartCoroutine(delayStop());
+        IEnumerator delayStop()
         {
+            StopCoroutine(delayStop());
+            yield return new WaitForSeconds(1f);
             listCollum[0].isStop = true;
             currentIndexStop = 0;
-        });
-
+        }
     }
     public void forceFreeSpin()
     {

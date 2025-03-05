@@ -546,11 +546,6 @@ public class SlotTarzanView : BaseSlotGameView
         listDiamondPos.Clear();
         listPosCharJungle.Clear();
         finishData = data;
-        //if (indexFreeSpin < 5)
-        //{
-        //finishData = JObject.Parse(GetFakeDataTarzan.instance.getBigWinData());
-        //    indexFreeSpin++;
-        //}
 
         if (miniGameView != null && miniGameView.gameObject.activeSelf)
         {
@@ -578,14 +573,14 @@ public class SlotTarzanView : BaseSlotGameView
         }
         checkFiveOfAKind();
         isWinScatter = checkWinScatter();
-        Sequence s = DOTween.Sequence();
-        s.AppendInterval(1.0f)
-        .AppendCallback(() =>
+        StartCoroutine(delayStop());
+        IEnumerator delayStop()
         {
+            StopCoroutine(delayStop());
+            yield return new WaitForSeconds(1f);
             listCollum[0].isStop = true;
             currentIndexStop = 0;
-        });
-
+        }
     }
     private void showGetItemDiamond(Vector2 posItem, TweenCallback cb = null)
     {
