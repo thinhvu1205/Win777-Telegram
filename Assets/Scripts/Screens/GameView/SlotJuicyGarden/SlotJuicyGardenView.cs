@@ -51,7 +51,7 @@ public class SlotJuicyGardenView : BaseSlotGameView
     public override void handleCTable(string data)
     {
         //data = GetFakeDataJuicy.instance.getdataCtableGioBeforeEnd();
-        Globals.Logging.Log("HandleCtable Juicy:" + data);
+        Logging.Log("HandleCtable Juicy:" + data);
         dataCtable = JObject.Parse(data);
         isBonusGame = getBool(dataCtable, "isBonusGame");
         payLines = (JArray)dataCtable["payLine"];
@@ -96,7 +96,7 @@ public class SlotJuicyGardenView : BaseSlotGameView
         JArray arrP = (JArray)dataCtable["ArrP"];
         JObject dataPlayer = (JObject)arrP[0];
         agPlayer = (long)dataPlayer["AG"];
-        lbCurrentChips.Text = Globals.Config.FormatNumber(agPlayer);
+        lbCurrentChips.Text = Config.FormatNumber(agPlayer);
         listMarkbet = ((JArray)dataCtable["MarkBet"]).ToObject<List<int>>();
         listBetRoom = getListBetRoom();
 
@@ -107,8 +107,8 @@ public class SlotJuicyGardenView : BaseSlotGameView
         updateCurrentMarkBet();
         if (isFreeSpin)
         {
-            currentMarkBet = listMarkbet.IndexOf(singleLineBet);
-            lbFreespinLeft.text = Globals.Config.getTextConfig("txt_freespinRM") + ": " + freespinLeft;
+            currentMarkBet = listMarkbet.IndexOf(singleLineBet * payLines.Count);
+            lbFreespinLeft.text = Config.getTextConfig("txt_freespinRM") + ": " + freespinLeft;
             animFreespinNum.gameObject.SetActive(true);
             animBgFreeSpin.gameObject.SetActive(true);
             animBgFreeSpin.skeletonDataAsset = UIManager.instance.loadSkeletonData(ANIM_BG_FREESPIN);
@@ -123,24 +123,24 @@ public class SlotJuicyGardenView : BaseSlotGameView
             if (listBetRoom.Count - 1 >= currentMarkBet)
             {
                 Debug.Log("currentMarkBet=" + currentMarkBet);
-                lbCurrentBet.text = Globals.Config.FormatMoney2(listBetRoom[currentMarkBet]);
-                lbStateBet.text = currentMarkBet == listBetRoom.Count - 1 ? Globals.Config.getTextConfig("txt_max_bet") : Globals.Config.getTextConfig("txt_bet");
+                lbCurrentBet.text = Config.FormatMoney2(listBetRoom[currentMarkBet]);
+                lbStateBet.text = currentMarkBet == listBetRoom.Count - 1 ? Config.getTextConfig("txt_max_bet") : Config.getTextConfig("txt_bet");
             }
             else
             {
-                lbCurrentBet.text = Globals.Config.FormatMoney2(totalListBetRoom[currentMarkBet]);
+                lbCurrentBet.text = Config.FormatMoney2(totalListBetRoom[currentMarkBet]);
             }
         }
         else
         {
             if (!isFreeSpin)
             {
-                lbInfoSession.text = Globals.Config.getTextConfig("msg_warrning_send");
-                lbCurrentBet.text = Globals.Config.FormatMoney2(totalListBetRoom[currentMarkBet]);
+                lbInfoSession.text = Config.getTextConfig("msg_warrning_send");
+                lbCurrentBet.text = Config.FormatMoney2(totalListBetRoom[currentMarkBet]);
             }
             else
             {
-                lbCurrentBet.text = Globals.Config.FormatMoney2(totalListBetRoom[currentMarkBet]);
+                lbCurrentBet.text = Config.FormatMoney2(totalListBetRoom[currentMarkBet]);
             }
         }
         setSpinType();
@@ -202,11 +202,11 @@ public class SlotJuicyGardenView : BaseSlotGameView
                 spintype = SPIN_TYPE.NORMAL;
             }
         }
-        Globals.Logging.Log("Spintype=" + spintype);
+        Logging.Log("Spintype=" + spintype);
     }
     protected override void resetSlotView()
     {
-        Globals.Logging.Log("Reset Slot View JUICY");
+        Logging.Log("Reset Slot View JUICY");
         if (finishData != null)
         {
             setDarkAllCollum(getInt((JObject)finishData["selectBonus"], "typeBonus") == 4 || getInt((JObject)finishData["selectBonus"], "typeBonus") == 5);
@@ -227,7 +227,7 @@ public class SlotJuicyGardenView : BaseSlotGameView
             Destroy(lineStraight);
         }
         lbInfoSession.gameObject.SetActive(true);
-        lbInfoSession.text = Globals.Config.formatStr(Globals.Config.getTextConfig("txt_playing_lines"), payLines.Count);
+        lbInfoSession.text = Config.formatStr(Config.getTextConfig("txt_playing_lines"), payLines.Count);
         paylineInfoContainer.SetActive(false);
         listLineStraight.Clear();
         gameState = GAME_STATE.PREPARE;
@@ -245,7 +245,7 @@ public class SlotJuicyGardenView : BaseSlotGameView
         if (freespinLeft > 0)
         {
 
-            if (Globals.Config.curGameId == (int)Globals.GAMEID.SLOTTARZAN)
+            if (Config.curGameId == (int)GAMEID.SLOTTARZAN)
             {
                 lbFreespinLeft.gameObject.SetActive(true);
                 lbFreespinLeft.text = freespinLeft.ToString();
@@ -253,7 +253,7 @@ public class SlotJuicyGardenView : BaseSlotGameView
             else
             {
                 animFreespinNum.gameObject.SetActive(true);
-                lbFreespinLeft.text = Globals.Config.getTextConfig("txt_freespinRM") + ": " + freespinLeft;
+                lbFreespinLeft.text = Config.getTextConfig("txt_freespinRM") + ": " + freespinLeft;
             }
         }
         else
@@ -262,7 +262,7 @@ public class SlotJuicyGardenView : BaseSlotGameView
             {
                 animBgFreeSpin.gameObject.SetActive(false);
             }
-            if (Globals.Config.curGameId != (int)Globals.GAMEID.SLOTTARZAN)
+            if (Config.curGameId != (int)GAMEID.SLOTTARZAN)
             {
                 animFreespinNum.gameObject.SetActive(false);
             }
@@ -285,7 +285,7 @@ public class SlotJuicyGardenView : BaseSlotGameView
     private void showEffectPackageWithIndex(int index, long value, TweenCallback cb = null)
     {
         totalPackageValue += value;
-        Globals.Config.tweenNumberToNumber(lbTotalPackageValue, totalPackageValue, totalPackageValue - value);
+        Config.tweenNumberToNumber(lbTotalPackageValue, totalPackageValue, totalPackageValue - value);
         animEffectPackage.gameObject.SetActive(true);
         animEffectPackage.skeletonDataAsset = UIManager.instance.loadSkeletonData(BGMONEYPACKAGE_ANIMPATH);
         animEffectPackage.Initialize(true);
@@ -301,7 +301,7 @@ public class SlotJuicyGardenView : BaseSlotGameView
     public override void setStateBtnSpin()
     {
         //base.setStateBtnSpin();
-        //Globals.Logging.Log("setStateBtnSpin:" + gameState + "----spintype==" + spintype);
+        //Logging.Log("setStateBtnSpin:" + gameState + "----spintype==" + spintype);
         if (gameState == GAME_STATE.SPINNING)
         {
 
@@ -397,7 +397,7 @@ public class SlotJuicyGardenView : BaseSlotGameView
         //else
         //{
         //    finishData = JObject.Parse(GetFakeDataJuicy.instance.getDataBonusFruitRain(indexPick));
-        //    Globals.Logging.Log("finish Fake=" + finishData.ToString());
+        //    Logging.Log("finish Fake=" + finishData.ToString());
         //    indexPick++;
         //}
         //if (indexPick == 1)
@@ -529,7 +529,7 @@ public class SlotJuicyGardenView : BaseSlotGameView
         {
             if ((long)finishData["agWin"] != 0 && !isBonusGame)
             {
-                //Globals.Config.tweenNumberTo(lbChipWins, (long)finishData["agWin"], 0, 0.3f, true);
+                //Config.tweenNumberTo(lbChipWins, (long)finishData["agWin"], 0, 0.3f, true);
                 lbChipWins.setValue((long)finishData["agWin"], true);
                 if ((long)finishData["agWin"] > 0)
                 {
@@ -543,11 +543,11 @@ public class SlotJuicyGardenView : BaseSlotGameView
             countTotalAgFreespin += (int)finishData["agWin"];
             TweenCallback acShowTotalWinFreeSpin = () =>
             {
-                //Globals.Config.tweenNumberTo(lbChipWins, countTotalAgFreespin, countTotalAgFreespin - (int)finishData["agWin"]);
+                //Config.tweenNumberTo(lbChipWins, countTotalAgFreespin, countTotalAgFreespin - (int)finishData["agWin"]);
                 lbChipWins.setValue(countTotalAgFreespin, true);
                 sprStateWin.sprite = listSprStateWin[1];
                 sprStateWin.SetNativeSize();
-                //Globals.Config.tweenNumberToNumber(lbCurrentChips, (long)finishData["AG"], agPlayer);
+                //Config.tweenNumberToNumber(lbCurrentChips, (long)finishData["AG"], agPlayer);
                 lbCurrentChips.setValue((long)finishData["AG"], true);
                 showAnimChipBay();
                 handleActionResult();
@@ -574,7 +574,7 @@ public class SlotJuicyGardenView : BaseSlotGameView
         {
             Debug.Log("Dang Trong FreeSpin");
             countTotalAgFreespin += (int)finishData["agWin"];
-            //Globals.Config.tweenNumberTo(lbChipWins, countTotalAgFreespin, countTotalAgFreespin - (int)finishData["agWin"]);
+            //Config.tweenNumberTo(lbChipWins, countTotalAgFreespin, countTotalAgFreespin - (int)finishData["agWin"]);
             lbChipWins.setValue(countTotalAgFreespin, true);
             sprStateWin.sprite = listSprStateWin[1];
             sprStateWin.SetNativeSize();
@@ -634,7 +634,7 @@ public class SlotJuicyGardenView : BaseSlotGameView
         {
             //dang quay thuong auto ma dc freespin-> dung lai.
             //dang quay freespin m? dc freespin->quay tiep.
-            Globals.Logging.Log("acCheckNextSpin:SpinType= " + spintype);
+            Logging.Log("acCheckNextSpin:SpinType= " + spintype);
             setSpinType();
             refreshBetRoomAndMarkbet();
 
@@ -687,7 +687,7 @@ public class SlotJuicyGardenView : BaseSlotGameView
             gameState = GAME_STATE.SHOWING_RESULT;
             if (winningLines.Count > 0 && !isFreeSpin)
             {
-                //Globals.Config.tweenNumberToNumber(lbCurrentChips, (long)finishData["AG"], agPlayer);
+                //Config.tweenNumberToNumber(lbCurrentChips, (long)finishData["AG"], agPlayer);
                 lbCurrentChips.setValue((long)finishData["AG"], true);
                 refreshBetRoomAndMarkbet();
                 showAnimChipBay();
@@ -764,7 +764,7 @@ public class SlotJuicyGardenView : BaseSlotGameView
         {//choi gi? ??n turn cu?i c?ng.Bat dau show effect ?n gi?
             TweenCallback showResultPackage = () =>
             {
-                //Globals.Config.tweenNumberTo(lbChipWins, (long)finishData["agWin"], 0, 0.3f, true);
+                //Config.tweenNumberTo(lbChipWins, (long)finishData["agWin"], 0, 0.3f, true);
                 lbChipWins.setValue((long)finishData["agWin"], true);
                 if ((long)finishData["agWin"] > 0)
                 {
@@ -780,7 +780,7 @@ public class SlotJuicyGardenView : BaseSlotGameView
         {
             TweenCallback acShowAnimChipBay = () =>
             {
-                //Globals.Config.tweenNumberToNumber(lbCurrentChips, (long)finishData["AG"], agPlayer);
+                //Config.tweenNumberToNumber(lbCurrentChips, (long)finishData["AG"], agPlayer);
                 lbCurrentChips.setValue((long)finishData["AG"], true);
                 refreshBetRoomAndMarkbet();
                 showAnimChipBay();
@@ -819,7 +819,7 @@ public class SlotJuicyGardenView : BaseSlotGameView
 
             TweenCallback acShowAnimChipBay = () =>
             {
-                //Globals.Config.tweenNumberToNumber(lbCurrentChips, (long)finishData["AG"], agPlayer);
+                //Config.tweenNumberToNumber(lbCurrentChips, (long)finishData["AG"], agPlayer);
                 lbCurrentChips.setValue((long)finishData["AG"], true);
                 refreshBetRoomAndMarkbet();
                 showAnimChipBay();
@@ -885,7 +885,7 @@ public class SlotJuicyGardenView : BaseSlotGameView
         bool isSetHolderPackage = false;
         if (isBonusGame)
         {
-            //Globals.Logging.Log("allowSelectBonus=" + getBool(dataGame, "allowSelectBonus"));
+            //Logging.Log("allowSelectBonus=" + getBool(dataGame, "allowSelectBonus"));
             if (allowSelectBonus == true && typeBonus != 5) //chua chon thunng.vao lai game.neu ca case chon gio thi create giu gio.con ko thi thoi.
             {
                 isSetHolderPackage = false;
@@ -951,18 +951,18 @@ public class SlotJuicyGardenView : BaseSlotGameView
     }
     protected override void showBigWin()
     {
-        playSound(Globals.SOUND_SLOT.BIG_WIN);
+        playSound(SOUND_SLOT.BIG_WIN);
         effectContainer.SetActive(true);
         animEffect.gameObject.SetActive(true);
         lbBigWin.gameObject.SetActive(true);
         lbBigWin.transform.localScale = new Vector2(1.5f, 1.5f);
         if (isInFreeSpin == true && isFreeSpin == false) //vua quay het freespin turn cuoi cung;
         {
-            Globals.Config.tweenNumberToNumber(lbBigWin, (long)countTotalAgFreespin, 0, 3.0f);
+            Config.tweenNumberToNumber(lbBigWin, (long)countTotalAgFreespin, 0, 3.0f);
         }
         else
         {
-            Globals.Config.tweenNumberToNumber(lbBigWin, getLong(finishData, "agWin"), 0, 3.0f);
+            Config.tweenNumberToNumber(lbBigWin, getLong(finishData, "agWin"), 0, 3.0f);
         }
 
         animEffect.transform.localScale = new Vector2(.75f, .75f);
@@ -987,18 +987,18 @@ public class SlotJuicyGardenView : BaseSlotGameView
     }
     protected override void showMegaWin()
     {
-        playSound(Globals.SOUND_SLOT.MEGA_WIN);
+        playSound(SOUND_SLOT.MEGA_WIN);
         effectContainer.SetActive(true);
         animEffect.gameObject.SetActive(true);
         lbBigWin.gameObject.SetActive(true);
         lbBigWin.transform.localScale = new Vector2(1.5f, 1.5f);
         if (isInFreeSpin == true && isFreeSpin == false) //vua quay het freespin turn cuoi cung;
         {
-            Globals.Config.tweenNumberToNumber(lbBigWin, (long)countTotalAgFreespin, 0, 5.0f);
+            Config.tweenNumberToNumber(lbBigWin, (long)countTotalAgFreespin, 0, 5.0f);
         }
         else
         {
-            Globals.Config.tweenNumberToNumber(lbBigWin, getLong(finishData, "agWin"), 0, 5.0f);
+            Config.tweenNumberToNumber(lbBigWin, getLong(finishData, "agWin"), 0, 5.0f);
         }
         animEffect.skeletonDataAsset = UIManager.instance.loadSkeletonData(BIGWIN_ANIMPATH);
         animEffect.transform.localScale = new Vector2(.75f, .75f);
@@ -1053,8 +1053,8 @@ public class SlotJuicyGardenView : BaseSlotGameView
         {
             animJackpot.AnimationState.SetAnimation(0, typeJP, true);
             TextMeshProUGUI lbJackpot = animJackpot.transform.GetComponentInChildren<TextMeshProUGUI>();
-            lbJackpot.text = Globals.Config.FormatMoney2(value);
-            Globals.Config.tweenNumberToNumber(lbJackpot, value, 0, 1.0f);
+            lbJackpot.text = Config.FormatMoney2(value);
+            Config.tweenNumberToNumber(lbJackpot, value, 0, 1.0f);
             lbJackpot.transform.localScale = new Vector2(0.8f, 0.8f);
             DOTween.Sequence()
            .Append(animJackpot.transform.DOScale(new Vector2(1.0f, 1.0f), 0.3f).SetEase(Ease.OutBack))
@@ -1078,10 +1078,10 @@ public class SlotJuicyGardenView : BaseSlotGameView
     }
     private void showPopupResultPackage()
     {
-        playSound(Globals.SOUND_SLOT.FREESPIN);
+        playSound(SOUND_SLOT.FREESPIN);
         animPopupResultPackage.gameObject.SetActive(true);
         animPopupResultPackage.skeletonDataAsset = UIManager.instance.loadSkeletonData(RESULT_BONUSGAME_ANIMPATH);
-        animPopupResultPackage.transform.Find("lbPackageValueWin").GetComponent<TextMeshProUGUI>().text = Globals.Config.FormatNumber(getLong(finishData, "agWin"));
+        animPopupResultPackage.transform.Find("lbPackageValueWin").GetComponent<TextMeshProUGUI>().text = Config.FormatNumber(getLong(finishData, "agWin"));
         effectContainer.SetActive(true);
         animPopupResultPackage.Initialize(true);
         animPopupResultPackage.AnimationState.SetAnimation(0, "eng", true);
@@ -1142,7 +1142,7 @@ public class SlotJuicyGardenView : BaseSlotGameView
     }
     protected override void showFreeSpin()
     {
-        playSound(Globals.SOUND_SLOT.FREESPIN);
+        playSound(SOUND_SLOT.FREESPIN);
         animPopupGetFreeSpin.transform.Find("NodeWild").gameObject.SetActive(false);
         animPopupGetFreeSpin.transform.Find("NodeFruitRain").gameObject.SetActive(false);
         animPopupGetFreeSpin.gameObject.SetActive(true);
@@ -1154,7 +1154,7 @@ public class SlotJuicyGardenView : BaseSlotGameView
         animPopupGetFreeSpin.AnimationState.SetAnimation(0, "thung", true);
         animPopupGetFreeSpin.transform.Find("btnBoxLeft").GetComponent<Button>().interactable = true;
         animPopupGetFreeSpin.transform.Find("btnBoxRight").GetComponent<Button>().interactable = true;
-        Globals.Logging.Log("showFreeSpin");
+        Logging.Log("showFreeSpin");
     }
     private void setJackpotValue(JObject data)
     {
@@ -1167,10 +1167,10 @@ public class SlotJuicyGardenView : BaseSlotGameView
         long valueJPMajorNew = (long)listMarkbet[currentMarkBet] * (long)rateJPMajor + jpMajorPlayer;
         long valueJPMinorNew = listMarkbet[currentMarkBet] * rateJPMinor;
         long valueJPMiniNew = listMarkbet[currentMarkBet] * rateJPMini;
-        //Globals.Config.tweenNumberToNumber(lbJpGrand, valueJPGrandNew, valueJPGrand);
-        //Globals.Config.tweenNumberToNumber(lbJpMajor, valueJPMajorNew, valueJPMajor);
-        //Globals.Config.tweenNumberToNumber(lbJpMinor, valueJPMinorNew, valueJPMinor);
-        //Globals.Config.tweenNumberToNumber(lbJpMini, valueJPMiniNew, valueJPMini);
+        //Config.tweenNumberToNumber(lbJpGrand, valueJPGrandNew, valueJPGrand);
+        //Config.tweenNumberToNumber(lbJpMajor, valueJPMajorNew, valueJPMajor);
+        //Config.tweenNumberToNumber(lbJpMinor, valueJPMinorNew, valueJPMinor);
+        //Config.tweenNumberToNumber(lbJpMini, valueJPMiniNew, valueJPMini);
         lbJpGrand.setValue(valueJPGrandNew, true, 0.2f);
         lbJpMajor.setValue(valueJPMajorNew, true, 0.2f);
         lbJpMinor.setValue(valueJPMinorNew, true, 0.2f);
@@ -1224,11 +1224,11 @@ public class SlotJuicyGardenView : BaseSlotGameView
                 nodeWild.localScale = Vector2.zero;
                 nodeWild.DOScale(Vector2.one, 0.3f).SetEase(Ease.OutBack);
                 TextMeshProUGUI lbFreeSpinNum = nodeWild.Find("lbFreeSpinNum").GetComponent<TextMeshProUGUI>();
-                Globals.Config.tweenNumberToNumber(lbFreeSpinNum, numFreeSpin, 0, 1.0f);
+                Config.tweenNumberToNumber(lbFreeSpinNum, numFreeSpin, 0, 1.0f);
                 TextMeshProUGUI lbNumWild = nodeWild.Find("lbAddedWild").GetComponent<TextMeshProUGUI>();
-                Globals.Config.tweenNumberToNumber(lbNumWild, numWild, 0, 1.0f);
+                Config.tweenNumberToNumber(lbNumWild, numWild, 0, 1.0f);
 
-                //.text = Globals.Config.getTextConfig("txt_add") + " " + numWild;
+                //.text = Config.getTextConfig("txt_add") + " " + numWild;
             }
             else if (typeBonus == 4)
             {
