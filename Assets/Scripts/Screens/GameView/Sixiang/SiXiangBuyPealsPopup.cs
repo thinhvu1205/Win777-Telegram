@@ -26,18 +26,23 @@ public class SiXiangBuyPealsPopup : BaseView
         SoundManager.instance.playEffectFromPath(SOUND_SLOT_BASE.CLICK);
         if (playerBalance >= price)
         {
-            SocketSend.sendBuyBonusGame(Globals.ACTION_SLOT_SIXIANG.buyBonusGame, typeGameBonus, betCurrent);
+            SocketSend.sendBuyBonusGame(ACTION_SLOT_SIXIANG.buyBonusGame, typeGameBonus, betCurrent);
             SiXiangView.Instance.agPlayer -= price;
             SiXiangView.Instance.setAGPlayer();
             onClickClose(true);
         }
         else
         {
-            string textShow = Globals.Config.getTextConfig("txt_not_enough_money_gl");
-            UIManager.instance.showDialog(textShow, Globals.Config.getTextConfig("shop"), () =>
-             {
-                 UIManager.instance.openShop();
-             }, Globals.Config.getTextConfig("label_cancel"));
+
+
+            // string textShow = Config.getTextConfig("txt_not_enough_money_gl");
+            // UIManager.instance.showDialog(textShow, Config.getTextConfig("shop"), () =>
+            //  {
+            //      UIManager.instance.openShop();
+            //  }, Config.getTextConfig("label_cancel"));
+            string textShow = Config.getTextConfig("txt_not_enough_money_gl");
+            string textBtn3 = Config.getTextConfig("label_cancel");
+            UIManager.instance.showDialog(textShow, textBtn3);
             onClickClose(true);
         }
     }
@@ -64,7 +69,7 @@ public class SiXiangBuyPealsPopup : BaseView
         betCurrent = bet;
         imgGem.sprite = listSprGem[indexSprite];
         Debug.Log("price=" + price);
-        lbInfo.text = "Pay " + Config.FormatNumber(price) + " chips to receive this gem!";//Globals.Config.formatStr(Globals.Config.getTextConfig("text_sixiang_buy_gem"), Globals.Config.FormatNumber(price));
+        lbInfo.text = "Pay " + Config.FormatNumber(price) + " chips to receive this gem!";//Config.formatStr(Config.getTextConfig("text_sixiang_buy_gem"), Config.FormatNumber(price));
     }
     public void onClickClosePopup(bool isDestroy = true)
     {
