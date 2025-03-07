@@ -56,6 +56,11 @@ public class LobbyView : BaseView
             }
         }
     }
+    [ContextMenu("test")]
+    public void Test()
+    {
+        SocketSend.sendSelectGame(9900);
+    }
     public void setQuickPlayGame(int gameID)
     {
         return;

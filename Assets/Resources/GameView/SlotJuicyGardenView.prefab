@@ -1032,10 +1032,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 478369270672831091}
-  - component: {fileID: 478369270672831101}
   - component: {fileID: 478369270672831090}
   - component: {fileID: 4754780148623529401}
   - component: {fileID: 7888764989567439050}
+  - component: {fileID: 478369270672831101}
   m_Layer: 5
   m_Name: SlotJuicyGardenView
   m_TagString: Untagged
@@ -1070,14 +1070,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &478369270672831101
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 478369270672831088}
-  m_CullTransparentMesh: 1
 --- !u!114 &478369270672831090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1239,6 +1231,14 @@ MonoBehaviour:
   lastFreeSpinWildWinLine: 
   dataWinLineNormal: '{"evt":"slotViews","slotViews":[[{"id":13,"value":28000},{"id":8,"value":0},{"id":1,"value":0}],[{"id":9,"value":0},{"id":4,"value":0},{"id":8,"value":0}],[{"id":7,"value":0},{"id":7,"value":0},{"id":7,"value":0}],[{"id":3,"value":0},{"id":7,"value":0},{"id":11,"value":0}],[{"id":1,"value":0},{"id":1,"value":0},{"id":5,"value":0}]],"creditWin":6000,"winningLine":[8,10,16],"lineDetail":[{"lineId":8,"win":2000},{"lineId":10,"win":2000},{"lineId":16,"win":2000}],"freeSpinLeft":0,"winType":0,"freeSpin":false,"isBonusGame":false,"agWin":6000,"AG":229403,"level":{"levelUser":0,"curLevelExp":0,"maxLevelExp":0,"agUser":229403},"MarkBet":[1,5,10,25,50,500,1000,5000,10000,25000,50000,100000,250000,500000],"jackPot":{"typeJP":"NONE","winJP":0},"allowSelectBonus":false,"selectBonus":{"typeBonus":0,"numSpin":0,"view":[[{"id":13,"value":28000},{"id":8,"value":0},{"id":1,"value":0}],[{"id":9,"value":0},{"id":4,"value":0},{"id":8,"value":0}],[{"id":7,"value":0},{"id":7,"value":0},{"id":7,"value":0}],[{"id":3,"value":0},{"id":7,"value":0},{"id":11,"value":0}],[{"id":1,"value":0},{"id":1,"value":0},{"id":5,"value":0}]]},"lineScatter":[-1,-1,-1,-1,-1],"jpGrandPlayer":8160,"jpMajorPlayer":1632}'
   dataGetFreeSpinAndWinLine: '{"evt":"slotViews","slotViews":[[{"id":7,"value":0},{"id":9,"value":0},{"id":10,"value":0}],[{"id":1,"value":0},{"id":12,"value":0},{"id":11,"value":0}],[{"id":12,"value":0},{"id":10,"value":0},{"id":9,"value":0}],[{"id":12,"value":0},{"id":10,"value":0},{"id":2,"value":0}],[{"id":5,"value":0},{"id":12,"value":0},{"id":3,"value":0}]],"creditWin":850000,"winningLine":[2,6,8,10,16],"lineDetail":[{"lineId":2,"win":20000},{"lineId":6,"win":500000},{"lineId":8,"win":20000},{"lineId":10,"win":250000},{"lineId":16,"win":20000}],"freeSpinLeft":3,"winType":0,"freeSpin":false,"isBonusGame":false,"agWin":850000,"AG":1107672367,"level":{"levelUser":0,"curLevelExp":0,"maxLevelExp":0,"agUser":1107672367},"MarkBet":[1,5,10,15,20,25,50,100,200,500,1000,2000,2500,5000,10000],"jackPot":{"typeJP":"NONE","winJP":0},"allowSelectBonus":true,"selectBonus":{"typeBonus":4,"numSpin":3,"view":[[{"id":7,"value":0},{"id":9,"value":0},{"id":10,"value":0}],[{"id":1,"value":0},{"id":12,"value":0},{"id":11,"value":0}],[{"id":12,"value":0},{"id":10,"value":0},{"id":9,"value":0}],[{"id":12,"value":0},{"id":10,"value":0},{"id":2,"value":0}],[{"id":5,"value":0},{"id":12,"value":0},{"id":3,"value":0}]]},"lineScatter":[-1,-1,-1,-1,-1],"jpGrandPlayer":21869475,"jpMajorPlayer":4373895}'
+--- !u!222 &478369270672831101
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478369270672831088}
+  m_CullTransparentMesh: 1
 --- !u!1 &478369270753346132
 GameObject:
   m_ObjectHideFlags: 0
@@ -13017,9 +13017,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 150000000
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9498c25ba4c992b48bcea7d7fa8abfd1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e51f50207c358c54ba4a9f1f9cb6aa19, type: 2}
   m_fixThaiVowel: 1
-  m_sharedMaterial: {fileID: -5096783720975700005, guid: 9498c25ba4c992b48bcea7d7fa8abfd1, type: 2}
+  m_sharedMaterial: {fileID: -343163305512803063, guid: e51f50207c358c54ba4a9f1f9cb6aa19, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13043,7 +13043,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28.4
+  m_fontSize: 18.25
   m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 1
